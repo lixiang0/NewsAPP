@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/menu_focus"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="焦点" />
+        <item
+            android:id="@+id/menu_world"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title=" 国际" />
+        <item
+            android:id="@+id/menu_mainland"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="内地" />
+        <item
+            android:id="@+id/menu_finance"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="财经" />
+        <item
+            android:id="@+id/menu_entertainment"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="娱乐" />
+        <item
+            android:id="@+id/menu_teconology"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="科技" />
+        <item
+            android:id="@+id/menu_sport"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="体育" />
+
+    </group>
+
+    <item android:title="更多">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="分享" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="建议" />
+        </menu>
+    </item>
+
+</menu>
