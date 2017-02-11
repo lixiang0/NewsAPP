@@ -29,7 +29,7 @@
             android:label="@string/title_activity_web"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="pub.cpp.news.activity.LoginActivity"
             android:label="@string/title_activity_login"></activity>
     </application>
 
