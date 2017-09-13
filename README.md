@@ -5,8 +5,8 @@
 - 3.添加了用户系统：包括用户注册、登陆、收藏、顶新闻、踩新闻的功能[正在添加]
 
 ### 更新（09142017）
-1.更新服务器新闻数据接口，更新app中服务器新闻数据URL
-2.修改readme.md的markdown格式
+- 1.更新服务器新闻数据接口，更新app中服务器新闻数据URL
+- 2.修改readme.md的markdown格式
 
 ## 新闻界面
 ![](https://github.com/lixiang0/NewsAPP/blob/master/device-2016-12-20-103804.png)
