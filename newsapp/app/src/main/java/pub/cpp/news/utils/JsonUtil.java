@@ -13,7 +13,7 @@ import pub.cpp.news.pojo.NewsItem;
  * Created by xzh on 8/18/2016.
  */
 public class JsonUtil {
-   static String url="http://cpp.pub:8080/webnews/news?type=";
+   static String url="http://121.42.138.77:8080/RubenServer/news?type=";
 
 
 
