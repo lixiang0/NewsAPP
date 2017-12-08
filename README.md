@@ -9,7 +9,7 @@
 - 2.修改readme.md的markdown格式
 
 ## 新闻界面
-<img src="https://github.com/lixiang0/NewsAPP/blob/master/device-2016-12-20-103804.png" height="200" width="200" />
+<img src="https://github.com/lixiang0/NewsAPP/blob/master/device-2016-12-20-103804.png" height="400" width="400"  align="middle"/>
 
 ## 新闻内容格式：
 ```
