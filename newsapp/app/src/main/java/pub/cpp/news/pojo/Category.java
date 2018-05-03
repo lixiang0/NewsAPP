@@ -9,9 +9,9 @@ public class Category {
 // https://news.google.com.hk/news?cf=all&hl=zh-CN&pz=1&ned=cn&topic=t&output=rss 科技
 // https://news.google.com.hk/news?cf=all&hl=zh-CN&pz=1&ned=cn&topic=s&output=rss 体育
 // https://news.google.com.hk/news?cf=all&hl=zh-CN&pz=1&ned=cn&geo=detect_metro_area&output=rss 本地
-	
+
 //	焦点 国际  内地 财经 娱乐 科技 体育 本地
-	
-	public static final int Focus=0,World=1,Mainland=2,Finance=3,Entainment=4,Technology=5,Sport=6,Native=7;
-	
+
+    public static final int Focus = 0, World = 1, Mainland = 2, Finance = 3, Entainment = 4, Technology = 5, Sport = 6, Native = 7;
+
 }
