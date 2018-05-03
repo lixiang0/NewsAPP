@@ -17,19 +17,20 @@ public class JsonUtil {
 
 
 
-    public static List<NewsItem> getNewsList(int type){
-        ArrayList<NewsItem> result=new ArrayList<NewsItem>();
-        String netUrl=url+type;
-        String jsonString=NetUtils.getNetStringByGet(netUrl);
+    public static List<NewsItem> getNewsList(int type) {
+        ArrayList<NewsItem> result = new ArrayList<NewsItem>();
+        String netUrl = url + type;
+        String jsonString = NetUtils.getNetStringByGet(netUrl);
         Type collectionType2 = new TypeToken<List<NewsItem>>() {
         }.getType();
         List<NewsItem> listObj = (new Gson()).fromJson(jsonString, collectionType2);
-        System.out.println("converted object representation: " + listObj.size());
+        System.out.println("converted object representation: " + (listObj == null ? 0 : listObj.size()));
         return listObj;
     }
-    public static final void main(String[] args){
-        List<NewsItem> result=JsonUtil.getNewsList(1);
-        for (NewsItem n:result){
+
+    public static final void main(String[] args) {
+        List<NewsItem> result = JsonUtil.getNewsList(1);
+        for (NewsItem n : result) {
             System.out.println(n);
         }
     }

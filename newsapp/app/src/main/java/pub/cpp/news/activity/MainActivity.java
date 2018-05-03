@@ -33,7 +33,7 @@ import pub.cpp.slamwiki.R;
 import pub.cpp.news.adapter.MyAdapter;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
     RelativeLayout layout_main;
     private RecyclerView mRecyclerView;
     DrawerLayout drawer;
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView.LayoutManager mLayoutManager;
     SwipeRefreshLayout swipeView;
     Handler mHandler;
-    int newsItem = 0;
+    int newsItem=0;
     Toolbar toolbar;
     private boolean flagLogin;
 
@@ -70,16 +70,16 @@ public class MainActivity extends AppCompatActivity
         final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(0);
-        flagLogin = false;
-        if (flagLogin) {
+        flagLogin=false;
+        if(flagLogin){
 
-        } else {
-            LogUtils.show(this.getLocalClassName() + "___user not login");
+        }else{
+            LogUtils.show(this.getLocalClassName()+"___user not login");
 //            View viewPhoto=getLayoutInflater().inflate(R.layout.activity_main,null).findViewById(R.id.nav_view);
 //            viewPhoto.findViewById(R.id.account_name).setVisibility(View.INVISIBLE);
 //            viewPhoto.findViewById(R.id.account_email).setVisibility(View.INVISIBLE);
-            ((TextView) ((NavigationView) findViewById(R.id.nav_view)).getHeaderView(0).findViewById(R.id.account_name)).setText("点击头像登录");
-            ((TextView) ((NavigationView) findViewById(R.id.nav_view)).getHeaderView(0).findViewById(R.id.account_email)).setText("");
+            ( (TextView) ((NavigationView) findViewById(R.id.nav_view)).getHeaderView(0).findViewById(R.id.account_name)).setText("点击头像登录");
+            ( (TextView) ((NavigationView) findViewById(R.id.nav_view)).getHeaderView(0).findViewById(R.id.account_email)).setText("");
         }
 
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
@@ -93,20 +93,20 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
-        mHandler = new Handler(new Handler.Callback() {
+        mHandler=new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message message) {
-                if (message.what == 1) {
+                if(message.what==1){
 
                     mRecyclerView.setAdapter(null);
-                    mRecyclerView.setAdapter(new MyAdapter((List<NewsItem>) message.obj, MainActivity.this.getApplicationContext()));
+                    mRecyclerView.setAdapter(new MyAdapter(( List<NewsItem>)message.obj,MainActivity.this.getApplicationContext()));
                     swipeView.setRefreshing(false);
                 }
                 return false;
             }
         });
-        swipeView = (SwipeRefreshLayout) findViewById(R.id.sl_items);
-        swipeView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+         swipeView = (SwipeRefreshLayout) findViewById(R.id.sl_items);
+       swipeView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 swipeView.setRefreshing(true);
@@ -120,11 +120,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void onClickLogin(View view) {
-        if (flagLogin) {
-            LogUtils.show(this.getLocalClassName() + "___user is login");
-        } else {
-            LogUtils.show(this.getLocalClassName() + "___user is not login");
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        if(flagLogin){
+            LogUtils.show(this.getLocalClassName()+"___user is login");
+        }else{
+            LogUtils.show(this.getLocalClassName()+"___user is not login");
+            Intent intent=new Intent(MainActivity.this,LoginActivity.class);
             startActivity(intent);
         }
     }
@@ -137,11 +137,11 @@ public class MainActivity extends AppCompatActivity
             result = JsonUtil.getNewsList(integers[0]);
             for (NewsItem n : result) {
                 System.out.println(n);
-                Log.d("123", n.toString());
+                Log.d("123",n.toString());
             }
-            Message msg = new Message();
-            msg.what = 1;
-            msg.obj = result;
+            Message msg=new Message();
+            msg.what=1;
+            msg.obj=result;
             mHandler.sendMessage(msg);
             return null;
         }
@@ -192,56 +192,24 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        int i = 0;
+      int i=0;
         switch (item.getItemId()) {
 
-            case R.id.menu_entertainment:
-                new AsyncLoader().execute(new Integer[]{Category.Entainment});
-                toolbar.setTitle("娱乐");
-                i = Category.Entainment;
-                break;
-            case R.id.menu_finance:
-                new AsyncLoader().execute(new Integer[]{Category.Finance});
-                i = Category.Finance;
-                toolbar.setTitle("财经");
-                break;
-            case R.id.menu_focus:
-                new AsyncLoader().execute(new Integer[]{Category.Focus});
-                i = Category.Focus;
-                toolbar.setTitle("焦点");
-                break;
-            case R.id.menu_mainland:
-                new AsyncLoader().execute(new Integer[]{Category.Mainland});
-                i = Category.Mainland;
-                toolbar.setTitle("国内");
-                break;
-            case R.id.menu_sport:
-                new AsyncLoader().execute(new Integer[]{Category.Sport});
-                i = Category.Sport;
-                toolbar.setTitle("体育");
-                break;
-            case R.id.menu_teconology:
-                new AsyncLoader().execute(new Integer[]{Category.Technology});
-                i = Category.Technology;
-                toolbar.setTitle("科技");
-                break;
-            case R.id.menu_world:
-                new AsyncLoader().execute(new Integer[]{Category.World});
-                toolbar.setTitle("国际");
-                i = Category.World;
-                break;
-            default:
-                new AsyncLoader().execute(new Integer[]{Category.Focus});
-                toolbar.setTitle("焦点");
-                i = Category.Focus;
-                break;
+            case R.id.menu_entertainment:new AsyncLoader().execute(new Integer[]{Category.Entainment});toolbar.setTitle("娱乐");i=Category.Entainment;break;
+            case R.id.menu_finance:new AsyncLoader().execute(new Integer[]{Category.Finance});i=Category.Finance;toolbar.setTitle("财经");break;
+            case R.id.menu_focus:new AsyncLoader().execute(new Integer[]{Category.Focus});i=Category.Focus;toolbar.setTitle("焦点");break;
+            case R.id.menu_mainland:new AsyncLoader().execute(new Integer[]{Category.Mainland});i=Category.Mainland;toolbar.setTitle("国内");break;
+            case R.id.menu_sport:new AsyncLoader().execute(new Integer[]{Category.Sport});i=Category.Sport;toolbar.setTitle("体育");break;
+            case R.id.menu_teconology:new AsyncLoader().execute(new Integer[]{Category.Technology});i=Category.Technology;toolbar.setTitle("科技");break;
+            case R.id.menu_world:new AsyncLoader().execute(new Integer[]{Category.World});toolbar.setTitle("国际");i=Category.World;break;
+            default:new AsyncLoader().execute(new Integer[]{Category.Focus});toolbar.setTitle("焦点");i=Category.Focus;break;
         }
-        newsItem = i;
+        newsItem=i;
         drawer.closeDrawers();
         return true;
     }
 
 
-}
+    }
 
 
