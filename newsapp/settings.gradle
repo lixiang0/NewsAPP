@@ -1,1 +1,1 @@
-include ':app', ':mylibs'
+include ':app', ':mylibs',":dachshundtablayout"

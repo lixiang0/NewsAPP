@@ -16,7 +16,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions("developer")//, "channel")
     productFlavors {
+        sjd {dimension "developer"}
+        lx {dimension "developer"}
+
+//        googleplay {dimension "channel"}
+//        wandoujia {dimension "channel"}
     }
 }
 
@@ -31,4 +37,6 @@ dependencies {
     implementation files('libs/jsoup-1.9.2.jar')
     implementation files('libs/gson-2.2.3.jar')
     implementation files('libs/glide-3.7.0.jar')
+    implementation project(':dachshundtablayout')
+    implementation project(':mylibs')
 }
