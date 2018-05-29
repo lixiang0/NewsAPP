@@ -17,13 +17,13 @@ android {
         }
     }
     flavorDimensions("developer")//, "channel")
-    productFlavors {
-        sjd {dimension "developer"}
-        lx {dimension "developer"}
-
+//    productFlavors {
+//        sjd {dimension "developer"}
+//        lx {dimension "developer"}
+//
 //        googleplay {dimension "channel"}
 //        wandoujia {dimension "channel"}
-    }
+//    }
 }
 
 
