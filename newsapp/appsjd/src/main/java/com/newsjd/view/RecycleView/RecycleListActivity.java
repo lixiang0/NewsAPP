@@ -1,7 +1,6 @@
-package com.mylibs.view.recycleview;
+package com.newsjd.view.RecycleView;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -15,7 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.mylibs.R;
+
+import com.newsjd.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class RecycleListActivity extends Activity {
     private List<String> mDatas;
     private RecycleListAdapter mAdapter;
 
-    @Override
+  /*  @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycle_activity);
@@ -115,5 +115,5 @@ public class RecycleListActivity extends Activity {
         } else {
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

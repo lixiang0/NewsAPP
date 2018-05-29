@@ -1,6 +1,6 @@
 package com.newsjd.data;
 
-public class newsData {
+public class NewsData {
 
     /**
      * time : Fri, 08 Dec 2017 06:13:00 GMT
@@ -74,5 +74,18 @@ public class newsData {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    @Override
+    public String toString() {
+        return "NewsData{" +
+                "time='" + time + '\'' +
+                ", category='" + category + '\'' +
+                ", title='" + title + '\'' +
+                ", img='" + img + '\'' +
+                ", id=" + id +
+                ", text='" + text + '\'' +
+                ", link='" + link + '\'' +
+                '}';
     }
 }

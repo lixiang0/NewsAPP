@@ -38,5 +38,4 @@ dependencies {
     implementation files('libs/gson-2.2.3.jar')
     implementation files('libs/glide-3.7.0.jar')
     implementation project(':dachshundtablayout')
-    implementation project(':mylibs')
 }

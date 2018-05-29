@@ -5,7 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.kekstudio.dachshundtablayout.DachshundTabLayout;
-import com.newsjd.view.PagerAdapterS;
+import com.newsjd.view.Fragments.PagerAdapterS;
 
 
 public class FirstActivty extends AppCompatActivity {
