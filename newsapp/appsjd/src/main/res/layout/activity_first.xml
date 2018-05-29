@@ -5,26 +5,25 @@
     android:id="@+id/activity_sample"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pub.cpp.newsjd.MainActivty">
+    tools:context="com.newsjd.FirstActivty">
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
+<!--
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimary"
-                android:minHeight="?attr/actionBarSize"/>
+                android:minHeight="?attr/actionBarSize"/>-->
 
             <com.kekstudio.dachshundtablayout.DachshundTabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 custom:ddAnimatedIndicator="dachshund"
-                custom:ddIndicatorHeight="6dp"
                 custom:ddIndicatorColor="@android:color/white"
                 custom:ddCenterAlign="true"
                 custom:tabMode="scrollable"/>
