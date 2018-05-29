@@ -1,4 +1,4 @@
-package com.mylibs.okhttp;
+package com.newsjd.http;
 
 
 import org.json.JSONException;

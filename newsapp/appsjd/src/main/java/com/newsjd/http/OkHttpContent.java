@@ -1,4 +1,4 @@
-package com.mylibs.okhttp;
+package com.newsjd.http;
 
 /**
  * Created by sjd on 2017/2/10.
