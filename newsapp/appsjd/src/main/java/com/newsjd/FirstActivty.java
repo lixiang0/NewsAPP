@@ -49,7 +49,8 @@ public class FirstActivty extends AppCompatActivity {
 
             @Override
             public void onPageSelected(final int position) {
-                new Thread(new Runnable() {
+                //TODO need  choose  some place to update recycleview's data
+               /* new Thread(new Runnable() {
                     @Override
                     public void run() {
                         String s = NetUtils.getNetStringByGet(Contants.url + Contants.AllItem[position]);
@@ -68,7 +69,7 @@ public class FirstActivty extends AppCompatActivity {
                             Toast.makeText(FirstActivty.this, "服务器返回数据为空", Toast.LENGTH_LONG).show();
                         }
                     }
-                }).start();
+                }).start();*/
             }
 
             @Override
