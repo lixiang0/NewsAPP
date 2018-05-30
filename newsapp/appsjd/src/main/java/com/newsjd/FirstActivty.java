@@ -24,4 +24,10 @@ public class FirstActivty extends AppCompatActivity {
         tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewPager.setOffscreenPageLimit(3);
+    }
 }

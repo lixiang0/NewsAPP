@@ -127,16 +127,6 @@ public class RecycleListAdapter extends RecyclerView.Adapter<RecycleListAdapter.
     }
 
 
-
- /*   class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.single_textView);
-        }
-    }*/
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tv_time;
         public TextView tv_title;

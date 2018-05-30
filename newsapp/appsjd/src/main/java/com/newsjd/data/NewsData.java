@@ -2,6 +2,16 @@ package com.newsjd.data;
 
 public class NewsData {
 
+    public NewsData(String time, String category, String title, String img, int id, String text, String link) {
+        this.time = time;
+        this.category = category;
+        this.title = title;
+        this.img = img;
+        this.id = id;
+        this.text = text;
+        this.link = link;
+    }
+
     /**
      * time : Fri, 08 Dec 2017 06:13:00 GMT
      * category : 1
