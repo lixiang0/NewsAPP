@@ -157,13 +157,13 @@ public class RecycleListAdapter extends RecyclerView.Adapter<RecycleListAdapter.
         Date date1 = null;
         try {
             date1 = inputFormat.parse(inputText);
-            System.out.println(date1.toString());
+//            System.out.println(date1.toString());
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         String outputText = outputFormat.format(date1);
-        System.out.println(outputText);
+//        System.out.println(outputText);
         return outputText;
     }
 

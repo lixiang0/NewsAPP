@@ -9,4 +9,5 @@
     <string name="sports">体育</string>
     <string name="local">本地</string>
     <string name="undefined">未定义</string>
+    <string name="title_activity_web">原文网址</string>
 </resources>

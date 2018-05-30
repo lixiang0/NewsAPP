@@ -30,7 +30,7 @@ public class OkHttpUtils {
     //    同步GET请求s
 //     Response类的string()方法会把文档的所有内容加载到内存，适用于小文档，对应大于1M的文档，应   使用流()的方式获取。
 //    response.body().byteStream()
-    public void run_get_synchronization(String  url) throws Exception {
+    public void run_get_synchronization(String url) throws Exception {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
@@ -46,9 +46,9 @@ public class OkHttpUtils {
 
     //    异步GET请求
 //    读取响应会阻塞当前线程，所以发起请求是在主线程，回调的内容在非主线程中。
-    public void run_get_asynchronous() throws Exception {
+    public void run_get_asynchronous(String url) throws Exception {
         Request request = new Request.Builder()
-                .url("http://publicobject.com/helloworld.txt")
+                .url(url)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
