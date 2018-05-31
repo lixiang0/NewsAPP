@@ -22,7 +22,7 @@ public class PagerAdapterS extends FragmentStatePagerAdapter {
         mItems = new ArrayList<>();
         for (int i : Contants.AllItem) {
             mItems.add(Contants.getItemName(i));
-            pageFragmentSArrayList.add(new PageFragmentS());
+            pageFragmentSArrayList.add(new PageFragmentS().setPosition(i));
         }
     }
 

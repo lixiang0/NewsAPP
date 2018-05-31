@@ -44,27 +44,5 @@ public class FirstActivty extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        final int positon = viewPager.getCurrentItem();
-        HttpUtils.getNewsByType(Constants.getNewsByType + Contants.AllItem[positon] + "").subscribeOn(Schedulers.computation()) // 指定 subscribe() 发生在 运算 线程
-                .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
-                .subscribe(new Subscriber<List<NewsData>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, "onError: ", e);
-                    }
-
-                    @Override
-                    public void onNext(List<NewsData> newsData) {
-                        pagerAdapterS.getPageFragments(positon).setmDatas(newsData);
-                        pagerAdapterS.notifyDataSetChanged();
-                    }
-                });
-
     }
 }

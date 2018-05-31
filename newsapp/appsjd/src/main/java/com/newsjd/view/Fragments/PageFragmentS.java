@@ -15,27 +15,36 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.network.bean.NewsData;
+import com.network.config.Constants;
 import com.newsjd.R;
+import com.newsjd.config.Contants;
 import com.newsjd.view.RecycleView.RecycleListAdapter;
+import com.utils.HttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
 public class PageFragmentS extends Fragment {
-    private static  final String TAG = "NEWS PageFragmentS";
+    private static final String TAG = "NEWS PageFragmentS";
 
     private RecyclerView mRecyclerView;
-    private List<NewsData> mDatas;
+    private List<NewsData> mDatas = new ArrayList<>();
     private RecycleListAdapter mAdapter;
 
+    private int position = -1;
+
     public PageFragmentS() {
-        Log.e(TAG, "PageFragmentS: " );
-        initDatas();
+//        Log.e(TAG, "PageFragmentS: ");
+//        initDatas();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.e(TAG, "onCreateView: " );
+        Log.e(TAG, "onCreateView: ");
         View view = inflater.inflate(R.layout.fragment_first, container, false);
         initViews(view, view.getContext());
         return view;
@@ -44,13 +53,47 @@ public class PageFragmentS extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.e(TAG, "onResume: " );
+        Log.e(TAG, "onResume: " + position);
+        HttpUtils.getNewsByType(Constants.getNewsByType + Contants.AllItem[position] + "").subscribeOn(Schedulers.computation()) // 指定 subscribe() 发生在 运算 线程
+                .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
+                .subscribe(new Subscriber<List<NewsData>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError: ", e);
+                    }
+
+                    @Override
+                    public void onNext(List<NewsData> newsData) {
+                        if (newsData == null) {
+                            mDatas.clear();
+                        } else {
+                            int min = Math.min(newsData.size(), mDatas.size());
+                            for (int i = 0; i < min; i++) {
+                                mDatas.add(i, newsData.get(i));
+                            }
+                            if (min < newsData.size()){
+                                for (int i = min; i < newsData.size(); i++) {
+                                    mDatas.add(newsData.get(i));
+                                }
+                            }else {
+                                for (int i = min; i < mDatas.size(); i++) {
+                                    mDatas.remove(i);
+                                }
+                            }
+                        }
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
     }
 
     private void initDatas() {
-        Log.e(TAG, "initDatas: " );
-        mDatas = new ArrayList<>();
-        for (int i = 'A'; i <= 'F'; i++) {
+        Log.e(TAG, "initDatas: ");
+        for (int i = 'A'; i <= 'A'; i++) {
             mDatas.add(new NewsData("Fri, 08 Dec 2017 06:13:00 GMT",
                     "1",
                     "aaaaaaaaaaaaa",
@@ -62,7 +105,7 @@ public class PageFragmentS extends Fragment {
     }
 
     private void initViews(View view, final Context context) {
-        Log.e(TAG, "initViews: " );
+        Log.e(TAG, "initViews: ");
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mAdapter = new RecycleListAdapter(context, mDatas);
         mRecyclerView.setAdapter(mAdapter);
@@ -117,7 +160,7 @@ public class PageFragmentS extends Fragment {
     }
 
     public void setmDatas(List<NewsData> mDatas) {
-        Log.e(TAG, "setmDatas: " );
+        Log.e(TAG, "setmDatas: ");
         this.mDatas = mDatas;
         mAdapter.notifyDataSetChanged();
     }
@@ -131,5 +174,14 @@ public class PageFragmentS extends Fragment {
             mDatas.set(i, newsData);
         }
         mAdapter.notifyItemChanged(i);
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public PageFragmentS setPosition(int position) {
+        this.position = position;
+        return this;
     }
 }
