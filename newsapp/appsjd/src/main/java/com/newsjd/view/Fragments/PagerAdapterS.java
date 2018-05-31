@@ -44,4 +44,11 @@ public class PagerAdapterS extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         return mItems.get(position);
     }
+
+    public PageFragmentS getPageFragments(int postion) {
+        if (pageFragmentSArrayList == null || postion < 0 || postion >= pageFragmentSArrayList.size()) {
+            return null;
+        }
+        return pageFragmentSArrayList.get(postion);
+    }
 }

@@ -1,4 +1,4 @@
-package com.newsjd.data;
+package com.network.bean;
 
 public class NewsData {
 

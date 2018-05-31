@@ -25,12 +25,17 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support:design:27.1.1'
-    implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
-    implementation files('libs/jsoup-1.9.2.jar')
-    implementation files('libs/gson-2.2.3.jar')
-    implementation files('libs/glide-3.7.0.jar')
     implementation project(':dachshundtablayout')
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    implementation 'com.squareup.okio:okio:1.14.1'
+    implementation project(':libnetwork')
+    api 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    api 'com.squareup.okhttp3:okhttp:3.10.0'
+    api 'com.squareup.okio:okio:1.14.1'
+    api 'com.squareup.retrofit2:retrofit:2.1.0'
+    api 'com.squareup.retrofit2:converter-gson:2.1.0'
+    api 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    api 'io.reactivex:rxjava:1.1.6'
+    api 'io.reactivex:rxandroid:1.2.1'
+    api 'com.arialyy.aria:Aria:2.4.0'
+    implementation files('libs/glide-3.7.0.jar')
 }

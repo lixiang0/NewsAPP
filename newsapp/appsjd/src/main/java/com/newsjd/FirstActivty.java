@@ -3,25 +3,24 @@ package com.newsjd;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.widget.Toast;
+import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.kekstudio.dachshundtablayout.DachshundTabLayout;
+import com.network.bean.NewsData;
+import com.network.config.Constants;
 import com.newsjd.config.Contants;
-import com.newsjd.data.NewsData;
-import com.newsjd.http.NetUtils;
 import com.newsjd.view.Fragments.PagerAdapterS;
+import com.utils.HttpUtils;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.newsjd.base.MainApplication.context;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 
 public class FirstActivty extends AppCompatActivity {
+    private static final String TAG = "NEWS FirstAty";
 
     private ViewPager viewPager;
     private DachshundTabLayout tabLayout;
@@ -40,47 +39,32 @@ public class FirstActivty extends AppCompatActivity {
         tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
 
-//        viewPager.setOffscreenPageLimit(1);
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//
-            }
-
-            @Override
-            public void onPageSelected(final int position) {
-                //TODO need  choose  some place to update recycleview's data
-               /* new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        String s = NetUtils.getNetStringByGet(Contants.url + Contants.AllItem[position]);
-                        if (!TextUtils.isEmpty(s)) {
-                            Type type = new TypeToken<List<NewsData>>() {
-                            }.getType();
-                            final ArrayList<NewsData> data = new Gson().fromJson(s, type);
-                            (FirstActivty.this).runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    //此时已在主线程中，可以更新UI了
-                                    pagerAdapterS.getItem(position).setmDatas(data);
-                                }
-                            });
-                        } else {
-                            Toast.makeText(FirstActivty.this, "服务器返回数据为空", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }).start();*/
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        final int positon = viewPager.getCurrentItem();
+        HttpUtils.getNewsByType(Constants.getNewsByType + Contants.AllItem[positon] + "").subscribeOn(Schedulers.computation()) // 指定 subscribe() 发生在 运算 线程
+                .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
+                .subscribe(new Subscriber<List<NewsData>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError: ", e);
+                    }
+
+                    @Override
+                    public void onNext(List<NewsData> newsData) {
+                        pagerAdapterS.getPageFragments(positon).setmDatas(newsData);
+                        pagerAdapterS.notifyDataSetChanged();
+                    }
+                });
+
     }
 }

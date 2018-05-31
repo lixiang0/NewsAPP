@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 
 import com.bumptech.glide.Glide;
+import com.network.bean.NewsData;
 import com.newsjd.R;
-import com.newsjd.data.NewsData;
 import com.newsjd.view.webview.WebActivity;
 
 import java.text.ParseException;

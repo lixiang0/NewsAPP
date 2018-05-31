@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,10 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.network.bean.NewsData;
 import com.newsjd.R;
-import com.newsjd.config.Contants;
-import com.newsjd.data.NewsData;
-import com.newsjd.http.NetUtils;
 import com.newsjd.view.RecycleView.RecycleListAdapter;
 
 import java.util.ArrayList;
