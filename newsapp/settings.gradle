@@ -1,1 +1,1 @@
-include ':app',":dachshundtablayout",":appsjd",":libnetwork"
+include ':app',":dachshundtablayout",":appsjd",":libnetwork",":libBottomNavigation"

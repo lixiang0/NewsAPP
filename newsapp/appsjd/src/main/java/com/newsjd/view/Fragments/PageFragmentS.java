@@ -147,39 +147,6 @@ public class PageFragmentS extends Fragment {
         });
     }
 
-    public RecycleListAdapter getmAdapter() {
-        return mAdapter;
-    }
-
-    public void setmAdapter(RecycleListAdapter mAdapter) {
-        this.mAdapter = mAdapter;
-    }
-
-    public List<NewsData> getmDatas() {
-        return mDatas;
-    }
-
-    public void setmDatas(List<NewsData> mDatas) {
-        Log.e(TAG, "setmDatas: ");
-        this.mDatas = mDatas;
-        mAdapter.notifyDataSetChanged();
-    }
-
-    public void setmDatas(int i, NewsData newsData) {
-        int size = mDatas.size();
-        if (i < 0 || i >= size) {
-            mDatas.add(newsData);
-            i = size;
-        } else {
-            mDatas.set(i, newsData);
-        }
-        mAdapter.notifyItemChanged(i);
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
     public PageFragmentS setPosition(int position) {
         this.position = position;
         return this;

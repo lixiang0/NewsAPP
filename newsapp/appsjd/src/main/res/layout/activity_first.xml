@@ -5,19 +5,13 @@
     android:id="@+id/activity_sample"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.newsjd.FirstActivty">
+    tools:context="com.newsjd.view.MainActivity.FirstFragment">
 
-    <android.support.design.widget.AppBarLayout
+    <LinearLayout
+        android:id="@+id/main_activity"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-        <!--
-                    <android.support.v7.widget.Toolbar
-                        android:id="@+id/toolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/colorPrimary"
-                        android:minHeight="?attr/actionBarSize"/>-->
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <com.kekstudio.dachshundtablayout.DachshundTabLayout
             android:id="@+id/tab_layout"
@@ -25,17 +19,15 @@
             android:layout_height="wrap_content"
             custom:ddAnimatedIndicator="dachshund"
             custom:ddCenterAlign="true"
-            custom:tabMode="scrollable"
             custom:ddIndicatorColor="@android:color/holo_orange_dark"
-            custom:tabTextColor="@android:color/darker_gray"
-            custom:tabSelectedTextColor="@android:color/black" />
+            custom:tabMode="scrollable"
+            custom:tabSelectedTextColor="@android:color/black"
+            custom:tabTextColor="@android:color/darker_gray" />
 
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        custom:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            custom:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
