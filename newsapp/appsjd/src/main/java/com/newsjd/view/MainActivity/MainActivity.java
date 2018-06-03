@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private void initView() {
         bottomNavigationView.setOnMenuItemClickListener(this);
+        //设置左右单侧保存的 item数量
+        mViewPager.setOffscreenPageLimit(3);
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
