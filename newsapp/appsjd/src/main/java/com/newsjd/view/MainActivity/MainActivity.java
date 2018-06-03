@@ -15,7 +15,7 @@ import net.cachapa.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnMenuItemClickListener {
-    private static final  String TAG = "MainActivity";
+    private static final String TAG = "MainActivity";
 
     private ViewPager mViewPager;
     private ViewPagerAdapterMain mViewPagerAdapterMain;
@@ -32,19 +32,59 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView = findViewById(R.id.main_bottom_navigation_view);
 
 //        mViewPager.setOnPageChangeListener();
+        initView();
     }
 
     @Override
     public void onMenuItemSelected(MenuItem item) {
-        showFragment(FirstFragment.create(item.getTitle().toString()));
-        Log.e(TAG, "onMenuItemSelected: "+item.getItemId() );
+//        showFragment(FirstFragment.create(item.getTitle().toString()));
+        Log.e(TAG, "onMenuItemSelected: " + item.getOrder() +
+                " | " + item.getGroupId() +
+                " | " + item.getItemId() +
+                "");
+        switch (item.getItemId()) {
+            case R.id.bottom_start:
+                mViewPager.setCurrentItem(0);
+                break;
+            case R.id.bottom_epg:
+                mViewPager.setCurrentItem(1);
+                break;
+            case R.id.bottom_series_list:
+                mViewPager.setCurrentItem(2);
+                break;
+            case R.id.bottom_discover:
+                mViewPager.setCurrentItem(3);
+                break;
+            default:
+        }
 //        mViewPager.setCurrentItem();
     }
 
     @Override
     public void onMenuItemReselected() {
-        FirstFragment fragment = (FirstFragment) getSupportFragmentManager().findFragmentByTag(CURRENT_FRAGMENT);
-        fragment.onReselected();
+        Log.e(TAG, "onMenuItemSelected: ");
+//        FirstFragment fragment = (FirstFragment) getSupportFragmentManager().findFragmentByTag(CURRENT_FRAGMENT);
+//        fragment.onReselected();
+    }
+
+    private void initView() {
+        bottomNavigationView.setOnMenuItemClickListener(this);
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                bottomNavigationView.setSelectedIndex(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     public static final String CURRENT_FRAGMENT = "current_fragment";
