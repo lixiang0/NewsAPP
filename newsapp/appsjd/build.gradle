@@ -8,7 +8,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -26,7 +26,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
-    implementation project(':dachshundtablayout')
+    implementation project(':libViewDachshundtablayout')
     implementation project(':libnetwork')
     api 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     api 'com.squareup.okhttp3:okhttp:3.10.0'
@@ -37,8 +37,6 @@ dependencies {
     api 'io.reactivex:rxjava:1.1.6'
     api 'io.reactivex:rxandroid:1.2.1'
     api 'com.arialyy.aria:Aria:2.4.0'
-
     implementation files('libs/glide-3.7.0.jar')
-//    implementation project(':libBottomNavigation')
-    implementation project(path: ':libBottomNavigation')
+    implementation project(':libViewBottomNavigation')
 }
