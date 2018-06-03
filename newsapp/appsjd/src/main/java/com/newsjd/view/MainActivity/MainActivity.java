@@ -31,17 +31,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mViewPager.setAdapter(mViewPagerAdapterMain);
         bottomNavigationView = findViewById(R.id.main_bottom_navigation_view);
 
-//        mViewPager.setOnPageChangeListener();
         initView();
     }
 
     @Override
     public void onMenuItemSelected(MenuItem item) {
-//        showFragment(FirstFragment.create(item.getTitle().toString()));
-        Log.e(TAG, "onMenuItemSelected: " + item.getOrder() +
-                " | " + item.getGroupId() +
-                " | " + item.getItemId() +
-                "");
         switch (item.getItemId()) {
             case R.id.bottom_start:
                 mViewPager.setCurrentItem(0);
@@ -87,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         });
     }
 
-    public static final String CURRENT_FRAGMENT = "current_fragment";
+   /* public static final String CURRENT_FRAGMENT = "current_fragment";
 
     private void showFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
@@ -95,4 +89,5 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 .replace(R.id.container, fragment, CURRENT_FRAGMENT)
                 .commit();
     }
+    */
 }

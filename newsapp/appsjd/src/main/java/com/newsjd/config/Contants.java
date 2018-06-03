@@ -9,7 +9,11 @@ import static com.newsjd.base.MainApplication.*;
 
 public class Contants {
     public static final int[] FourPart = {0, 1, 2, 3};
-    public static final String[] FourPart_Name = {"新闻", "视频", "联系人", "设置"};
+    public static final String[] FourPart_Name = {context.getString(R.string.news),
+            context.getString(R.string.video),
+            context.getString(R.string.Contacts),
+            context.getString(R.string.setting)
+    };
 
 
     //	焦点 国际  内地 财经 娱乐 科技 体育 本地

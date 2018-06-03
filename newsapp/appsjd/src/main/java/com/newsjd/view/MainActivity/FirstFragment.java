@@ -39,15 +39,15 @@ public class FirstFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    public void onReselected() {
+/*    public void onReselected() {
         Toast.makeText(getContext(), "Fragment reselected", Toast.LENGTH_SHORT).show();
     }
 
-    public static Fragment create(String title) {
+    public  Fragment create(String title) {
         Bundle args = new Bundle();
         args.putString("title", title);
         Fragment fragment = new FirstFragment();
         fragment.setArguments(args);
         return fragment;
-    }
+    }*/
 }

@@ -4,21 +4,20 @@
     <item
         android:id="@+id/bottom_start"
         android:icon="@drawable/menu_1"
-        android:title="Movies &amp; TV" />
+        android:title="@string/news" />
 
     <item
         android:id="@+id/bottom_epg"
         android:icon="@drawable/menu_2"
-        android:title="Music" />
+        android:title="@string/video" />
 
     <item
         android:id="@+id/bottom_series_list"
         android:icon="@drawable/menu_3"
-        android:title="Books" />
+        android:title="@string/Contacts" />
 
     <item
         android:id="@+id/bottom_discover"
         android:icon="@drawable/menu_4"
-        android:title="Newsstand" />
-
+        android:title="@string/setting" />
 </menu>
