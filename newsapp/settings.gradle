@@ -1,1 +1,1 @@
-include ':app', ':libViewDachshundtablayout',":appsjd",":libnetwork", ':libViewBottomNavigation'
+include ':app', ':libViewDachshundtablayout',":appsjd",":libnetwork", ":libViewBottomNavigation"
