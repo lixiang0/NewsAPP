@@ -12,6 +12,10 @@ public class Constants {
     public static final String getNewsByType = "/query?type=";
 
 
+    //======================== 按类型获取新闻数据  =================//
+    public static final String login = "/login";
+
+
     //============================ 后台地址 ================================//
     // Get url.
     public static String getHost() {

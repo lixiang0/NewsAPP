@@ -33,6 +33,12 @@ public interface Api {
     Observable<List<NewsData>> getNewsByType(@Url String type);
 
     @FormUrlEncoded
+    @POST(Constants.login)
+    Observable<String> login(@FieldMap Map<String, String> map);
+//    http://121.42.138.77:8081/login username password
+
+
+    @FormUrlEncoded
     @POST(Constants.getNewsByType)
     Observable<BaseResponse<NewsData>> postTokenOLD(@FieldMap Map<String, Object> map);
 

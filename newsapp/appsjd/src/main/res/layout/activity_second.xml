@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:text="Button"
         tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="176dp" />
+        tools:layout_editor_absoluteY="176dp"
+        tools:ignore="MissingConstraints" />
 
     <Switch
         android:id="@+id/switch1"
@@ -19,5 +20,6 @@
         android:layout_height="wrap_content"
         android:text="Switch"
         tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="311dp" />
+        tools:layout_editor_absoluteY="311dp"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>
