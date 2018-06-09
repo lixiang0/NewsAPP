@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/libViewBottomNavigation" />
             <option value="$PROJECT_DIR$/libViewDachshundtablayout" />
             <option value="$PROJECT_DIR$/libnetwork" />
+            <option value="$PROJECT_DIR$/libshare" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

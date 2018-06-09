@@ -1,4 +1,4 @@
-package com.newsjd.view.Fragments;
+package com.newsjd.view.Fragments.First;
 
 
 import android.support.v4.app.FragmentManager;

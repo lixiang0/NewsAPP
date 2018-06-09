@@ -1,4 +1,4 @@
-package com.newsjd.view.MainActivity;
+package com.newsjd.view.Fragments.Second;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +14,7 @@ import com.newsjd.R;
 import com.utils.HttpUtils;
 
 import rx.Observable;
+import rx.functions.Action1;
 import rx.functions.Func1;
 
 public class SecondFragment extends Fragment implements View.OnClickListener {
@@ -31,9 +32,9 @@ public class SecondFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       Button button =  mView.findViewById(R.id.button2);
+        Button button = mView.findViewById(R.id.button2);
 
-       button.setOnClickListener(this);
+        button.setOnClickListener(this);
     }
 
     @Override
@@ -41,16 +42,16 @@ public class SecondFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.button2:
                 Log.e(TAG, "onClick: button2");
-                HttpUtils.login("admin", "password").flatMap(new Func1<String, Observable<String>>() {
+                HttpUtils.login("tes", "test").filter(new Func1<String, Boolean>() {
                     @Override
-                    public Observable<String> call(String s) {
-                        Log.e(TAG, "call: " + s);
+                    public Boolean call(String s) {
+                        Log.e(TAG, "call: " + s );
                         return null;
                     }
                 });
                 break;
             default:
-                Log.e(TAG, "onClick: "+v.getId() );
+                Log.e(TAG, "onClick: " + v.getId());
         }
     }
 }

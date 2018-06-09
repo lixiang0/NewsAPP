@@ -2,7 +2,11 @@ package com.newsjd.view.RecycleView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +20,21 @@ import com.network.bean.NewsData;
 import com.newsjd.R;
 import com.newsjd.view.webview.WebActivity;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by sjd on 2017/7/17.
@@ -68,20 +81,8 @@ public class RecycleListAdapter extends RecyclerView.Adapter<RecycleListAdapter.
         Glide.with(mContext)
                 .load("http://" + mDatas.get(position).getImg()).placeholder(R.mipmap.null_pic).error(R.mipmap.null_pic)
                 .into(holder.tv_img);
-//        URL url = null;
-//        try {
-//            url = new URL("http://"+mDatas.get(position).getImg());
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        }
-//        Bitmap bmp = null;
-//        try {
-//            bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        holder.tv_img.setImageBitmap(bmp);
 
+        initImage(mDatas.get(position).getImg(), holder.tv_img);
     }
 
     protected void setUpItemEvent(final ViewHolder holder) {
@@ -109,7 +110,6 @@ public class RecycleListAdapter extends RecyclerView.Adapter<RecycleListAdapter.
     public int getItemCount() {
         return mDatas.size();
     }
-
 
 
     //添加onclick 接口
@@ -144,6 +144,27 @@ public class RecycleListAdapter extends RecyclerView.Adapter<RecycleListAdapter.
         }
     }
 
+    private static final String TAG = "RecycleListAdapter";
+
+    public static Bitmap getImage(String urlString) {
+        Log.e(TAG, "getImage: " + urlString);
+        URL url = null;
+        Bitmap bmp = null;
+        if (TextUtils.isEmpty(urlString)) {
+            return bmp;
+        }
+        try {
+            url = new URL("http://" + urlString);
+        } catch (MalformedURLException e) {
+        }
+        try {
+            assert url != null;
+            bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bmp;
+    }
 
     public static String dateFormat(String dateString) {
         String inputText = dateString;
@@ -167,4 +188,34 @@ public class RecycleListAdapter extends RecyclerView.Adapter<RecycleListAdapter.
         return outputText;
     }
 
+
+    public static void initImage(String img, final ImageView tv_img) {
+        Observable.just(img).flatMap(new Func1<String, Observable<Bitmap>>() {
+            @Override
+            public Observable<Bitmap> call(String s) {
+                return Observable.just(getImage(s));
+            }
+        }).subscribeOn(Schedulers.computation()) // 指定 subscribe() 发生在 运算 线程
+                .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
+                .subscribe(new Subscriber<Bitmap>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Bitmap bitmap) {
+                        if (bitmap == null) {
+                            tv_img.setVisibility(View.GONE);
+                        } else {
+                            tv_img.setImageBitmap(bitmap);
+                        }
+                    }
+                });
+    }
 }

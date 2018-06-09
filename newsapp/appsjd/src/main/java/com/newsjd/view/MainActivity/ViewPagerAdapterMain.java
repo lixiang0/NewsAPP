@@ -6,6 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
+import com.newsjd.view.Fragments.First.FirstFragment;
+import com.newsjd.view.Fragments.Second.SecondFragment;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 

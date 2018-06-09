@@ -1,5 +1,7 @@
 package com.utils;
 
+import android.util.Log;
+
 import com.network.RetrofitClient;
 import com.network.bean.BaseResponse;
 import com.network.bean.NewsData;
@@ -20,16 +22,14 @@ public class HttpUtils {
     private static final String TAG = "NET HttpUtils";
 
     public static Observable<List<NewsData>> getNewsByType(String type) {
-        Observable<List<NewsData>> observable = RetrofitClient.getApi().getNewsByType(type);
-        return observable;
+        return RetrofitClient.getApi().getNewsByType(type);
     }
 
     public static Observable<String> login(String username, String password) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("username", username);
         hashMap.put("password", password);
-        Observable<String> observable = RetrofitClient.getApi().login(hashMap);
-        return observable;
+        return RetrofitClient.getApi().login(hashMap);
     }
 }
 

@@ -1,4 +1,4 @@
-package com.newsjd.view.Fragments;
+package com.newsjd.view.Fragments.First;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -54,7 +54,8 @@ public class PageFragmentS extends Fragment {
     public void onResume() {
         super.onResume();
         Log.e(TAG, "onResume: " + position);
-        HttpUtils.getNewsByType(Constants.getNewsByType + Contants.AllItem[position] + "").subscribeOn(Schedulers.computation()) // 指定 subscribe() 发生在 运算 线程
+        HttpUtils.getNewsByType(Constants.getNewsByType + Contants.AllItem[position] + "")
+                .subscribeOn(Schedulers.computation()) // 指定 subscribe() 发生在 运算 线程
                 .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
                 .subscribe(new Subscriber<List<NewsData>>() {
                     @Override

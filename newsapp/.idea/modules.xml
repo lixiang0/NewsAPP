@@ -4,10 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/appsjd/appsjd.iml" filepath="$PROJECT_DIR$/appsjd/appsjd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libViewBottomNavigation/libViewBottomNavigation.iml" filepath="$PROJECT_DIR$/libViewBottomNavigation/libViewBottomNavigation.iml" />
       <module fileurl="file://$PROJECT_DIR$/libViewDachshundtablayout/libViewDachshundtablayout.iml" filepath="$PROJECT_DIR$/libViewDachshundtablayout/libViewDachshundtablayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/libnetwork/libnetwork.iml" filepath="$PROJECT_DIR$/libnetwork/libnetwork.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libshare/libshare.iml" filepath="$PROJECT_DIR$/libshare/libshare.iml" />
       <module fileurl="file://$PROJECT_DIR$/newsapp.iml" filepath="$PROJECT_DIR$/newsapp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libViewBottomNavigation/newsapp-libViewBottomNavigation.iml" filepath="$PROJECT_DIR$/libViewBottomNavigation/newsapp-libViewBottomNavigation.iml" />
     </modules>
   </component>
 </project>

@@ -28,6 +28,7 @@ dependencies {
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation project(':libViewDachshundtablayout')
     implementation project(':libnetwork')
+    implementation project(':libViewBottomNavigation')
     api 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     api 'com.squareup.okhttp3:okhttp:3.10.0'
     api 'com.squareup.okio:okio:1.14.1'
@@ -38,5 +39,4 @@ dependencies {
     api 'io.reactivex:rxandroid:1.2.1'
     api 'com.arialyy.aria:Aria:2.4.0'
     implementation files('libs/glide-3.7.0.jar')
-    implementation project(':libViewBottomNavigation')
 }
