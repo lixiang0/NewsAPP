@@ -1,4 +1,4 @@
-package com.newsjd.view.Fragments.First;
+package com.newsjd.view.Adapter;
 
 
 import android.support.v4.app.FragmentManager;
@@ -6,16 +6,18 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
 
+import com.newsjd.view.Fragments.FirstFragment_Item;
+
 import java.util.ArrayList;
 
-public class ViewPagerAdapterS extends FragmentStatePagerAdapter {
+public class AdapterFirstVP extends FragmentStatePagerAdapter {
     private int length = 0;
 
     private ArrayList<String> mItems = new ArrayList<>();
 
-    private ArrayList<PageFragmentS> pageFragmentSArrayList = new ArrayList<>(length);
+    private ArrayList<FirstFragment_Item> firstFragmentItemArrayList = new ArrayList<>(length);
 
-    public ViewPagerAdapterS(FragmentManager fm, int[] data, String[] data_Name) {
+    public AdapterFirstVP(FragmentManager fm, int[] data, String[] data_Name) {
         super(fm);
         addData(data, data_Name);
     }
@@ -25,7 +27,7 @@ public class ViewPagerAdapterS extends FragmentStatePagerAdapter {
             length = data.length;
             for (int i = 0; i < length; i++) {
                 mItems.add(data_Name[i]);
-                pageFragmentSArrayList.add(new PageFragmentS().setPosition(i));
+                firstFragmentItemArrayList.add(new FirstFragment_Item().setPosition(i));
             }
         }
     }
@@ -35,8 +37,8 @@ public class ViewPagerAdapterS extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public PageFragmentS getItem(int i) {
-        return pageFragmentSArrayList.get(i);
+    public FirstFragment_Item getItem(int i) {
+        return firstFragmentItemArrayList.get(i);
     }
 
     @Override

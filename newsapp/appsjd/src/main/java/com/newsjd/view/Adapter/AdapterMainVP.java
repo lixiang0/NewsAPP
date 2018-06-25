@@ -1,4 +1,4 @@
-package com.newsjd.view.MainActivity;
+package com.newsjd.view.Adapter;
 
 
 import android.support.v4.app.Fragment;
@@ -12,14 +12,14 @@ import com.newsjd.view.Fragments.SecondFragment;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ViewPagerAdapterMain extends FragmentStatePagerAdapter {
+public class AdapterMainVP extends FragmentStatePagerAdapter {
     private int length = 0;
 
     private ArrayList<String> mItems = new ArrayList<>();
 
     private ArrayList<Fragment> pageFragmentSArrayList = new ArrayList<>(length);
 
-    public ViewPagerAdapterMain(FragmentManager fm, int[] data, String[] data_Name) {
+    public AdapterMainVP(FragmentManager fm, int[] data, String[] data_Name) {
         super(fm);
         addData(data, data_Name);
     }

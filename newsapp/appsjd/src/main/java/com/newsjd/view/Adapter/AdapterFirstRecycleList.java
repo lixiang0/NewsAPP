@@ -1,4 +1,4 @@
-package com.newsjd.view.RecycleView;
+package com.newsjd.view.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -29,19 +29,19 @@ import java.util.TimeZone;
  * Created by sjd on 2017/7/17.
  */
 
-public class RecycleListAdapter extends RecyclerView.Adapter<RecycleListAdapter.ViewHolder> {
+public class AdapterFirstRecycleList extends RecyclerView.Adapter<AdapterFirstRecycleList.ViewHolder> {
     private LayoutInflater mInflater;
     private Context mContext;
     private List<NewsBean> mDatas;
 
-    public RecycleListAdapter(Context context, List<NewsBean> datas) {
+    public AdapterFirstRecycleList(Context context, List<NewsBean> datas) {
         mContext = context;
         mDatas = datas;
         mInflater = LayoutInflater.from(context);
     }
 
     @Override //创建
-    public RecycleListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AdapterFirstRecycleList.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.view_item_new, parent, false);
         ViewHolder myViewHolder = new ViewHolder(view);
         return myViewHolder;
@@ -133,7 +133,7 @@ public class RecycleListAdapter extends RecyclerView.Adapter<RecycleListAdapter.
         }
     }
 
-    private static final String TAG = "RecycleListAdapter";
+    private static final String TAG = "AdapterFirstRecycleList";
 
 
 

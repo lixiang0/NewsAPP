@@ -1,4 +1,4 @@
-package com.newsjd.view.Fragments.First;
+package com.newsjd.view.Fragments;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -18,7 +18,7 @@ import com.network.bean.NewsBean;
 import com.network.config.Constants;
 import com.newsjd.R;
 import com.newsjd.config.Contants;
-import com.newsjd.view.RecycleView.RecycleListAdapter;
+import com.newsjd.view.Adapter.AdapterFirstRecycleList;
 import com.utils.HttpUtils;
 
 import java.util.ArrayList;
@@ -28,17 +28,17 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class PageFragmentS extends Fragment {
-    private static final String TAG = "NEWS PageFragmentS";
+public class FirstFragment_Item extends Fragment {
+    private static final String TAG = "NEWS FirstFragment_Item";
 
     private RecyclerView mRecyclerView;
     private List<NewsBean> mDatas = new ArrayList<>();
-    private RecycleListAdapter mAdapter;
+    private AdapterFirstRecycleList mAdapter;
 
     private int position = -1;
 
-    public PageFragmentS() {
-//        Log.e(TAG, "PageFragmentS: ");
+    public FirstFragment_Item() {
+//        Log.e(TAG, "FirstFragment_Item: ");
     }
 
     @Override
@@ -94,7 +94,7 @@ public class PageFragmentS extends Fragment {
     private void initViews(View view, final Context context) {
         Log.e(TAG, "initViews: ");
         mRecyclerView = view.findViewById(R.id.recyclerView);
-        mAdapter = new RecycleListAdapter(context, mDatas);
+        mAdapter = new AdapterFirstRecycleList(context, mDatas);
         mRecyclerView.setAdapter(mAdapter);
 
         //设置RecyclerView的布局管理
@@ -121,7 +121,7 @@ public class PageFragmentS extends Fragment {
         mRecyclerView.addItemDecoration(itemDecor);//设置分割线
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());//设置动画
 
-        mAdapter.setOnItemClickListener(new RecycleListAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new AdapterFirstRecycleList.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Toast.makeText(context, position + " click", Toast.LENGTH_SHORT).show();
@@ -134,7 +134,7 @@ public class PageFragmentS extends Fragment {
         });
     }
 
-    public PageFragmentS setPosition(int position) {
+    public FirstFragment_Item setPosition(int position) {
         this.position = position;
         return this;
     }

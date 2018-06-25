@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.kekstudio.dachshundtablayout.DachshundTabLayout;
 import com.newsjd.R;
 import com.newsjd.config.Contants;
-import com.newsjd.view.Fragments.First.ViewPagerAdapterS;
+import com.newsjd.view.Adapter.AdapterFirstVP;
 
 public class FirstFragment extends Fragment {
     private static final String TAG = "NEWS FirstAty";
@@ -19,7 +19,7 @@ public class FirstFragment extends Fragment {
     private ViewPager viewPager;
     private DachshundTabLayout tabLayout;
 
-    private ViewPagerAdapterS viewPagerAdapterS;
+    private AdapterFirstVP adapterFirstVP;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,8 +31,8 @@ public class FirstFragment extends Fragment {
 
     private void initViews(View view) {
         viewPager = view.findViewById(R.id.view_pager);
-        viewPagerAdapterS = new ViewPagerAdapterS(getFragmentManager(), Contants.AllItem,Contants.AllItem_Name);
-        viewPager.setAdapter(viewPagerAdapterS);
+        adapterFirstVP = new AdapterFirstVP(getFragmentManager(), Contants.AllItem,Contants.AllItem_Name);
+        viewPager.setAdapter(adapterFirstVP);
 
         tabLayout = view.findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);

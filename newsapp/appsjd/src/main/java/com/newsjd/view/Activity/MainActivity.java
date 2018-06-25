@@ -1,6 +1,5 @@
-package com.newsjd.view.MainActivity;
+package com.newsjd.view.Activity;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +9,7 @@ import android.view.MenuItem;
 
 import com.newsjd.R;
 import com.newsjd.config.Contants;
+import com.newsjd.view.Adapter.AdapterMainVP;
 
 import net.cachapa.bottomnavigation.BottomNavigationView;
 
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private static final String TAG = "MainActivity";
 
     private ViewPager mViewPager;
-    private ViewPagerAdapterMain mViewPagerAdapterMain;
+    private AdapterMainVP mAdapterMainVP;
     private BottomNavigationView bottomNavigationView;
 
     @Override
@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
         mViewPager = findViewById(R.id.main_view_pager);
 
-        mViewPagerAdapterMain = new ViewPagerAdapterMain(getSupportFragmentManager(), Contants.FourPart, Contants.FourPart_Name);
-        mViewPager.setAdapter(mViewPagerAdapterMain);
+        mAdapterMainVP = new AdapterMainVP(getSupportFragmentManager(), Contants.FourPart, Contants.FourPart_Name);
+        mViewPager.setAdapter(mAdapterMainVP);
         bottomNavigationView = findViewById(R.id.main_bottom_navigation_view);
 
         initView();
