@@ -1,13 +1,11 @@
 package com.network.config;
 
-import com.network.BuildConfig;
 import com.network.bean.BaseResponse;
-import com.network.bean.NewsData;
+import com.network.bean.NewsBean;
 
 import java.util.List;
 import java.util.Map;
 
-import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -30,17 +28,16 @@ import rx.Observable;
 public interface Api {
     //============= API =================//
     @GET
-    Observable<List<NewsData>> getNewsByType(@Url String type);
+    Observable<List<NewsBean>> getNewsByType(@Url String type);
 
     @FormUrlEncoded
     @POST(Constants.login)
     Observable<String> login(@FieldMap Map<String, String> map);
-//    http://121.42.138.77:8081/login username password
 
 
     @FormUrlEncoded
     @POST(Constants.getNewsByType)
-    Observable<BaseResponse<NewsData>> postTokenOLD(@FieldMap Map<String, Object> map);
+    Observable<BaseResponse<NewsBean>> postTokenOLD(@FieldMap Map<String, Object> map);
 
     @FormUrlEncoded
     @POST(Constants.getNewsByType)
@@ -59,7 +56,7 @@ public interface Api {
 
 
     @GET(Constants.getNewsByType)
-    Observable<BaseResponse<List<NewsData>>> firmware(@Query("flag") String flag,
+    Observable<BaseResponse<List<NewsBean>>> firmware(@Query("flag") String flag,
                                                       @Query("version") String version,
                                                       @Header("token") String token);
 

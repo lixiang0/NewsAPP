@@ -1,8 +1,8 @@
 package com.network.bean;
 
-public class NewsData {
+public class NewsBean {
 
-    public NewsData(String time, String category, String title, String img, int id, String text, String link) {
+    public NewsBean(String time, String category, String title, String img, int id, String text, String link) {
         this.time = time;
         this.category = category;
         this.title = title;
@@ -88,7 +88,7 @@ public class NewsData {
 
     @Override
     public String toString() {
-        return "NewsData{" +
+        return "NewsBean{" +
                 "time='" + time + '\'' +
                 ", category='" + category + '\'' +
                 ", title='" + title + '\'' +

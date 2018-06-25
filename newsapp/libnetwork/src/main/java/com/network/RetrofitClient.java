@@ -60,21 +60,4 @@ public class RetrofitClient {
 //                .addInterceptor(new UserAgentIntercepter())
                 .build();
     }
-
-//    .data("query", "Java")
-//                    .userAgent("Mozilla")
-//                    .cookie("auth", "token")
-
-    /**
-     * 添加请求头
-     */
-    public class UserAgentIntercepter implements Interceptor {
-        @Override
-        public Response intercept(Chain chain) throws IOException {
-            Request request = chain.request().newBuilder()
-                    .addHeader("query", "Java")
-                    .build();
-            return chain.proceed(request);
-        }
-    }
 }

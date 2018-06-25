@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.network.bean.NewsData;
+import com.network.bean.NewsBean;
 import com.network.config.Constants;
 import com.newsjd.R;
 import com.newsjd.config.Contants;
@@ -32,14 +32,13 @@ public class PageFragmentS extends Fragment {
     private static final String TAG = "NEWS PageFragmentS";
 
     private RecyclerView mRecyclerView;
-    private List<NewsData> mDatas = new ArrayList<>();
+    private List<NewsBean> mDatas = new ArrayList<>();
     private RecycleListAdapter mAdapter;
 
     private int position = -1;
 
     public PageFragmentS() {
 //        Log.e(TAG, "PageFragmentS: ");
-//        initDatas();
     }
 
     @Override
@@ -57,7 +56,7 @@ public class PageFragmentS extends Fragment {
         HttpUtils.getNewsByType(Constants.getNewsByType + Contants.AllItem[position] + "")
                 .subscribeOn(Schedulers.computation()) // 指定 subscribe() 发生在 运算 线程
                 .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
-                .subscribe(new Subscriber<List<NewsData>>() {
+                .subscribe(new Subscriber<List<NewsBean>>() {
                     @Override
                     public void onCompleted() {
 
@@ -69,7 +68,7 @@ public class PageFragmentS extends Fragment {
                     }
 
                     @Override
-                    public void onNext(List<NewsData> newsData) {
+                    public void onNext(List<NewsBean> newsData) {
                         if (newsData == null) {
                             mDatas.clear();
                         } else {
@@ -90,19 +89,6 @@ public class PageFragmentS extends Fragment {
                         mAdapter.notifyDataSetChanged();
                     }
                 });
-    }
-
-    private void initDatas() {
-        Log.e(TAG, "initDatas: ");
-        for (int i = 'A'; i <= 'A'; i++) {
-            mDatas.add(new NewsData("Fri, 08 Dec 2017 06:13:00 GMT",
-                    "1",
-                    "aaaaaaaaaaaaa",
-                    "t0.gstatic.com/images?q\\u003dtbn:ANd9GcRJc023FTqF3wtzBsmcYiikyr7kKQeY9L7FPu7CUO-WcIU6f9aH7_dO-z5LX-hJgD700LZz86QF",
-                    1,
-                    "  aaa " + i,
-                    "http://news.sina.com.cn/c/2017-12-08/doc-ifypnqvn1474616.shtml"));
-        }
     }
 
     private void initViews(View view, final Context context) {

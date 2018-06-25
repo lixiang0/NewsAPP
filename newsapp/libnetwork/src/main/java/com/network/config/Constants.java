@@ -14,7 +14,8 @@ public class Constants {
 
     //======================== 按类型获取新闻数据  =================//
     public static final String login = "/login";
-
+    public static final String Login_username = "username";
+    public static final String Login_password = "password";
 
     //============================ 后台地址 ================================//
     // Get url.

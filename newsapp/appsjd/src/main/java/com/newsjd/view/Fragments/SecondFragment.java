@@ -1,4 +1,4 @@
-package com.newsjd.view.Fragments.Second;
+package com.newsjd.view.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,8 +13,6 @@ import android.widget.Button;
 import com.newsjd.R;
 import com.utils.HttpUtils;
 
-import rx.Observable;
-import rx.functions.Action1;
 import rx.functions.Func1;
 
 public class SecondFragment extends Fragment implements View.OnClickListener {

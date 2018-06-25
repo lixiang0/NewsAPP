@@ -1,4 +1,4 @@
-package com.newsjd.view.Fragments.Second;
+package com.newsjd.view.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,7 +17,7 @@ import rx.Observable;
 import rx.functions.Action1;
 import rx.functions.Func1;
 
-public class SecondFragment extends Fragment implements View.OnClickListener {
+public class FourFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "sjd secfrag";
     View mView;
 

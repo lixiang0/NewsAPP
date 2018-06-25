@@ -1,4 +1,4 @@
-package com.newsjd.view.Fragments.First;
+package com.newsjd.view.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.kekstudio.dachshundtablayout.DachshundTabLayout;
 import com.newsjd.R;
 import com.newsjd.config.Contants;
+import com.newsjd.view.Fragments.First.ViewPagerAdapterS;
 
 public class FirstFragment extends Fragment {
     private static final String TAG = "NEWS FirstAty";
@@ -36,16 +37,4 @@ public class FirstFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
     }
-
-/*    public void onReselected() {
-        Toast.makeText(getContext(), "Fragment reselected", Toast.LENGTH_SHORT).show();
-    }
-
-    public  Fragment create(String title) {
-        Bundle args = new Bundle();
-        args.putString("title", title);
-        Fragment fragment = new FirstFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }*/
 }

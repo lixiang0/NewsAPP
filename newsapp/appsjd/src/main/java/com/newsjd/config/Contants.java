@@ -1,9 +1,6 @@
 package com.newsjd.config;
 
-import android.content.Context;
-
 import com.newsjd.R;
-import com.newsjd.base.MainApplication;
 
 import static com.newsjd.base.MainApplication.*;
 
@@ -27,6 +24,4 @@ public class Contants {
             context.getString(R.string.sports),
             context.getString(R.string.local)
     };
-
-    public static String url = "http://121.42.138.77:8081/query?type=";
 }

@@ -1,17 +1,13 @@
 package com.utils;
 
-import android.util.Log;
-
 import com.network.RetrofitClient;
-import com.network.bean.BaseResponse;
-import com.network.bean.NewsData;
+import com.network.bean.NewsBean;
+import com.network.config.Constants;
 
 import java.util.HashMap;
 import java.util.List;
 
 import rx.Observable;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by SJD
@@ -21,14 +17,14 @@ import rx.schedulers.Schedulers;
 public class HttpUtils {
     private static final String TAG = "NET HttpUtils";
 
-    public static Observable<List<NewsData>> getNewsByType(String type) {
+    public static Observable<List<NewsBean>> getNewsByType(String type) {
         return RetrofitClient.getApi().getNewsByType(type);
     }
 
     public static Observable<String> login(String username, String password) {
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("username", username);
-        hashMap.put("password", password);
+        hashMap.put(Constants.Login_username, username);
+        hashMap.put(Constants.Login_password, password);
         return RetrofitClient.getApi().login(hashMap);
     }
 }
