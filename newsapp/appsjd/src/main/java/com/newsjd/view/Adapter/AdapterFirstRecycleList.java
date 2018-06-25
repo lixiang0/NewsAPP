@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,64 +17,162 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.network.bean.NewsBean;
 import com.newsjd.R;
+import com.newsjd.config.LoadingFooter;
 import com.newsjd.view.webview.WebActivity;
+import com.utils.Utils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  * Created by sjd on 2017/7/17.
  */
 
-public class AdapterFirstRecycleList extends RecyclerView.Adapter<AdapterFirstRecycleList.ViewHolder> {
-    private LayoutInflater mInflater;
+public class AdapterFirstRecycleList extends RecyclerView.Adapter {
     private Context mContext;
     private List<NewsBean> mDatas;
+   public FooterHolder mFooterHolder;
 
     public AdapterFirstRecycleList(Context context, List<NewsBean> datas) {
         mContext = context;
         mDatas = datas;
-        mInflater = LayoutInflater.from(context);
     }
 
     @Override //创建
-    public AdapterFirstRecycleList.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.view_item_new, parent, false);
-        ViewHolder myViewHolder = new ViewHolder(view);
-        return myViewHolder;
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view;
+        LayoutInflater mInflater = LayoutInflater.from(mContext);
+        if (viewType == 1) {
+            view = mInflater.inflate(R.layout.fragment_first_list_footer, parent, false);
+            mFooterHolder = new FooterHolder(view);
+            return mFooterHolder;
+        } else {
+            view = mInflater.inflate(R.layout.view_item_new, parent, false);
+            return new NormalHolder(view);
+        }
     }
 
     @SuppressLint("SetTextI18n")
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tv_time.setText(mContext.getString(R.string.update_time) + dateFormat(mDatas.get(position).getTime()));
-        holder.tv_title.setText(mDatas.get(position).getTitle());
-//        holder.tv_link.setTag("链接:"+mDatas.get(position).getLink());
-        final Intent intent = new Intent(mContext, WebActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("link", mDatas.get(position).getLink());
-        holder.tv_link.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.startActivity(intent);
-            }
-        });
-//        holder.tv_link.setMovementMethod(LinkMovementMethod.getInstance());
-        holder.tv_description.setText(mDatas.get(position).getText());
-//        holder.tv_img.setBackgroundResource(R.mipmap.null_pic);
-//        holder.tv_img.setImageURI( Uri.parse("http://"+mDatas.get(position).getImg()));
-        Glide.with(mContext)
-                .load("http://" + mDatas.get(position).getImg()).placeholder(R.mipmap.null_pic).error(R.mipmap.null_pic)
-                .into(holder.tv_img);
 
-//        initImage(mDatas.get(position).getImg(), holder.tv_img);
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof NormalHolder) {
+            NormalHolder normalHolder = (NormalHolder) holder;
+            normalHolder.tv_time.setText(mContext.getString(R.string.update_time) + Utils.dateFormat(mDatas.get(position).getTime()));
+            normalHolder.tv_title.setText(mDatas.get(position).getTitle());
+
+//        holder.tv_link.setMovementMethod(LinkMovementMethod.getInstance());
+            normalHolder.tv_description.setText(mDatas.get(position).getText());
+            setUpItemEvent(normalHolder);
+            Glide.with(mContext)
+                    .load("http://" + mDatas.get(position).getImg()).placeholder(R.mipmap.null_pic).error(R.mipmap.null_pic)
+                    .into(normalHolder.tv_img);
+        }
     }
 
-    protected void setUpItemEvent(final ViewHolder holder) {
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == mDatas.size())
+            //是 最后一个则显示加载
+            return 1;
+        else
+            return 0;
+    }
+
+    @Override
+    public int getItemCount() {
+        return mDatas.size() + 1;
+    }
+
+
+    //添加onclick 接口
+    //在 onBindViewHolder 进行回调
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+
+        void onItemLongClick(View view, int position);
+    }
+
+    private OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mOnItemClickListener = listener;
+    }
+
+
+    public class NormalHolder extends RecyclerView.ViewHolder {
+        public TextView tv_time;
+        public TextView tv_title;
+        public Button tv_link;
+        public TextView tv_description;
+        public ImageView tv_img;
+
+        public NormalHolder(View v) {
+            super(v);
+            tv_time = v.findViewById(R.id.tv_time);
+            tv_title = v.findViewById(R.id.tv_title);
+            tv_link = v.findViewById(R.id.tv_link);
+            tv_description = v.findViewById(R.id.tv_description);
+            tv_img = v.findViewById(R.id.tv_img);
+        }
+    }
+
+    public class FooterHolder extends RecyclerView.ViewHolder {
+        View mLoadingViewstubstub;
+        View mEndViewstub;
+        View mNetworkErrorViewstub;
+
+        public FooterHolder(View itemView) {
+            super(itemView);
+            mLoadingViewstubstub = itemView.findViewById(R.id.loading_viewstub);
+            mEndViewstub = itemView.findViewById(R.id.end_viewstub);
+            mNetworkErrorViewstub = itemView.findViewById(R.id.network_error_viewstub);
+        }
+
+        //根据传过来的status控制哪个状态可见
+        public void setData(LoadingFooter.FooterState status) {
+            Log.d("TAG", "reduAdapter" + status + "");
+            switch (status) {
+                case Normal:
+                    setAllGone();
+                    break;
+                case Loading:
+                    setAllGone();
+                    mLoadingViewstubstub.setVisibility(View.VISIBLE);
+                    break;
+                case TheEnd:
+                    setAllGone();
+                    mEndViewstub.setVisibility(View.VISIBLE);
+                    break;
+                case NetWorkError:
+                    setAllGone();
+                    mNetworkErrorViewstub.setVisibility(View.VISIBLE);
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        //全部不可见
+        void setAllGone() {
+            if (mLoadingViewstubstub != null) {
+                mLoadingViewstubstub.setVisibility(View.GONE);
+            }
+            if (mEndViewstub != null) {
+                mEndViewstub.setVisibility(View.GONE);
+            }
+            if (mNetworkErrorViewstub != null) {
+                mNetworkErrorViewstub.setVisibility(View.GONE);
+            }
+        }
+
+    }
+
+    private static final String TAG = "AdapterFirstRecycleList";
+
+
+    protected void setUpItemEvent(final NormalHolder holder) {
         if (mOnItemClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -92,70 +191,5 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter<AdapterFirstRe
                 }
             });
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return mDatas.size();
-    }
-
-
-
-    //添加onclick 接口
-    //在 onBindViewHolder 进行回调
-    public interface OnItemClickListener {
-        void onItemClick(View view, int position);
-
-        void onItemLongClick(View view, int position);
-    }
-
-    private OnItemClickListener mOnItemClickListener;
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.mOnItemClickListener = listener;
-    }
-
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_time;
-        public TextView tv_title;
-        public Button tv_link;
-        public TextView tv_description;
-        public ImageView tv_img;
-
-        public ViewHolder(View v) {
-            super(v);
-            tv_time = v.findViewById(R.id.tv_time);
-            tv_title = v.findViewById(R.id.tv_title);
-            tv_link = v.findViewById(R.id.tv_link);
-            tv_description = v.findViewById(R.id.tv_description);
-            tv_img = v.findViewById(R.id.tv_img);
-        }
-    }
-
-    private static final String TAG = "AdapterFirstRecycleList";
-
-
-
-    public static String dateFormat(String dateString) {
-        String inputText = dateString;
-        SimpleDateFormat inputFormat = new SimpleDateFormat
-                ("EEE, dd MMM yyyy HH:mm:ss 'GMT'", Locale.ENGLISH);
-        inputFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-
-        SimpleDateFormat outputFormat =
-                new SimpleDateFormat("MM月dd日HH时mm分");
-        // Adjust locale and zone appropriately
-        Date date1 = null;
-        try {
-            date1 = inputFormat.parse(inputText);
-//            System.out.println(date1.toString());
-        } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        String outputText = outputFormat.format(date1);
-//        System.out.println(outputText);
-        return outputText;
     }
 }
