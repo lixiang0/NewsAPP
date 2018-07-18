@@ -24,8 +24,6 @@ android {
             dimension "versionCode"
             versionName "v" + defaultConfig.versionName
             buildConfigField("String", "API_HOST_V", "\"\"")//通讯版本
-            buildConfigField("String", "API_HOST_DEBUG", "\"http://121.42.138.77:8081/\"")//测试后台
-            buildConfigField("String", "API_HOST_RELEASE", "\"http://121.42.138.77:8081/\"")//正式后台
         }
     }
 

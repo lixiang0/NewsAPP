@@ -30,7 +30,7 @@ import java.util.List;
 public class AdapterFirstRecycleList extends RecyclerView.Adapter {
     private Context mContext;
     private List<NewsBean> mDatas;
-   public FooterHolder mFooterHolder;
+    public FooterHolder mFooterHolder;
 
     public AdapterFirstRecycleList(Context context, List<NewsBean> datas) {
         mContext = context;
@@ -121,12 +121,15 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
         View mLoadingViewstubstub;
         View mEndViewstub;
         View mNetworkErrorViewstub;
+        View mOnClickContinueErrorViewstub;
+
 
         public FooterHolder(View itemView) {
             super(itemView);
             mLoadingViewstubstub = itemView.findViewById(R.id.loading_viewstub);
             mEndViewstub = itemView.findViewById(R.id.end_viewstub);
             mNetworkErrorViewstub = itemView.findViewById(R.id.network_error_viewstub);
+            mOnClickContinueErrorViewstub = itemView.findViewById(R.id.loaded_viewstub);
         }
 
         //根据传过来的status控制哪个状态可见
@@ -135,6 +138,7 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
             switch (status) {
                 case Normal:
                     setAllGone();
+                    mOnClickContinueErrorViewstub.setVisibility(View.VISIBLE);
                     break;
                 case Loading:
                     setAllGone();
@@ -165,6 +169,10 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
             if (mNetworkErrorViewstub != null) {
                 mNetworkErrorViewstub.setVisibility(View.GONE);
             }
+            if (mOnClickContinueErrorViewstub != null) {
+                mOnClickContinueErrorViewstub.setVisibility(View.GONE);
+            }
+
         }
 
     }

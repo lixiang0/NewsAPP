@@ -20,10 +20,6 @@ public class Constants {
     //============================ 后台地址 ================================//
     // Get url.
     public static String getHost() {
-        if (BuildConfig.DEBUG) {
-            return BuildConfig.API_HOST_DEBUG;
-        } else {
-            return BuildConfig.API_HOST_RELEASE;
-        }
+        return "http://121.42.138.77:8081/";
     }
 }

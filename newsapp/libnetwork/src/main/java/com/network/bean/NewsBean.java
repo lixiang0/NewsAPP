@@ -1,5 +1,7 @@
 package com.network.bean;
 
+import android.text.TextUtils;
+
 public class NewsBean {
 
     public NewsBean(String time, String category, String title, String img, int id, String text, String link) {
@@ -84,6 +86,21 @@ public class NewsBean {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof NewsBean) {
+            NewsBean newsBean = (NewsBean) obj;
+            return TextUtils.equals(this.time, newsBean.time) &&
+                    TextUtils.equals(this.category, newsBean.category) &&
+                    TextUtils.equals(this.title, newsBean.title) &&
+                    TextUtils.equals(this.img, newsBean.img) &&
+                    (this.id == newsBean.id) &&
+                    TextUtils.equals(this.text, newsBean.text) &&
+                    TextUtils.equals(this.link, newsBean.link);
+        }
+        return super.equals(obj);
     }
 
     @Override

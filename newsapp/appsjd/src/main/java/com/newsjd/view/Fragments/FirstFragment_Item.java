@@ -81,6 +81,7 @@ public class FirstFragment_Item extends Fragment {
                         // 添加数据
                         boolean hasNewData = false;
                         for (NewsBean bean : newsData) {
+//                            Log.e(TAG, "onNext:  NewsBean 是否存在：" + mDatas.contains(bean));
                             if (!mDatas.contains(bean)) {
                                 mDatas.add(bean);
                                 hasNewData = true;
