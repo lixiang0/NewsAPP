@@ -16,19 +16,22 @@
             android:id="@+id/loading_viewstub"
             layout="@layout/fragment_first_list_footer_loading"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
 
         <include
             android:id="@+id/end_viewstub"
             layout="@layout/fragment_first_list_footer_end"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
 
         <include
             android:id="@+id/network_error_viewstub"
             layout="@layout/fragment_first_list_footer_error"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
 
         <include
             android:id="@+id/loaded_viewstub"

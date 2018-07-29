@@ -9,7 +9,7 @@ public class Constants {
 
 
     //======================== 按类型获取新闻数据  =================//
-    public static final String getNewsByType = "/query?type=";
+    public static final String getNewsByType = "/query";//?type=1&page=1
 
 
     //======================== 按类型获取新闻数据  =================//

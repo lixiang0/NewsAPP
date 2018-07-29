@@ -1,6 +1,7 @@
 package com.newsjd.view.Adapter;
 
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ public class AdapterFirstVP extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public FirstFragment_Item getItem(int i) {
+    public Fragment getItem(int i) {
         return firstFragmentItemArrayList.get(i);
     }
 
@@ -49,5 +50,10 @@ public class AdapterFirstVP extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return mItems.get(position);
+    }
+
+
+    public void loadData(int position){
+        firstFragmentItemArrayList.get(position).loadData();
     }
 }

@@ -27,8 +27,9 @@ import rx.Observable;
  */
 public interface Api {
     //============= API =================//
-    @GET
-    Observable<List<NewsBean>> getNewsByType(@Url String type);
+    @GET(Constants.getNewsByType)
+    Observable<List<NewsBean>> getNewsByType(@Query("type") int type,
+                                             @Query("page") int page);
 
     @FormUrlEncoded
     @POST(Constants.login)

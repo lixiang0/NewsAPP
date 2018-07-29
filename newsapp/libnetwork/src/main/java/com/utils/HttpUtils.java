@@ -6,6 +6,7 @@ import com.network.config.Constants;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import rx.Observable;
 
@@ -17,8 +18,8 @@ import rx.Observable;
 public class HttpUtils {
     private static final String TAG = "NET HttpUtils";
 
-    public static Observable<List<NewsBean>> getNewsByType(String type) {
-        return RetrofitClient.getApi().getNewsByType(type);
+    public static Observable<List<NewsBean>> getNewsByType(int type, int page) {
+        return RetrofitClient.getApi().getNewsByType(type, page);
     }
 
     public static Observable<String> login(String username, String password) {

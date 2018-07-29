@@ -3,11 +3,12 @@ package com.newsjd.view.Fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.network.bean.NewsBean;
-import com.network.config.Constants;
 import com.newsjd.R;
 import com.newsjd.config.Contants;
 import com.newsjd.config.LoadingFooter;
@@ -39,6 +39,7 @@ public class FirstFragment_Item extends Fragment {
     private RecyclerView mRecyclerView;
     private List<NewsBean> mDatas = new ArrayList<>();
     private AdapterFirstRecycleList mAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private int position = -1;
 
@@ -58,48 +59,14 @@ public class FirstFragment_Item extends Fragment {
     public void onResume() {
         super.onResume();
         Log.e(TAG, "onResume: " + position);
-        initData();
-    }
-
-    private void initData() {
-        HttpUtils.getNewsByType(Constants.getNewsByType + Contants.AllItem[position] + "")
-                .subscribeOn(Schedulers.computation()) // 指定 subscribe() 发生在 运算 线程
-                .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
-                .subscribe(new Subscriber<List<NewsBean>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, "onError: ", e);
-                    }
-
-                    @Override
-                    public void onNext(List<NewsBean> newsData) {
-                        // 添加数据
-                        boolean hasNewData = false;
-                        for (NewsBean bean : newsData) {
-//                            Log.e(TAG, "onNext:  NewsBean 是否存在：" + mDatas.contains(bean));
-                            if (!mDatas.contains(bean)) {
-                                mDatas.add(bean);
-                                hasNewData = true;
-                            }
-                        }
-                        mAdapter.notifyDataSetChanged();
-                        if (hasNewData) {
-                            setState(LoadingFooter.FooterState.Normal);
-                        } else {
-                            setState(LoadingFooter.FooterState.TheEnd);
-                        }
-                    }
-                });
+//initData();
     }
 
     private void initViews(View view, final Context context) {
         Log.e(TAG, "initViews: ");
         mRecyclerView = view.findViewById(R.id.recyclerView);
+        swipeRefreshLayout = view.findViewById(R.id.fragment_first_srl);
+
         mAdapter = new AdapterFirstRecycleList(context, mDatas);
 
         mRecyclerView.setAdapter(mAdapter);
@@ -157,7 +124,88 @@ public class FirstFragment_Item extends Fragment {
 //                Toast.makeText(context, position + " longclick", Toast.LENGTH_SHORT).show();
             }
         });
+
+        //初始化下拉刷新
+        swipeRefreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //清除数据
+                initData(true, new InitDataCallBack() {
+                    @Override
+                    public void onCallBack() {
+                        // 取消SwipeRefreshLayout的刷新状态
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+            }
+        });
     }
+
+    public void loadData() {
+        if (mDatas.size() == 0) {
+            initData();
+        }
+    }
+
+
+    private void initData() {
+        initData(false, null);
+    }
+
+    int pageNum = 0;
+
+    private void initData(final boolean clean, final InitDataCallBack initDataCallBack) {
+        if (clean || mDatas.size() == 0) {
+            pageNum = 0;
+        } else {
+            pageNum++;
+        }
+        Log.e(TAG, "initData:  pageNum = " + pageNum);
+        HttpUtils.getNewsByType(Contants.AllItem[position], pageNum)
+                .subscribeOn(Schedulers.computation()) // 指定 subscribe() 发生在 运算 线程
+                .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
+                .subscribe(new Subscriber<List<NewsBean>>() {
+                    // 添加数据
+                    boolean hasNewData = false;
+
+                    @Override
+                    public void onCompleted() {
+                        if (initDataCallBack != null) {
+                            initDataCallBack.onCallBack();
+                        } else {
+                            if (hasNewData) {
+                                Toast.makeText(getContext(), "已加载", Toast.LENGTH_SHORT).show();
+                                setState(LoadingFooter.FooterState.Normal);
+                            } else {
+                                Toast.makeText(getContext(), "已经是最新数据", Toast.LENGTH_SHORT).show();
+                                setState(LoadingFooter.FooterState.TheEnd);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError: ", e);
+                    }
+
+                    @Override
+                    public void onNext(List<NewsBean> newsData) {
+                        if (clean) {
+                            mDatas.clear();
+                        }
+                        for (NewsBean bean : newsData) {
+//                            Log.e(TAG, "onNext:  NewsBean 是否存在：" + mDatas.contains(bean));
+                            if (!mDatas.contains(bean)) {
+                                mDatas.add(bean);
+                                hasNewData = true;
+                            }
+                        }
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+    }
+
 
     public FirstFragment_Item setPosition(int position) {
         this.position = position;
@@ -215,5 +263,10 @@ public class FirstFragment_Item extends Fragment {
         if (mAdapter != null && mAdapter.mFooterHolder != null) {
             mAdapter.mFooterHolder.setData(mState);
         }
+    }
+
+
+    private interface InitDataCallBack {
+        void onCallBack();
     }
 }

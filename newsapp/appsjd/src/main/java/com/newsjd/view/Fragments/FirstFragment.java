@@ -31,10 +31,31 @@ public class FirstFragment extends Fragment {
 
     private void initViews(View view) {
         viewPager = view.findViewById(R.id.view_pager);
-        adapterFirstVP = new AdapterFirstVP(getFragmentManager(), Contants.AllItem,Contants.AllItem_Name);
+        adapterFirstVP = new AdapterFirstVP(getFragmentManager(), Contants.AllItem, Contants.AllItem_Name);
         viewPager.setAdapter(adapterFirstVP);
 
         tabLayout = view.findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
+
+        //添加监听，当切换页面的时候， 如果没有数据，那么就加载数据
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                adapterFirstVP.loadData(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        //初始化第一页的时候 加载数据
+        adapterFirstVP.loadData(0);
     }
 }
