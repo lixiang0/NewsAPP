@@ -195,6 +195,7 @@ public class FirstFragment_Item extends Fragment {
                             mDatas.clear();
                         }
                         for (NewsBean bean : newsData) {
+                            Log.e(TAG, "onNext: " + bean.toString());
 //                            Log.e(TAG, "onNext:  NewsBean 是否存在：" + mDatas.contains(bean));
                             if (!mDatas.contains(bean)) {
                                 mDatas.add(bean);
