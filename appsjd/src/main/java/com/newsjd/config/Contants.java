@@ -1,6 +1,6 @@
 package com.newsjd.config;
 
-import com.newsjd.R;
+import pub.cpp.news.R;
 
 import static com.newsjd.base.MainApplication.*;
 

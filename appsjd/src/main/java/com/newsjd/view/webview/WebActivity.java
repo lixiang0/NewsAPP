@@ -1,37 +1,53 @@
 package com.newsjd.view.webview;
 
-import android.annotation.SuppressLint;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.content.Intent;
+import android.util.Log;
 
-import com.newsjd.R;
+/**
+ * Created by cenxiaozhong on 2017/5/22.
+ * <p>
+ */
 
+public class WebActivity extends BaseWebActivity {
+    private static final String TAG = "WebActivity";
 
-public class WebActivity extends AppCompatActivity {
-
-    @SuppressLint("SetJavaScriptEnabled")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web);
-        WebView webView=findViewById(R.id.webview);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-        });
-        webView.loadUrl(getIntent().getStringExtra("link"));
-
+    protected void onStart() {
+        super.onStart();
+        if (getIntent() == null) {
+            return;
+        }
+        String url = getIntent().getStringExtra("link");
+        setUrl(url);
+        Log.e(TAG, "onStart: " + getUrl());
     }
 
-    public void onClickBack(View v){
-        this.finish();
-    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e(TAG, "onResume: " + getUrl());
+        //测试Cookies
+        /*try {
 
+            String targetUrl="";
+            Log.i("Info","cookies:"+ AgentWebConfig.getCookiesByUrl(targetUrl="http://www.jd.com"));
+            AgentWebConfig.removeAllCookies(new ValueCallback<Boolean>() {
+                @Override
+                public void onReceiveValue(Boolean value) {
+                    Log.i("Info","onResume():"+value);
+                }
+            });
+
+            String tagInfo=AgentWebConfig.getCookiesByUrl(targetUrl);
+            Log.i("Info","tag:"+tagInfo);
+            AgentWebConfig.syncCookie("http://www.jd.com","ID=IDHl3NVU0N3ltZm9OWHhubHVQZW1BRThLdGhLaFc5TnVtQWd1S2g1REcwNVhTS3RXQVFBQEBFDA984906B62C444931EA0");
+            String tag=AgentWebConfig.getCookiesByUrl(targetUrl);
+            Log.i("Info","tag:"+tag);
+            AgentWebConfig.removeSessionCookies();
+            Log.i("Info","removeSessionCookies:"+AgentWebConfig.getCookiesByUrl(targetUrl));
+        }catch (Exception e){
+            e.printStackTrace();
+        }*/
+
+    }
 }

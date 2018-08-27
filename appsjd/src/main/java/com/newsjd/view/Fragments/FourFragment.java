@@ -10,11 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.newsjd.R;
+import pub.cpp.news.R;
+
 import com.utils.HttpUtils;
 
-import rx.Observable;
-import rx.functions.Action1;
 import rx.functions.Func1;
 
 public class FourFragment extends Fragment implements View.OnClickListener {
@@ -45,7 +44,7 @@ public class FourFragment extends Fragment implements View.OnClickListener {
                 HttpUtils.login("tes", "test").filter(new Func1<String, Boolean>() {
                     @Override
                     public Boolean call(String s) {
-                        Log.e(TAG, "call: " + s );
+                        Log.e(TAG, "call: " + s);
                         return null;
                     }
                 });

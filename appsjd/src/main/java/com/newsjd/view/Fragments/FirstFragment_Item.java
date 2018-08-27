@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.network.bean.NewsBean;
-import com.newsjd.R;
+import pub.cpp.news.R;
 import com.newsjd.config.Contants;
 import com.newsjd.config.LoadingFooter;
 import com.newsjd.view.Adapter.AdapterFirstRecycleList;
@@ -113,10 +113,14 @@ public class FirstFragment_Item extends Fragment {
             public void onItemClick(View view, int position) {
 //                Toast.makeText(context, position + " click", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(context, WebActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                Intent intent = new Intent(context, WebActivity.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.putExtra("link", mDatas.get(position).getLink());
+//                context.startActivity(intent);
+
+                Intent intent = new Intent(FirstFragment_Item.this.getContext(), WebActivity.class);
                 intent.putExtra("link", mDatas.get(position).getLink());
-                context.startActivity(intent);
+                startActivity(intent);
             }
 
             @Override

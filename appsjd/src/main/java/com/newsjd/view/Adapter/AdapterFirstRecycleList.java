@@ -2,9 +2,7 @@ package com.newsjd.view.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -17,27 +15,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.bumptech.glide.BitmapTypeRequest;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DecodeFormat;
-import com.bumptech.glide.load.ResourceDecoder;
-import com.bumptech.glide.load.Transformation;
-import com.bumptech.glide.load.engine.Resource;
-import com.bumptech.glide.load.model.ImageVideoWrapper;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.load.resource.gifbitmap.GifBitmapWrapper;
-import com.bumptech.glide.load.resource.transcode.ResourceTranscoder;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.network.bean.NewsBean;
-import com.newsjd.R;
+import pub.cpp.news.R;
 import com.newsjd.config.LoadingFooter;
-import com.newsjd.view.webview.WebActivity;
 import com.utils.Base64BitmapUtil;
 import com.utils.Utils;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 /**

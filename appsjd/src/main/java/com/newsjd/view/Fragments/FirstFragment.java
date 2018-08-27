@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kekstudio.dachshundtablayout.DachshundTabLayout;
-import com.newsjd.R;
+import pub.cpp.news.R;
 import com.newsjd.config.Contants;
 import com.newsjd.view.Adapter.AdapterFirstVP;
 
@@ -58,4 +58,5 @@ public class FirstFragment extends Fragment {
         //初始化第一页的时候 加载数据
         adapterFirstVP.loadData(0);
     }
+
 }

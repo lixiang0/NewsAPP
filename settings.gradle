@@ -1,1 +1,1 @@
-include ':app', ':libViewBottomNavigation', ':libViewDachshundtablayout', ':appsjd', ':libnetwork', ':libshare'
+include ':app', ':libViewBottomNavigation', ':libViewDachshundtablayout', ':appsjd', ':libnetwork', ':libshare', ':libagentweb-core', ':libagentweb-download', ':libagentweb-filechooser'

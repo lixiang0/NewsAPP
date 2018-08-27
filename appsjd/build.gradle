@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.newsjd"
+        applicationId "pub.cpp.news"
         minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
@@ -27,7 +27,6 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation project(':libViewDachshundtablayout')
     implementation project(':libnetwork')
@@ -42,4 +41,6 @@ dependencies {
     implementation files('libs/glide-3.7.0.jar')
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'io.reactivex:rxjava:1.3.8'
+    implementation project(':libagentweb-core')
+    implementation 'com.lcodecorex:tkrefreshlayout:1.0.7'
 }

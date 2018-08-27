@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.newsjd.R;
+import pub.cpp.news.R;
 import com.utils.HttpUtils;
 
 import rx.functions.Func1;

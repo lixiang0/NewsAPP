@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.newsjd.R;
+import pub.cpp.news.R;
 import com.newsjd.config.Contants;
 import com.newsjd.view.Adapter.AdapterMainVP;
 
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView.setOnMenuItemClickListener(this);
         //设置左右单侧保存的 item数量
         mViewPager.setOffscreenPageLimit(3);
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
