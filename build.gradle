@@ -3,11 +3,10 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
         mavenCentral()
-//        maven {
-//            url 'https://maven.google.com/'
-//            name 'Google'
-//        }
         google()
     }
     dependencies {
@@ -23,11 +22,10 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
         mavenCentral()
-//        maven {
-//            url 'https://maven.google.com/'
-//            name 'Google'
-//        }
         google()
     }
 }

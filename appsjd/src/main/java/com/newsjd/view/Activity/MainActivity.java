@@ -13,7 +13,6 @@ import com.newsjd.view.Adapter.AdapterMainVP;
 
 import net.cachapa.bottomnavigation.BottomNavigationView;
 
-
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnMenuItemClickListener {
     private static final String TAG = "MainActivity";
 
