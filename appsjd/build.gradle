@@ -1,6 +1,17 @@
 apply plugin: 'com.android.application'
 
 android {
+    //签名
+//    signingConfigs {
+//        main {
+//            File key = new File(rootProject.ext.signingConfigs["filePath"])
+//            keyAlias rootProject.ext.signingConfigs["keyAlias"]
+//            keyPassword rootProject.ext.signingConfigs["keyPassword"]
+//            storeFile file(key)
+//            storePassword rootProject.ext.signingConfigs["storePassword"]
+//        }
+//    }
+
     compileSdkVersion 27
     defaultConfig {
         applicationId "pub.cpp.news"
@@ -14,9 +25,24 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    def fileName = "news_v${defaultConfig.versionName}_${releaseTime()}_${variant.flavorName}_${variant.buildType.name}.apk"
+                    outputFileName = fileName
+                }
+            }
+//            signingConfig signingConfigs.main
+        }
+        debug {
+            versionNameSuffix "-debug"
+//            signingConfig signingConfigs.main
         }
     }
     buildToolsVersion '27.0.3'
+}
+
+static def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
 
 dependencies {
