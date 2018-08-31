@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.network.bean.NewsBean;
 import pub.cpp.news.R;
 import com.newsjd.config.LoadingFooter;
@@ -77,15 +78,17 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
                 }
             }
 
+
             if (bitmapBytes == null) {
                 normalHolder.tv_img.setVisibility(View.GONE);
             } else {
-                Glide.with(mContext)
-//                    .load("http://" + mDatas.get(position).getImg())
-                        .load(bitmapBytes)
+                RequestOptions requestOptions = new RequestOptions()
                         .placeholder(R.mipmap.null_pic)
-                        .error(R.mipmap.null_pic)
-                        .centerCrop()
+                        .error(R.mipmap.null_pic);
+
+                Glide.with(mContext)
+                        .load(bitmapBytes)
+                        .apply(requestOptions)
                         .into(normalHolder.tv_img);
             }
         }

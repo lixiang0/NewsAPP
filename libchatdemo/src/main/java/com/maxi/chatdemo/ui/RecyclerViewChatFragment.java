@@ -14,7 +14,6 @@ import com.maxi.chatdemo.adapter.ChatRecyclerAdapter;
 import com.maxi.chatdemo.animator.SlideInOutBottomItemAnimator;
 import com.maxi.chatdemo.common.ChatConst;
 import com.maxi.chatdemo.db.ChatMessageBean;
-import com.maxi.chatdemo.ui.base.BaseActivity;
 import com.maxi.chatdemo.ui.base.BaseFragment;
 import com.maxi.chatdemo.utils.KeyBoardUtils;
 import com.maxi.chatdemo.widget.AudioRecordButton;
@@ -38,7 +37,7 @@ public class RecyclerViewChatFragment extends BaseFragment {
     @Override
     protected void findView() {
         super.findView();
-        pullList.setSlideView(new PullToRefreshView(this).getSlideView(PullToRefreshView.RECYCLERVIEW));
+        pullList.setSlideView(new PullToRefreshView(this.getContext()).getSlideView(PullToRefreshView.RECYCLERVIEW));
         myList = (PullToRefreshRecyclerView) pullList.returnMylist();
     }
 
