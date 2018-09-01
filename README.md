@@ -3,6 +3,7 @@
 - 1.自动更新抓取谷歌新闻
 - 2.新闻内容为JSON格式,参考[链接](http://121.42.138.77:8081/query?type=1)
 - 3.添加了用户系统：包括用户注册、登陆、收藏、顶新闻、踩新闻的功能[正在添加]
+- 4.apk下载链接：[apk链接](https://github.com/lixiang0/NewsAPP/blob/master/app-debug.apk)
 
 ### 更新（20180505）
 - 1.将服务端切换为python flask
