@@ -20,7 +20,7 @@ android {
     }
 
     productFlavors {
-        main {
+        orginal {
             dimension "versionCode"
             versionName "v" + defaultConfig.versionName
             buildConfigField("String", "API_HOST_V", "\"\"")//通讯版本
