@@ -35,20 +35,20 @@ public class RecyclerViewChatFragment extends BaseFragment {
     }
 
     @Override
-    protected void findView() {
-        super.findView();
+    protected void findView(View view) {
+        super.findView(view);
         pullList.setSlideView(new PullToRefreshView(this.getContext()).getSlideView(PullToRefreshView.RECYCLERVIEW));
         myList = (PullToRefreshRecyclerView) pullList.returnMylist();
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         tblist.clear();
         tbAdapter.notifyDataSetChanged();
         myList.setAdapter(null);
@@ -59,8 +59,8 @@ public class RecyclerViewChatFragment extends BaseFragment {
     @Override
     protected void init() {
         setTitle("RecyclerView");
-        tbAdapter = new ChatRecyclerAdapter(this, tblist);
-        wcLinearLayoutManger = new WrapContentLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        tbAdapter = new ChatRecyclerAdapter(this.getContext(), tblist);
+        wcLinearLayoutManger = new WrapContentLinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         myList.setLayoutManager(wcLinearLayoutManger);
         myList.setItemAnimator(new SlideInOutBottomItemAnimator(myList));
         myList.setAdapter(tbAdapter);

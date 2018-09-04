@@ -365,7 +365,7 @@ public abstract class BaseFragment extends Fragment {
 
         });
 //        controlKeyboardLayout(activityRootView, pullList);
-        bottomStatusHeight = ScreenUtil.getNavigationBarHeight(this);
+        bottomStatusHeight = ScreenUtil.getNavigationBarHeight(this.getContext());
         //加载本地聊天记录
         page = (int) mChatDbManager.getPages(number);
         loadRecords();

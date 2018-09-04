@@ -1,6 +1,7 @@
 package com.maxi.chatdemo.animator;
 
-import android.support.v4.animation.AnimatorCompatHelper;
+import android.animation.TimeInterpolator;
+import android.animation.ValueAnimator;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
@@ -471,7 +472,8 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
     }
 
     private void resetAnimation(RecyclerView.ViewHolder holder) {
-        AnimatorCompatHelper.clearInterpolator(holder.itemView);
+        TimeInterpolator mDefaultInterpolator = new ValueAnimator().getInterpolator();
+        holder.itemView.animate().setInterpolator(mDefaultInterpolator);
         endAnimation(holder);
     }
 

@@ -3,7 +3,6 @@ apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.3'
 //    aaptOptions.cruncherEnabled = false
 //    aaptOptions.useNewCruncher = false
     defaultConfig {
@@ -22,8 +21,8 @@ android {
         schemaVersion 1
         targetGenDir 'src/main/java'
     }
-    productFlavors {
-    }
+
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
