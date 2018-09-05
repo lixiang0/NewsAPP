@@ -372,16 +372,16 @@ public abstract class BaseActivity extends Activity {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.ivLeft:
-                        doLeft();
-                        break;
-                    case R.id.ivRight:
-                        doRight();
-                        break;
-                    case R.id.llRight:
-                        doRight();
-                        break;
+                int i = v.getId();
+                if (i == R.id.ivLeft) {
+                    doLeft();
+
+                } else if (i == R.id.ivRight) {
+                    doRight();
+
+                } else if (i == R.id.llRight) {
+                    doRight();
+
                 }
             }
         };

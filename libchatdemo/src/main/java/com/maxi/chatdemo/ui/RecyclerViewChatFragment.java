@@ -30,14 +30,14 @@ public class RecyclerViewChatFragment extends BaseFragment {
     private WrapContentLinearLayoutManager wcLinearLayoutManger;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
     protected void findView(View view) {
         super.findView(view);
-        pullList.setSlideView(new PullToRefreshView(this.getContext()).getSlideView(PullToRefreshView.RECYCLERVIEW));
+        pullList.setSlideView(new PullToRefreshView(this.getActivity()).getSlideView(PullToRefreshView.RECYCLERVIEW));
         myList = (PullToRefreshRecyclerView) pullList.returnMylist();
     }
 
@@ -57,10 +57,10 @@ public class RecyclerViewChatFragment extends BaseFragment {
     }
 
     @Override
-    protected void init() {
+    protected void init(View view) {
         setTitle("RecyclerView");
-        tbAdapter = new ChatRecyclerAdapter(this.getContext(), tblist);
-        wcLinearLayoutManger = new WrapContentLinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
+        tbAdapter = new ChatRecyclerAdapter(view.getContext(), tblist);
+        wcLinearLayoutManger = new WrapContentLinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
         myList.setLayoutManager(wcLinearLayoutManger);
         myList.setItemAnimator(new SlideInOutBottomItemAnimator(myList));
         myList.setAdapter(tbAdapter);
@@ -128,8 +128,7 @@ public class RecyclerViewChatFragment extends BaseFragment {
                         tbAdapter.setIsGif(false);
                         tbAdapter.isPicRefresh = true;
                         reset();
-                        KeyBoardUtils.hideKeyBoard(RecyclerViewChatFragment.this,
-                                mEditTextContent);
+                        KeyBoardUtils.hideKeyBoard(view.getContext(), mEditTextContent);
                         break;
                     default:
                         break;
@@ -142,7 +141,7 @@ public class RecyclerViewChatFragment extends BaseFragment {
             }
         });
         controlKeyboardLayout(activityRootView, pullList);
-        super.init();
+        super.init(view);
     }
 
     /**
@@ -157,9 +156,9 @@ public class RecyclerViewChatFragment extends BaseFragment {
             @Override
             public void onGlobalLayout() {
                 //获取当前界面可视部分
-                RecyclerViewChatFragment.this.getWindow().getDecorView().getWindowVisibleDisplayFrame(r);
+                RecyclerViewChatFragment.this.getActivity().getWindow().getDecorView().getWindowVisibleDisplayFrame(r);
                 //获取屏幕的高度
-                int screenHeight = RecyclerViewChatFragment.this.getWindow().getDecorView().getRootView().getHeight();
+                int screenHeight = RecyclerViewChatFragment.this.getActivity().getWindow().getDecorView().getRootView().getHeight();
                 //此处就是用来获取键盘的高度的， 在键盘没有弹出的时候 此高度为0 键盘弹出的时候为一个正数
                 int heightDifference = screenHeight - r.bottom;
                 int recyclerHeight = 0;

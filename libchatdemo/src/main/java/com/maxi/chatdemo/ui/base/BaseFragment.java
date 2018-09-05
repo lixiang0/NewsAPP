@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -15,6 +14,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.Spannable;
 import android.text.TextUtils;
@@ -127,20 +127,24 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void loadRecords();
 
+//    View view;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_chat, container, false);
         findView(view);
+        initpop(view);
+        init(view);
         return view;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        findView();
-        initpop();
-        init();
+//        findView(view);
+//        initpop(view);
+//        init(view);
         // after andrioid m,must request Permiision on runtime
         getPersimmions();
     }
@@ -168,7 +172,7 @@ public abstract class BaseFragment extends Fragment {
         initActionBar();
     }
 
-    protected void init() {
+    protected void init(final View view) {
         mEditTextContent.setOnKeyListener(onKeyListener);
         mChatDbManager = new ChatDbManager();
         PullToRefreshLayout.pulltorefreshNotifier pullNotifier = new PullToRefreshLayout.pulltorefreshNotifier() {
@@ -192,13 +196,13 @@ public abstract class BaseFragment extends Fragment {
                     tbbv.setVisibility(View.GONE);
                     mess_lv.setVisibility(View.GONE);
                     voiceBtn.setVisibility(View.VISIBLE);
-                    KeyBoardUtils.hideKeyBoard(BaseFragment.this.getContext(), mEditTextContent);
+                    KeyBoardUtils.hideKeyBoard(view.getContext(), mEditTextContent);
                     voiceIv.setBackgroundResource(R.mipmap.chatting_setmode_keyboard_btn_normal);
                 } else {
                     mEditTextContent.setVisibility(View.VISIBLE);
                     voiceBtn.setVisibility(View.GONE);
                     voiceIv.setBackgroundResource(R.mipmap.voice_btn_normal);
-                    KeyBoardUtils.showKeyBoard(BaseFragment.this.getContext(), mEditTextContent);
+                    KeyBoardUtils.showKeyBoard(view.getContext(), mEditTextContent);
                 }
             }
 
@@ -218,16 +222,16 @@ public abstract class BaseFragment extends Fragment {
                     emoji.setBackgroundResource(R.mipmap.emoji);
                     voiceIv.setBackgroundResource(R.mipmap.voice_btn_normal);
                     tbbv.setVisibility(View.VISIBLE);
-                    KeyBoardUtils.hideKeyBoard(BaseFragment.this.getContext(),
+                    KeyBoardUtils.hideKeyBoard(view.getContext(),
                             mEditTextContent);
                     mess_iv.setBackgroundResource(R.mipmap.chatting_setmode_keyboard_btn_normal);
                 } else {
                     tbbv.setVisibility(View.GONE);
-                    KeyBoardUtils.showKeyBoard(BaseFragment.this.getContext(), mEditTextContent);
+                    KeyBoardUtils.showKeyBoard(view.getContext(), mEditTextContent);
                     mess_iv.setBackgroundResource(R.mipmap.tb_more);
                     if (mess_lv.getVisibility() != View.GONE) {
                         mess_lv.setVisibility(View.GONE);
-                        KeyBoardUtils.showKeyBoard(BaseFragment.this.getContext(), mEditTextContent);
+                        KeyBoardUtils.showKeyBoard(view.getContext(), mEditTextContent);
                         mess_iv.setBackgroundResource(R.mipmap.tb_more);
                     }
                 }
@@ -297,8 +301,7 @@ public abstract class BaseFragment extends Fragment {
                             emoji.setBackgroundResource(R.mipmap.emoji);
                             voiceIv.setBackgroundResource(R.mipmap.voice_btn_normal);
                             mess_lv.setVisibility(View.VISIBLE);
-                            KeyBoardUtils.hideKeyBoard(BaseFragment.this.getContext(),
-                                    mEditTextContent);
+                            KeyBoardUtils.hideKeyBoard(view.getContext(), mEditTextContent);
                             mess_iv.setBackgroundResource(R.mipmap.chatting_setmode_keyboard_btn_normal);
                         }
                 }
@@ -319,12 +322,11 @@ public abstract class BaseFragment extends Fragment {
                     mess_iv.setBackgroundResource(R.mipmap.tb_more);
                     emoji_group.setVisibility(View.VISIBLE);
                     emoji.setBackgroundResource(R.mipmap.chatting_setmode_keyboard_btn_normal);
-                    KeyBoardUtils.hideKeyBoard(BaseFragment.this.getContext(),
-                            mEditTextContent);
+                    KeyBoardUtils.hideKeyBoard(view.getContext(), mEditTextContent);
                 } else {
                     emoji_group.setVisibility(View.GONE);
                     emoji.setBackgroundResource(R.mipmap.emoji);
-                    KeyBoardUtils.showKeyBoard(BaseFragment.this.getContext(), mEditTextContent);
+                    KeyBoardUtils.showKeyBoard(view.getContext(), mEditTextContent);
                 }
             }
         });
@@ -365,7 +367,7 @@ public abstract class BaseFragment extends Fragment {
 
         });
 //        controlKeyboardLayout(activityRootView, pullList);
-        bottomStatusHeight = ScreenUtil.getNavigationBarHeight(this.getContext());
+        bottomStatusHeight = ScreenUtil.getNavigationBarHeight(this.getActivity());
         //加载本地聊天记录
         page = (int) mChatDbManager.getPages(number);
         loadRecords();
@@ -381,16 +383,16 @@ public abstract class BaseFragment extends Fragment {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.ivLeft:
-                        doLeft();
-                        break;
-                    case R.id.ivRight:
-                        doRight();
-                        break;
-                    case R.id.llRight:
-                        doRight();
-                        break;
+                int i = v.getId();
+                if (i == R.id.ivLeft) {
+                    doLeft();
+
+                } else if (i == R.id.ivRight) {
+                    doRight();
+
+                } else if (i == R.id.llRight) {
+                    doRight();
+
                 }
             }
         };
@@ -419,14 +421,18 @@ public abstract class BaseFragment extends Fragment {
 
 
     private boolean addPermission(ArrayList<String> permissionsList, String permission) {
-        if (getActivity().checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) { // 如果应用没有获得对应权限,则添加到列表中,准备批量申请
-            if (shouldShowRequestPermissionRationale(permission)) {
-                return true;
-            } else {
-                permissionsList.add(permission);
-                return false;
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (getActivity().checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) { // 如果应用没有获得对应权限,则添加到列表中,准备批量申请
+                if (shouldShowRequestPermissionRationale(permission)) {
+                    return true;
+                } else {
+                    permissionsList.add(permission);
+                    return false;
+                }
 
+            } else {
+                return true;
+            }
         } else {
             return true;
         }
@@ -449,12 +455,12 @@ public abstract class BaseFragment extends Fragment {
                 if (perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     // Permission Denied
                     CAN_WRITE_EXTERNAL_STORAGE = false;
-                    Toast.makeText(this.getContext(), "禁用图片权限将导致发送图片功能无法使用！", Toast.LENGTH_SHORT)
+                    Toast.makeText(this.getActivity(), "禁用图片权限将导致发送图片功能无法使用！", Toast.LENGTH_SHORT)
                             .show();
                 }
                 if (perms.get(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
                     CAN_RECORD_AUDIO = false;
-                    Toast.makeText(this.getContext(), "禁用录制音频权限将导致语音功能无法使用！", Toast.LENGTH_SHORT)
+                    Toast.makeText(this.getActivity(), "禁用录制音频权限将导致语音功能无法使用！", Toast.LENGTH_SHORT)
                             .show();
                 }
                 break;
@@ -464,6 +470,9 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public void setTitle(CharSequence title) {
+        if (getActivity().getActionBar() == null) {
+            return;
+        }
         ((TextView) getActivity().getActionBar().getCustomView().findViewById(R.id.tvTitle)).setText(title);
     }
 
@@ -502,23 +511,24 @@ public abstract class BaseFragment extends Fragment {
             return;
         }
         ((TextView) getActivity().getActionBar().getCustomView().findViewById(R.id.tvRight)).setText(text);
-        getActivity().  getActionBar().getCustomView().findViewById(R.id.tvRight).setVisibility(View.VISIBLE);
+        getActivity().getActionBar().getCustomView().findViewById(R.id.tvRight).setVisibility(View.VISIBLE);
     }
 
     /**
      * 常用语列表初始化
+     *
+     * @param view
      */
     @SuppressLint({"NewApi", "InflateParams"})
-    private void initpop() {
-        mess_lv = (ListView) getActivity().findViewById(R.id.mess_lv);
-        adapter = new DataAdapter(this.getContext(), item);
+    private void initpop(View view) {
+        mess_lv = view.findViewById(R.id.mess_lv);
+        adapter = new DataAdapter(view.getContext(), item);
         mess_lv.setAdapter(adapter);
     }
 
     private void downLoad() {
         if (!isDown) {
             new Thread(new Runnable() {
-
                 @Override
                 public void run() {
                     // TODO Auto-generated method stub
@@ -530,7 +540,7 @@ public abstract class BaseFragment extends Fragment {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == getActivity().RESULT_OK) {
             tbbv.setVisibility(View.GONE);
@@ -568,7 +578,7 @@ public abstract class BaseFragment extends Fragment {
                     break;
                 case ChatBottomView.FROM_GALLERY:
                     Uri uri = data.getData();
-                    String path = FileSaveUtil.getPath(getContext(), uri);
+                    String path = FileSaveUtil.getPath(getActivity(), uri);
                     mCurrentPhotoFile = new File(path); // 图片文件路径
                     if (mCurrentPhotoFile.exists()) {
                         int size = ImageCheckoutUtil.getImageSize(ImageCheckoutUtil.getLoacalBitmap(path));
@@ -611,7 +621,7 @@ public abstract class BaseFragment extends Fragment {
 
     public void showToast(String text) {
         if (mToast == null) {
-            mToast = Toast.makeText(this.getContext(), text, Toast.LENGTH_SHORT);
+            mToast = Toast.makeText(this.getActivity(), text, Toast.LENGTH_SHORT);
         } else {
             mToast.setText(text);
             mToast.setDuration(Toast.LENGTH_SHORT);
@@ -633,7 +643,7 @@ public abstract class BaseFragment extends Fragment {
      * @return
      */
     private View getGridChildView(int i) {
-        View view = View.inflate(this, R.layout.layout_expression_gridview, null);
+        View view = View.inflate(this.getActivity(), R.layout.layout_expression_gridview, null);
         ExpandGridView gv = (ExpandGridView) view.findViewById(R.id.gridview);
         List<String> list = new ArrayList<String>();
         if (i == 1) {
@@ -643,7 +653,7 @@ public abstract class BaseFragment extends Fragment {
             list.addAll(reslist.subList(20, reslist.size()));
         }
         list.add("delete_expression");
-        final ExpressionAdapter expressionAdapter = new ExpressionAdapter(this.getContext(),
+        final ExpressionAdapter expressionAdapter = new ExpressionAdapter(this.getActivity(),
                 1, list);
         gv.setAdapter(expressionAdapter);
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -667,7 +677,7 @@ public abstract class BaseFragment extends Fragment {
                                 mEditTextContent.getSelectionStart(), 0);
                         StringBuilder sBuilder = new StringBuilder(oriContent);
                         Spannable insertEmotion = SmileUtils.getSmiledText(
-                                BaseFragment.this.getContext(),
+                                BaseFragment.this.getActivity(),
                                 (String) field.get(null));
                         sBuilder.insert(index, insertEmotion);
                         mEditTextContent.setText(sBuilder.toString());

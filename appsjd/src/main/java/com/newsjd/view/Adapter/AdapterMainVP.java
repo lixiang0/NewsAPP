@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
+import com.maxi.chatdemo.ui.RecyclerViewChatFragment;
 import com.newsjd.view.Fragments.FirstFragment;
 import com.newsjd.view.Fragments.SecondFragment;
 
@@ -17,7 +18,7 @@ public class AdapterMainVP extends FragmentStatePagerAdapter {
 
     private ArrayList<String> mItems = new ArrayList<>();
 
-    private ArrayList<Fragment> pageFragmentSArrayList = new ArrayList<>(length);
+    private ArrayList<? super Fragment> pageFragmentSArrayList = new ArrayList<>(length);
 
     public AdapterMainVP(FragmentManager fm, int[] data, String[] data_Name) {
         super(fm);
@@ -29,7 +30,8 @@ public class AdapterMainVP extends FragmentStatePagerAdapter {
             length = data.length;
             mItems.addAll(Arrays.asList(data_Name).subList(0, length));
             pageFragmentSArrayList.add(new FirstFragment());
-            pageFragmentSArrayList.add(new SecondFragment());
+            pageFragmentSArrayList.add(new RecyclerViewChatFragment());
+//            pageFragmentSArrayList.add(new SecondFragment());
             pageFragmentSArrayList.add(new SecondFragment());
             pageFragmentSArrayList.add(new SecondFragment());
         }
@@ -41,7 +43,7 @@ public class AdapterMainVP extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-        return pageFragmentSArrayList.get(i);
+        return (Fragment) pageFragmentSArrayList.get(i);
     }
 
     @Override
