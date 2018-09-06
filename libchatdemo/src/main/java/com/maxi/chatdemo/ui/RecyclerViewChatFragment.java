@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
@@ -20,10 +21,17 @@ import com.maxi.chatdemo.widget.AudioRecordButton;
 import com.maxi.chatdemo.widget.pulltorefresh.PullToRefreshRecyclerView;
 import com.maxi.chatdemo.widget.pulltorefresh.WrapContentLinearLayoutManager;
 import com.maxi.chatdemo.widget.pulltorefresh.base.PullToRefreshView;
+import com.utils.HttpUtils;
 
 import java.lang.ref.WeakReference;
 
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+
 public class RecyclerViewChatFragment extends BaseFragment {
+    private static final String TAG = "RecViewChatFragment";
     private PullToRefreshRecyclerView myList;
     private ChatRecyclerAdapter tbAdapter;
     private SendMessageHandler sendMessageHandler;
@@ -111,8 +119,7 @@ public class RecyclerViewChatFragment extends BaseFragment {
                 tbAdapter.stopPlayVoice();
             }
         });
-        myList.setOnScrollListener(new RecyclerView.OnScrollListener() {
-
+        myList.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView view, int scrollState) {
                 // TODO Auto-generated method stub
@@ -281,15 +288,36 @@ public class RecyclerViewChatFragment extends BaseFragment {
      */
     @Override
     protected void sendMessage() {
+        final String content = mEditTextContent.getText().toString();
+        tblist.add(getTbub(userName, ChatListViewAdapter.TO_USER_MSG, content, null, null, null, null, null, 0f, ChatConst.COMPLETED));
+        sendMessageHandler.sendEmptyMessage(SEND_OK);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String content = mEditTextContent.getText().toString();
-                tblist.add(getTbub(userName, ChatListViewAdapter.TO_USER_MSG, content, null, null,
-                        null, null, null, 0f, ChatConst.COMPLETED));
-                sendMessageHandler.sendEmptyMessage(SEND_OK);
-                RecyclerViewChatFragment.this.content = content;
-                receriveHandler.sendEmptyMessageDelayed(0, 1000);
+                HttpUtils.chatRobot(content)
+                        .subscribeOn(Schedulers.computation()) // 指定 subscribe() 发生在 运算 线程
+                        .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
+                        .subscribe(new Subscriber<String>() {
+                            @Override
+                            public void onCompleted() {
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                Log.e(TAG, "onError: ", e);
+//                sendMessageHandler.sendEmptyMessage();
+                            }
+
+                            @Override
+                            public void onNext(String s) {
+                                Log.e(TAG, "onNext: " + s);
+                                Message message = new Message();
+                                message.what = 0;
+                                message.obj = s;
+                                receriveHandler.sendMessage(message);
+                            }
+                        });
             }
         }).start();
     }
@@ -303,7 +331,7 @@ public class RecyclerViewChatFragment extends BaseFragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String message = "回复：" + content;
+                String message = content;//"回复：" +
                 ChatMessageBean tbub = new ChatMessageBean();
                 tbub.setUserName(userName);
                 String time = returnTime();
@@ -424,7 +452,8 @@ public class RecyclerViewChatFragment extends BaseFragment {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
-                    receriveMsgText(content);
+                    String s = (String) msg.obj;
+                    receriveMsgText(s);
                     break;
                 case 1:
                     receriveImageText(filePath);

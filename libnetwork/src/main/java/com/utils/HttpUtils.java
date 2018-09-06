@@ -6,7 +6,6 @@ import com.network.config.Constants;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import rx.Observable;
 
@@ -28,5 +27,12 @@ public class HttpUtils {
         hashMap.put(Constants.Login_password, password);
         return RetrofitClient.getApi().login(hashMap);
     }
+
+    public static Observable<String> chatRobot(String msg) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put(Constants.chatContants, msg);
+        return RetrofitClient.getApiChat().chatRobot(hashMap);
+    }
+
 }
 

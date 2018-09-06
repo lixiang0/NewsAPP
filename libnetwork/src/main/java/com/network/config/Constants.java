@@ -11,15 +11,22 @@ public class Constants {
     //======================== 按类型获取新闻数据  =================//
     public static final String getNewsByType = "/query";//?type=1&page=1
 
-
     //======================== 按类型获取新闻数据  =================//
     public static final String login = "/login";
     public static final String Login_username = "username";
     public static final String Login_password = "password";
+
+    //========================   向机器人发送聊天消息  =================//
+    public static final String chatRobot = "/chat/me";
+    public static final String chatContants = "msg";
 
     //============================ 后台地址 ================================//
     // Get url.
     public static String getHost() {
         return "http://121.42.138.77:8081/";
     }
+    public static String getChatHost() {
+        return "http://121.42.138.77:8889/";
+    }
+
 }

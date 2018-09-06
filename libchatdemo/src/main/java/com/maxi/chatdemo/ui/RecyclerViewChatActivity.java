@@ -305,7 +305,7 @@ public class RecyclerViewChatActivity extends BaseActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String message = "回复：" + content;
+                String message = content;// "回复：" +
                 ChatMessageBean tbub = new ChatMessageBean();
                 tbub.setUserName(userName);
                 String time = returnTime();

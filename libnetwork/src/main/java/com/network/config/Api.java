@@ -16,7 +16,6 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -34,7 +33,6 @@ public interface Api {
     @FormUrlEncoded
     @POST(Constants.login)
     Observable<String> login(@FieldMap Map<String, String> map);
-
 
     @FormUrlEncoded
     @POST(Constants.getNewsByType)

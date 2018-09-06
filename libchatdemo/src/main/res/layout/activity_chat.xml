@@ -3,6 +3,7 @@
     android:id="@+id/layout_tongbao_rl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
     android:background="@android:color/white">
 
     <com.maxi.chatdemo.widget.pulltorefresh.PullToRefreshLayout

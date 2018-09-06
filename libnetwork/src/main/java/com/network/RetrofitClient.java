@@ -1,6 +1,7 @@
 package com.network;
 
 import com.network.config.Api;
+import com.network.config.ApiChat;
 import com.network.config.Constants;
 
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class RetrofitClient {
     private static OkHttpClient okHttpClient;
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
+    private static ApiChat apiChat;
 
     public static Api getApi() {
         if (null == okHttpClient) {
@@ -49,6 +51,23 @@ public class RetrofitClient {
         }
         return api;
     }
+
+    public static ApiChat getApiChat() {
+        if (null == okHttpClient) {
+            initOkhttpClient();
+        }
+        if (apiChat == null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(okHttpClient)
+                    .baseUrl(Constants.getChatHost())
+                    .addConverterFactory(gsonConverterFactory)
+                    .addCallAdapterFactory(rxJavaCallAdapterFactory)
+                    .build();
+            apiChat = retrofit.create(ApiChat.class);
+        }
+        return apiChat;
+    }
+
 
     private static void initOkhttpClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
