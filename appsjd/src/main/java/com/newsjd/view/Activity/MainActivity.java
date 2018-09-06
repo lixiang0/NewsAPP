@@ -1,5 +1,7 @@
 package com.newsjd.view.Activity;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,17 +10,18 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import pub.cpp.news.R;
+
 import com.newsjd.config.Contants;
 import com.newsjd.view.Adapter.AdapterMainVP;
 
-import net.cachapa.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnMenuItemClickListener {
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
 
     private ViewPager mViewPager;
     private AdapterMainVP mAdapterMainVP;
     private BottomNavigationView bottomNavigationView;
+    private MenuItem menuItem;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,12 +32,43 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mAdapterMainVP = new AdapterMainVP(getSupportFragmentManager(), Contants.FourPart, Contants.FourPart_Name);
         mViewPager.setAdapter(mAdapterMainVP);
         bottomNavigationView = findViewById(R.id.main_bottom_navigation_view);
-
         initView();
     }
 
+    private void initView() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        //设置左右单侧保存的 item数量
+        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+//                bottomNavigationView.setSelectedIndex(position);
+                bottomNavigationView.setSelectedItemId(position);
+                if (menuItem != null) {
+                    menuItem.setChecked(false);
+                } else {
+                    bottomNavigationView.getMenu().getItem(0).setChecked(false);
+                }
+                menuItem = bottomNavigationView.getMenu().getItem(position);
+                menuItem.setChecked(true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
     @Override
-    public void onMenuItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Log.e(TAG, "onMenuItemSelected: ");
+        menuItem = item;
         switch (item.getItemId()) {
             case R.id.bottom_start:
                 mViewPager.setCurrentItem(0);
@@ -51,35 +85,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             default:
         }
 //        mViewPager.setCurrentItem();
+        return false;
     }
 
     @Override
-    public void onMenuItemReselected() {
-        Log.e(TAG, "onMenuItemSelected: ");
-//        FirstFragment fragment = (FirstFragment) getSupportFragmentManager().findFragmentByTag(CURRENT_FRAGMENT);
-//        fragment.onReselected();
-    }
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
-    private void initView() {
-        bottomNavigationView.setOnMenuItemClickListener(this);
-        //设置左右单侧保存的 item数量
-        mViewPager.setOffscreenPageLimit(3);
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                bottomNavigationView.setSelectedIndex(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
    /* public static final String CURRENT_FRAGMENT = "current_fragment";

@@ -18,13 +18,28 @@
             custom:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_weight="1" />
 
-        <net.cachapa.bottomnavigation.BottomNavigationView
+        <android.support.design.widget.BottomNavigationView
             android:id="@+id/main_bottom_navigation_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:fitsSystemWindows="true"
-            custom:bnv_colors="@array/menu_colors"
-            custom:bnv_menu="@menu/bottom_navigation" />
+            custom:itemBackground="@null"
+            custom:itemIconTint="@drawable/bottom_navigation_selector"
+            custom:itemTextColor="@drawable/bottom_navigation_selector"
+            custom:menu="@menu/bottom_navigation"/>
+        <!--android:fitsSystemWindows="true"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--custom:bnv_colors="@array/menu_colors"-->
+        <!--custom:bnv_menu="@menu/bottom_navigation"-->
+
+
+        <!---->
+        <!--<net.cachapa.bottomnavigation.BottomNavigationView-->
+            <!--android:id="@+id/main_bottom_navigation_view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:fitsSystemWindows="true"-->
+            <!--custom:bnv_colors="@array/menu_colors"-->
+            <!--custom:bnv_menu="@menu/bottom_navigation" />-->
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
