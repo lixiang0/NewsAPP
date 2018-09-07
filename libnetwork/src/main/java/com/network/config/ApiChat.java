@@ -1,6 +1,7 @@
 package com.network.config;
 
 import com.network.bean.BaseResponse;
+import com.network.bean.ChatMsgBean;
 import com.network.bean.NewsBean;
 
 import java.util.List;
@@ -28,5 +29,5 @@ public interface ApiChat {
 
     @FormUrlEncoded
     @POST(Constants.chatRobot)
-    Observable<String> chatRobot(@FieldMap Map<String, String> map);
+    Observable<ChatMsgBean> chatRobot(@FieldMap Map<String, String> map);
 }

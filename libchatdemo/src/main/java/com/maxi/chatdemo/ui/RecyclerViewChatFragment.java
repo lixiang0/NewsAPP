@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
+import com.google.gson.Gson;
 import com.maxi.chatdemo.adapter.ChatListViewAdapter;
 import com.maxi.chatdemo.adapter.ChatRecyclerAdapter;
 import com.maxi.chatdemo.animator.SlideInOutBottomItemAnimator;
@@ -21,6 +22,7 @@ import com.maxi.chatdemo.widget.AudioRecordButton;
 import com.maxi.chatdemo.widget.pulltorefresh.PullToRefreshRecyclerView;
 import com.maxi.chatdemo.widget.pulltorefresh.WrapContentLinearLayoutManager;
 import com.maxi.chatdemo.widget.pulltorefresh.base.PullToRefreshView;
+import com.network.bean.ChatMsgBean;
 import com.utils.HttpUtils;
 
 import java.lang.ref.WeakReference;
@@ -297,7 +299,7 @@ public class RecyclerViewChatFragment extends BaseFragment {
                 HttpUtils.chatRobot(content)
                         .subscribeOn(Schedulers.computation()) // 指定 subscribe() 发生在 运算 线程
                         .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
-                        .subscribe(new Subscriber<String>() {
+                        .subscribe(new Subscriber<ChatMsgBean>() {
                             @Override
                             public void onCompleted() {
 
@@ -310,11 +312,11 @@ public class RecyclerViewChatFragment extends BaseFragment {
                             }
 
                             @Override
-                            public void onNext(String s) {
-                                Log.e(TAG, "onNext: " + s);
+                            public void onNext(ChatMsgBean s) {
+                                Log.e(TAG, "onNext: " + s.getMsg());
                                 Message message = new Message();
                                 message.what = 0;
-                                message.obj = s;
+                                message.obj = s.getMsg();
                                 receriveHandler.sendMessage(message);
                             }
                         });
