@@ -29,6 +29,12 @@ public class FirstFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
     private void initViews(View view) {
         viewPager = view.findViewById(R.id.view_pager);
         adapterFirstVP = new AdapterFirstVP(getFragmentManager(), Contants.AllItem, Contants.AllItem_Name);

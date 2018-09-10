@@ -1,6 +1,8 @@
 package com.newsjd.view.Activity;
 
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,8 @@ import pub.cpp.news.R;
 
 import com.newsjd.config.Contants;
 import com.newsjd.view.Adapter.AdapterMainVP;
+
+import java.lang.reflect.Field;
 
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -37,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private void initView() {
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         //设置左右单侧保存的 item数量
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
