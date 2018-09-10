@@ -728,7 +728,6 @@ public abstract class BaseFragment extends Fragment {
 
     private void showDialog(final String path) {
         new Thread(new Runnable() {
-
             @Override
             public void run() {
                 // // TODO Auto-generated method stub

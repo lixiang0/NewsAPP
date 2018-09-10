@@ -33,6 +33,8 @@ public class FirstFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
+        //初始化第一页的时候 加载数据
+        adapterFirstVP.loadInitData(0);
     }
 
     private void initViews(View view) {
@@ -52,7 +54,7 @@ public class FirstFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-                adapterFirstVP.loadData(position);
+                adapterFirstVP.loadInitData(position);
             }
 
             @Override
@@ -60,9 +62,6 @@ public class FirstFragment extends Fragment {
 
             }
         });
-
-        //初始化第一页的时候 加载数据
-        adapterFirstVP.loadData(0);
     }
 
 }

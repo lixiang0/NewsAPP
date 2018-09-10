@@ -146,7 +146,7 @@ public class FirstFragment_Item extends Fragment {
         });
     }
 
-    public void loadData() {
+    public void loadInitData() {
         if (mDatas.size() == 0) {
             initData();
         }

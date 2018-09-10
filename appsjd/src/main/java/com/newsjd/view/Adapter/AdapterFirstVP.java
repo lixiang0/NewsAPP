@@ -53,7 +53,7 @@ public class AdapterFirstVP extends FragmentStatePagerAdapter {
     }
 
 
-    public void loadData(int position){
-        firstFragmentItemArrayList.get(position).loadData();
+    public void loadInitData(int position){
+        firstFragmentItemArrayList.get(position).loadInitData();
     }
 }
