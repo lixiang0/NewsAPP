@@ -90,14 +90,14 @@ public abstract class BaseFragment extends Fragment {
     private String permissionInfo;
     private String camPicPath;
     public String item[] = {"你好!", "我正忙着呢,等等", "有啥事吗？", "有时间聊聊吗", "再见！"};
-    public List<ChatMessageBean> tblist = new ArrayList<ChatMessageBean>();
+    public List<ChatMessageBean> tblist = new ArrayList<>();
     private List<String> reslist;
     public ChatDbManager mChatDbManager;
     public int page = 0;
     public int number = 10;
-    public List<ChatMessageBean> pagelist = new ArrayList<ChatMessageBean>();
-    public ArrayList<String> imageList = new ArrayList<String>();//adapter图片数据
-    public HashMap<Integer, Integer> imagePosition = new HashMap<Integer, Integer>();//图片下标位置
+    public List<ChatMessageBean> pagelist = new ArrayList<>();
+    public ArrayList<String> imageList = new ArrayList<>();//adapter图片数据
+    public HashMap<Integer, Integer> imagePosition = new HashMap<>();//图片下标位置
     private static final int SDK_PERMISSION_REQUEST = 127;
     private static final int IMAGE_SIZE = 100 * 1024;// 300kb
     public static final int SEND_OK = 0x1110;
@@ -184,7 +184,6 @@ public abstract class BaseFragment extends Fragment {
         };
         pullList.setpulltorefreshNotifier(pullNotifier);
         voiceIv.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
@@ -366,7 +365,6 @@ public abstract class BaseFragment extends Fragment {
             }
 
         });
-//        controlKeyboardLayout(activityRootView, pullList);
         bottomStatusHeight = ScreenUtil.getNavigationBarHeight(this.getActivity());
         //加载本地聊天记录
         page = (int) mChatDbManager.getPages(number);
@@ -374,7 +372,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     private void initActionBar() {
-        if (getActivity().getActionBar() == null) {
+        if (getActivity() == null || getActivity().getActionBar() == null) {
             return;
         }
 //        getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.ab_bg));//ActionBar的背景图片
@@ -404,7 +402,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected void getPersimmions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            ArrayList<String> permissions = new ArrayList<String>();
+            ArrayList<String> permissions = new ArrayList<>();
             // 读写权限
             if (addPermission(permissions, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 permissionInfo += "Manifest.permission.WRITE_EXTERNAL_STORAGE Deny \n";
@@ -422,7 +420,7 @@ public abstract class BaseFragment extends Fragment {
 
     private boolean addPermission(ArrayList<String> permissionsList, String permission) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (getActivity().checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) { // 如果应用没有获得对应权限,则添加到列表中,准备批量申请
+            if (getActivity() != null && getActivity().checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) { // 如果应用没有获得对应权限,则添加到列表中,准备批量申请
                 if (shouldShowRequestPermissionRationale(permission)) {
                     return true;
                 } else {
@@ -653,8 +651,7 @@ public abstract class BaseFragment extends Fragment {
             list.addAll(reslist.subList(20, reslist.size()));
         }
         list.add("delete_expression");
-        final ExpressionAdapter expressionAdapter = new ExpressionAdapter(this.getActivity(),
-                1, list);
+        final ExpressionAdapter expressionAdapter = new ExpressionAdapter(this.getActivity(), 1, list);
         gv.setAdapter(expressionAdapter);
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -710,7 +707,6 @@ public abstract class BaseFragment extends Fragment {
                                 }
                             }
                         }
-
                     }
                 } catch (Exception e) {
                 }
@@ -789,11 +785,9 @@ public abstract class BaseFragment extends Fragment {
     }
 
     private View.OnKeyListener onKeyListener = new View.OnKeyListener() {
-
         @Override
         public boolean onKey(View v, int keyCode, KeyEvent event) {
-            if (keyCode == KeyEvent.KEYCODE_ENTER
-                    && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
                 sendMessage();
                 return true;
             }
@@ -805,7 +799,6 @@ public abstract class BaseFragment extends Fragment {
     public static String returnTime() {
         SimpleDateFormat sDateFormat = new SimpleDateFormat(
                 "yyyy-MM-dd HH:mm:ss");
-        String date = sDateFormat.format(new java.util.Date());
-        return date;
+        return sDateFormat.format(new java.util.Date());
     }
 }

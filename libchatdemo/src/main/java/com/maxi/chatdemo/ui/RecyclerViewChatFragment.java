@@ -1,9 +1,11 @@
 package com.maxi.chatdemo.ui;
 
+import android.app.Fragment;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -71,6 +73,7 @@ public class RecyclerViewChatFragment extends BaseFragment {
         setTitle("RecyclerView");
         tbAdapter = new ChatRecyclerAdapter(view.getContext(), tblist);
         wcLinearLayoutManger = new WrapContentLinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
+        wcLinearLayoutManger.setStackFromEnd(true); //关键 设置此项，当软键盘弹出时，布局会自动顶上去，在结合AndroidManifest.xml设置属性
         myList.setLayoutManager(wcLinearLayoutManger);
         myList.setItemAnimator(new SlideInOutBottomItemAnimator(myList));
         myList.setAdapter(tbAdapter);
@@ -149,7 +152,7 @@ public class RecyclerViewChatFragment extends BaseFragment {
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
-        controlKeyboardLayout(activityRootView, pullList);
+//        controlKeyboardLayout(activityRootView, pullList);
         super.init(view);
     }
 
@@ -164,10 +167,14 @@ public class RecyclerViewChatFragment extends BaseFragment {
 
             @Override
             public void onGlobalLayout() {
+                FragmentActivity fragmentActivity = RecyclerViewChatFragment.this.getActivity();
+                if (fragmentActivity == null) {
+                    return;
+                }
                 //获取当前界面可视部分
-                RecyclerViewChatFragment.this.getActivity().getWindow().getDecorView().getWindowVisibleDisplayFrame(r);
+                fragmentActivity.getWindow().getDecorView().getWindowVisibleDisplayFrame(r);
                 //获取屏幕的高度
-                int screenHeight = RecyclerViewChatFragment.this.getActivity().getWindow().getDecorView().getRootView().getHeight();
+                int screenHeight = fragmentActivity.getWindow().getDecorView().getRootView().getHeight();
                 //此处就是用来获取键盘的高度的， 在键盘没有弹出的时候 此高度为0 键盘弹出的时候为一个正数
                 int heightDifference = screenHeight - r.bottom;
                 int recyclerHeight = 0;
@@ -177,6 +184,7 @@ public class RecyclerViewChatFragment extends BaseFragment {
                 if (heightDifference == 0 || heightDifference == bottomStatusHeight) {
                     needToScrollView.scrollTo(0, 0);
                 } else {
+                    Log.e(TAG, "onGlobalLayout: "+ "heightDifference = "+heightDifference +" | recyclerHeight = "+recyclerHeight );
                     if (heightDifference < recyclerHeight) {
                         int contentHeight = wcLinearLayoutManger == null ? 0 : wcLinearLayoutManger.getHeight();
                         if (recyclerHeight < contentHeight) {
@@ -186,6 +194,7 @@ public class RecyclerViewChatFragment extends BaseFragment {
                             listSlideHeight = heightDifference;
                             needToScrollView.scrollTo(0, listSlideHeight);
                         }
+                        Log.e(TAG, "onGlobalLayout: listSlideHeight ="+ listSlideHeight );
                     } else {
                         listSlideHeight = 0;
                     }
@@ -327,17 +336,14 @@ public class RecyclerViewChatFragment extends BaseFragment {
     /**
      * 接收文字
      */
-    String content = "";
-
     private void receriveMsgText(final String content) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String message = content;//"回复：" +
                 ChatMessageBean tbub = new ChatMessageBean();
                 tbub.setUserName(userName);
                 String time = returnTime();
-                tbub.setUserContent(message);
+                tbub.setUserContent(content);
                 tbub.setTime(time);
                 tbub.setType(ChatListViewAdapter.FROM_USER_MSG);
                 tblist.add(tbub);
@@ -468,5 +474,6 @@ public class RecyclerViewChatFragment extends BaseFragment {
             }
         }
     };
+
 
 }

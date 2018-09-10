@@ -772,11 +772,9 @@ public abstract class BaseActivity extends Activity {
     }
 
     private View.OnKeyListener onKeyListener = new View.OnKeyListener() {
-
         @Override
         public boolean onKey(View v, int keyCode, KeyEvent event) {
-            if (keyCode == KeyEvent.KEYCODE_ENTER
-                    && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
                 sendMessage();
                 return true;
             }

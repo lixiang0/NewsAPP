@@ -439,5 +439,4 @@ public class RecyclerViewChatActivity extends BaseActivity {
             }
         }
     };
-
 }
