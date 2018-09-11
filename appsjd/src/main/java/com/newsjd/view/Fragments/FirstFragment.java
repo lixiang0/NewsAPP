@@ -1,6 +1,7 @@
 package com.newsjd.view.Fragments;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -9,32 +10,49 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kekstudio.dachshundtablayout.DachshundTabLayout;
+
 import pub.cpp.news.R;
+
 import com.newsjd.config.Contants;
 import com.newsjd.view.Adapter.AdapterFirstVP;
 
-public class FirstFragment extends Fragment {
+public class FirstFragment extends LazyBaseFragment {
     private static final String TAG = "NEWS FirstAty";
 
     private ViewPager viewPager;
     private DachshundTabLayout tabLayout;
-
     private AdapterFirstVP adapterFirstVP;
+
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.e(TAG, "onCreateView: ");
-        View view = inflater.inflate(R.layout.activity_first, container, false);
-        initViews(view);
+        view = inflater.inflate(R.layout.activity_first, container, false);
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+    }
 
+
+    @Override
+    protected void initOnceData() {
+        initViews(view);
         //初始化第一页的时候 加载数据
         adapterFirstVP.loadInitData(0);
+    }
+
+    @Override
+    protected void initEveryTimeVisiable() {
+        initViews(view);
+    }
+
+    @Override
+    protected void initEveryTimeUNVisiable() {
+
     }
 
     private void initViews(View view) {
@@ -63,5 +81,4 @@ public class FirstFragment extends Fragment {
             }
         });
     }
-
 }

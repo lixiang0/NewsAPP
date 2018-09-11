@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Focus News</string>
+    <string name="app_name">Serious Msgs</string>
     <string name="focus">focus</string>
     <string name="international">international</string>
     <string name="Inland">Inland</string>
@@ -18,4 +18,6 @@
     <string name="setting">Setting</string>
 
     <string name="update_time">update time</string>
+    <string name="loaded">已加载</string>
+    <string name="latestdata">已经是最新数据</string>
 </resources>

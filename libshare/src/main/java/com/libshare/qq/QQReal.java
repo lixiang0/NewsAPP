@@ -1,4 +1,4 @@
-package com.libshare.QQ;
+package com.libshare.qq;
 
 import com.tencent.connect.share.QQShare;
 

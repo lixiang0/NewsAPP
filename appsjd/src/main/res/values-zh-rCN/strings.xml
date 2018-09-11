@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">焦点新闻</string>
+    <string name="app_name">严肃消息</string>
     <string name="focus">焦点</string>
     <string name="international">国际</string>
     <string name="Inland">内地</string>
@@ -16,4 +16,6 @@
     <string name="Contacts">联系人</string>
     <string name="setting">设置</string>
     <string name="update_time">更新于</string>
+    <string name="loaded">已加载</string>
+    <string name="latestdata">已经是最新数据</string>
 </resources>

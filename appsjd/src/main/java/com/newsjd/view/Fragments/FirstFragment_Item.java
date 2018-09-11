@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -18,7 +19,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.network.bean.NewsBean;
+
 import pub.cpp.news.R;
+
 import com.newsjd.config.Contants;
 import com.newsjd.config.LoadingFooter;
 import com.newsjd.view.Adapter.AdapterFirstRecycleList;
@@ -33,7 +36,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class FirstFragment_Item extends Fragment {
+public class FirstFragment_Item extends LazyBaseFragment {
     private static final String TAG = "NEWS FirstFragment_Item";
 
     private RecyclerView mRecyclerView;
@@ -50,8 +53,9 @@ public class FirstFragment_Item extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.e(TAG, "onCreateView: ");
-        View view = inflater.inflate(R.layout.fragment_first, container, false);
-        initViews(view, view.getContext());
+        View view;
+        view = inflater.inflate(R.layout.fragment_first, container, false);
+        initViews(view);
         return view;
     }
 
@@ -59,11 +63,28 @@ public class FirstFragment_Item extends Fragment {
     public void onResume() {
         super.onResume();
         Log.e(TAG, "onResume: " + position);
-//initData();
     }
 
-    private void initViews(View view, final Context context) {
+
+    @Override
+    protected void initOnceData() {
+//        initViews(view);
+        //initData();
+    }
+
+    @Override
+    protected void initEveryTimeVisiable() {
+//        initViews(view);
+    }
+
+    @Override
+    protected void initEveryTimeUNVisiable() {
+
+    }
+
+    private void initViews(View view) {
         Log.e(TAG, "initViews: ");
+        Context context = view.getContext();
         mRecyclerView = view.findViewById(R.id.recyclerView);
         swipeRefreshLayout = view.findViewById(R.id.fragment_first_srl);
 
@@ -111,13 +132,6 @@ public class FirstFragment_Item extends Fragment {
         mAdapter.setOnItemClickListener(new AdapterFirstRecycleList.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-//                Toast.makeText(context, position + " click", Toast.LENGTH_SHORT).show();
-
-//                Intent intent = new Intent(context, WebActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                intent.putExtra("link", mDatas.get(position).getLink());
-//                context.startActivity(intent);
-
                 Intent intent = new Intent(FirstFragment_Item.this.getContext(), WebActivity.class);
                 intent.putExtra("link", mDatas.get(position).getLink());
                 startActivity(intent);
@@ -179,10 +193,10 @@ public class FirstFragment_Item extends Fragment {
                             initDataCallBack.onCallBack();
                         } else {
                             if (hasNewData) {
-                                Toast.makeText(getContext(), "已加载", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), R.string.loaded, Toast.LENGTH_SHORT).show();
                                 setState(LoadingFooter.FooterState.Normal);
                             } else {
-                                Toast.makeText(getContext(), "已经是最新数据", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), R.string.latestdata, Toast.LENGTH_SHORT).show();
                                 setState(LoadingFooter.FooterState.TheEnd);
                             }
                         }
@@ -211,12 +225,10 @@ public class FirstFragment_Item extends Fragment {
                 });
     }
 
-
     public FirstFragment_Item setPosition(int position) {
         this.position = position;
         return this;
     }
-
 
     private EndlessRecyclerOnScrollListener mOnScrollListener = new EndlessRecyclerOnScrollListener() {
         @Override
@@ -255,12 +267,6 @@ public class FirstFragment_Item extends Fragment {
     protected void setState(LoadingFooter.FooterState mState) {
         this.mState = mState;
         changeAdaperState();
-//        ((FirstFragment_Item.this)).runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//changeAdaperState();
-//            }
-//        });
     }
 
     //改变底部bottom的样式
@@ -269,7 +275,6 @@ public class FirstFragment_Item extends Fragment {
             mAdapter.mFooterHolder.setData(mState);
         }
     }
-
 
     private interface InitDataCallBack {
         void onCallBack();

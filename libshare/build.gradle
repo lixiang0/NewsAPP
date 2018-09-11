@@ -27,4 +27,5 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     testImplementation 'junit:junit:4.12'
     implementation files('libs/open_sdk_r6008_lite.jar')
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.6'
 }
