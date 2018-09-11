@@ -1,21 +1,21 @@
 <resources>
-    <string name="app_name">焦点新闻</string>
-    <string name="focus">焦点</string>
-    <string name="international">国际</string>
-    <string name="Inland">内地</string>
-    <string name="FinanceAndEconomics">财经</string>
-    <string name="entertainment">娱乐</string>
-    <string name="technology">科技</string>
-    <string name="sports">体育</string>
-    <string name="local">本地</string>
+    <string name="app_name">Focus News</string>
+    <string name="focus">focus</string>
+    <string name="international">international</string>
+    <string name="Inland">Inland</string>
+    <string name="FinanceAndEconomics">FinanceAndEconomics</string>
+    <string name="entertainment">entertainment</string>
+    <string name="technology">technology</string>
+    <string name="sports">sports</string>
+    <string name="local">local</string>
 
-    <string name="undefined">未定义</string>
+    <string name="undefined">undefined</string>
     <string name="title_activity_web">原文网址</string>
 
-    <string name="news">新闻</string>
-    <string name="video">聊天</string>
-    <string name="Contacts">联系人</string>
-    <string name="setting">设置</string>
+    <string name="news">News</string>
+    <string name="video">Video</string>
+    <string name="Contacts">Contacts</string>
+    <string name="setting">Setting</string>
 
-    <string name="update_time">更新于</string>
+    <string name="update_time">update time</string>
 </resources>

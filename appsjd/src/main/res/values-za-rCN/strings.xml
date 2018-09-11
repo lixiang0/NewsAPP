@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">焦点新闻</string>
     <string name="focus">焦点</string>
     <string name="international">国际</string>
     <string name="Inland">内地</string>
