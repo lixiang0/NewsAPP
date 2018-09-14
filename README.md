@@ -9,7 +9,7 @@
 
 
 ## APP和网页界面
-<p align="center"><img src="app.png" width="200"  align="middle"/><img src="web.png" width="200"  align="middle"/></p>
+<p align="center"><img src="app.png" width="400"  align="middle"/><img src="web.png" width="400"  align="middle"/></p>
 
 
 
