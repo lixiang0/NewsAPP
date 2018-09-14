@@ -9,11 +9,11 @@
 
 
 ## APP界面
-<p align="center"><img src="https://github.com/lixiang0/NewsAPP/blob/master/device-2016-12-20-103804.png" width="200"  align="middle"/></p>
+<p align="center"><img src="app.png" width="200"  align="middle"/></p>
 
 
 ## 网页界面
-<p align="center"><img src="new.png" width="100"  align="middle"/></p>
+<p align="center"><img src="web.png" width="200"  align="middle"/></p>
 
 
 ## 新闻内容格式：
