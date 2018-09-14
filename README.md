@@ -9,7 +9,8 @@
 
 
 ## APP和网页界面
-<img src="app.png" width="200"  align="middle"/><img src="web.png" width="200"  align="middle"/>
+<img src="app.png" width="200"  align="middle"/>
+<img src="web.png" width="200"  align="middle"/>
 
 
 ## 新闻内容格式：
