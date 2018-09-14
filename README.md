@@ -8,12 +8,8 @@
 - 6.获取新闻接口：[示例：获取国际新闻第一页](http://121.42.138.77:8081/query?type=1&page=1)
 
 
-## APP界面
-<p align="center"><img src="app.png" width="200"  align="middle"/></p>
-
-
-## 网页界面
-<p align="center"><img src="web.png" width="200"  align="middle"/></p>
+## APP和网页界面
+<img src="app.png" width="200"  align="middle"/><img src="web.png" width="200"  align="middle"/>
 
 
 ## 新闻内容格式：
