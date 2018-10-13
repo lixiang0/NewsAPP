@@ -1,15 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
-
+    compileSdkVersion 28
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        flavorDimensions "versionCode"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//        flavorDimensions "versionCode"
     }
 
     buildTypes {
@@ -19,25 +18,28 @@ android {
         }
     }
 
-    productFlavors {
-        main {
-            dimension "versionCode"
-            versionName "v" + defaultConfig.versionName
-            buildConfigField("String", "API_HOST_V", "\"\"")//通讯版本
-        }
-    }
+//    productFlavors {
+//        main {
+//            dimension "versionCode"
+//            versionName "v" //+ defaultConfig.versionName
+////            buildConfigField("String", "API_HOST_V", "\"\"")//通讯版本
+//        }
+//    }
 
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
-        }
-    }
+//    sourceSets {
+//        main {
+//            jniLibs.srcDirs = ['libs']
+//        }
+//    }
+    buildToolsVersion '28.0.2'
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
     testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
