@@ -4,18 +4,14 @@
 - 2.新闻内容为JSON格式,参考[链接](http://121.42.138.77:8081/query?type=1)
 - 3.添加了用户系统：包括用户注册、登陆、收藏、顶新闻、踩新闻的功能[正在添加]
 - 4.apk下载链接：[apk链接](https://github.com/lixiang0/NewsAPP/blob/master/app-debug.apk)
-
-### 更新（20180505）
-- 1.将服务端切换为python flask
-- 2.添加登录功能，登录则可以添加新闻
-- 3.未登录则显示新闻信息。[链接](http://news.rubenxiao.com/)
-
-### 更新（20180728）
-- 1.获取新闻接口：[示例：获取国际新闻第一页](http://121.42.138.77:8081/query?type=1&page=1)
+- 5.登录则可以添加新闻;未登录则显示新闻信息。[链接](http://news.rubenxiao.com/)
+- 6.获取新闻接口：[示例：获取国际新闻第一页](http://121.42.138.77:8081/query?type=1&page=1)
 
 
-## 新闻界面
-<p align="center"><img src="https://github.com/lixiang0/NewsAPP/blob/master/device-2016-12-20-103804.png" width="400"  align="middle"/></p>
+## APP和网页界面
+<p align="center"><img src="app.png" width="400"  align="middle"/><img src="web.png" width="400"  align="middle"/></p>
+
+
 
 ## 新闻内容格式：
 ```
