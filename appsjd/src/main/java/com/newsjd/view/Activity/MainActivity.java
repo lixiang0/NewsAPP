@@ -1,8 +1,6 @@
 package com.newsjd.view.Activity;
 
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationItemView;
-import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +13,6 @@ import pub.cpp.news.R;
 
 import com.newsjd.config.Contants;
 import com.newsjd.view.Adapter.AdapterMainVP;
-
-import java.lang.reflect.Field;
-
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";

@@ -11,6 +11,8 @@ android {
 //            storePassword rootProject.ext.signingConfigs["storePassword"]
 //        }
 //    }
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
 
     compileSdkVersion 28
     defaultConfig {
@@ -74,4 +76,6 @@ dependencies {
     implementation project(':libchatdemo')
     implementation project(':liblogin')
     implementation project(':libshare')
+    //检测更新
+//    implementation 'com.allenliu.versionchecklib:library:2.0.0'
 }

@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import pub.cpp.news.R;
 import com.utils.HttpUtils;
 
+import pub.cpp.news.R;
 import rx.functions.Func1;
 
 public class SecondFragment extends Fragment implements View.OnClickListener {

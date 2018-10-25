@@ -10,7 +10,7 @@
     <string name="local">local</string>
 
     <string name="undefined">undefined</string>
-    <string name="title_activity_web">原文网址</string>
+    <string name="title_activity_web">Original website</string>
 
     <string name="news">News</string>
     <string name="video">Video</string>
@@ -18,6 +18,6 @@
     <string name="setting">Setting</string>
 
     <string name="update_time">update time</string>
-    <string name="loaded">已加载</string>
-    <string name="latestdata">已经是最新数据</string>
+    <string name="loaded">loaded</string>
+    <string name="latestdata">It\'s the latest data</string>
 </resources>
