@@ -4,8 +4,6 @@ package com.newsjd.view.Adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.view.ViewGroup;
-
 
 import com.newsjd.view.Fragments.FirstFragment_Item;
 
@@ -31,10 +29,6 @@ public class AdapterFirstVP extends FragmentStatePagerAdapter {
                 firstFragmentItemArrayList.add(new FirstFragment_Item().setPosition(i));
             }
         }
-    }
-
-    @Override
-    public void startUpdate(ViewGroup container) {
     }
 
     @Override

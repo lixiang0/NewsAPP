@@ -4,7 +4,6 @@ package com.newsjd.view.Adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.view.ViewGroup;
 
 import com.newsjd.view.Fragments.FirstFragment;
 import com.newsjd.view.Fragments.FourFragment;
@@ -35,10 +34,6 @@ public class AdapterMainVP extends FragmentStatePagerAdapter {
             pageFragmentSArrayList.add(new ThirdFragment());
             pageFragmentSArrayList.add(new FourFragment());
         }
-    }
-
-    @Override
-    public void startUpdate(ViewGroup container) {
     }
 
     @Override

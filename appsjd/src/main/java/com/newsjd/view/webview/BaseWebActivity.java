@@ -1,12 +1,10 @@
 package com.newsjd.view.webview;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -21,6 +19,7 @@ import android.widget.TextView;
 
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.DefaultWebClient;
+
 import pub.cpp.news.R;
 
 /**
@@ -35,10 +34,7 @@ public class BaseWebActivity extends AppCompatActivity {
     protected AgentWeb mAgentWeb;
     private AgentWeb.PreAgentWeb mPreAgentWeb;
 
-    private LinearLayout mLinearLayout;
-    private Toolbar mToolbar;
     private TextView mTitleTextView;
-    private AlertDialog mAlertDialog;
     private String url = "https://m.jd.com/";
 
     @Override
@@ -47,9 +43,8 @@ public class BaseWebActivity extends AppCompatActivity {
         Log.e(TAG, "onCreate: " + getUrl());
         setContentView(R.layout.activity_web);
 
-
-        mLinearLayout = this.findViewById(R.id.container);
-        mToolbar = this.findViewById(R.id.toolbar);
+        LinearLayout mLinearLayout = this.findViewById(R.id.container);
+        Toolbar mToolbar = this.findViewById(R.id.toolbar);
         mToolbar.setTitleTextColor(Color.WHITE);
         mToolbar.setTitle("");
         mTitleTextView = this.findViewById(R.id.toolbar_title);
@@ -124,33 +119,6 @@ public class BaseWebActivity extends AppCompatActivity {
         this.url = url;
     }
 
-    private void showDialog() {
-
-        if (mAlertDialog == null) {
-            mAlertDialog = new AlertDialog.Builder(this)
-                    .setMessage("您确定要关闭该页面吗?")
-                    .setNegativeButton("再逛逛", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if (mAlertDialog != null) {
-                                mAlertDialog.dismiss();
-                            }
-                        }
-                    })//
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            if (mAlertDialog != null) {
-                                mAlertDialog.dismiss();
-                            }
-                            BaseWebActivity.this.finish();
-                        }
-                    }).create();
-        }
-        mAlertDialog.show();
-    }
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (mAgentWeb != null) {
@@ -197,4 +165,31 @@ public class BaseWebActivity extends AppCompatActivity {
             mAgentWeb.getWebLifeCycle().onDestroy();
         }
     }
+
+//    private AlertDialog mAlertDialog;
+//    private void showDialog() {
+//        if (mAlertDialog == null) {
+//            mAlertDialog = new AlertDialog.Builder(this)
+//                    .setMessage("您确定要关闭该页面吗?")
+//                    .setNegativeButton("再逛逛", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            if (mAlertDialog != null) {
+//                                mAlertDialog.dismiss();
+//                            }
+//                        }
+//                    })//
+//                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//
+//                            if (mAlertDialog != null) {
+//                                mAlertDialog.dismiss();
+//                            }
+//                            BaseWebActivity.this.finish();
+//                        }
+//                    }).create();
+//        }
+//        mAlertDialog.show();
+//    }
 }

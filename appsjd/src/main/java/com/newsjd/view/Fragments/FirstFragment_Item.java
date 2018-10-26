@@ -7,8 +7,6 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,46 +38,20 @@ import rx.schedulers.Schedulers;
 public class FirstFragment_Item extends LazyBaseFragment {
     private static final String TAG = "NEWS FirstFragment_Item";
 
-    private RecyclerView mRecyclerView;
     private List<NewsBean> mDatas = new ArrayList<>();
     private AdapterFirstRecycleList mAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     //新闻分类
     private int position = -1;
 
-    public FirstFragment_Item() {
-    }
-
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.e(TAG, "onCreateView: ");
         View view;
         view = inflater.inflate(R.layout.fragment_first, container, false);
         initViews(view);
         return view;
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
 
     @Override
     protected void initOnceData() {
@@ -99,7 +71,7 @@ public class FirstFragment_Item extends LazyBaseFragment {
         Log.e(TAG, "initViews: ");
         Context context = view.getContext();
         mAdapter = new AdapterFirstRecycleList(getContext(), mDatas);
-        mRecyclerView = view.findViewById(R.id.recyclerView);
+        RecyclerView mRecyclerView = view.findViewById(R.id.recyclerView);
         swipeRefreshLayout = view.findViewById(R.id.fragment_first_srl);
 
         mRecyclerView.setAdapter(mAdapter);
@@ -246,8 +218,6 @@ public class FirstFragment_Item extends LazyBaseFragment {
     private EndlessRecyclerOnScrollListener mOnScrollListener = new EndlessRecyclerOnScrollListener() {
         @Override
         public void onLoadNextPage(View view) {
-            super.onLoadNextPage(view);
-
             if (mState == LoadingFooter.FooterState.Loading) {
                 Log.d("TAG", "the state is Loading, just wait..");
                 Log.d("TAG", "the state is Loading, just wait..");

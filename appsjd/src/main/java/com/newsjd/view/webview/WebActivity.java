@@ -1,6 +1,5 @@
 package com.newsjd.view.webview;
 
-import android.content.Intent;
 import android.util.Log;
 
 /**
@@ -28,7 +27,6 @@ public class WebActivity extends BaseWebActivity {
         Log.e(TAG, "onResume: " + getUrl());
         //测试Cookies
         /*try {
-
             String targetUrl="";
             Log.i("Info","cookies:"+ AgentWebConfig.getCookiesByUrl(targetUrl="http://www.jd.com"));
             AgentWebConfig.removeAllCookies(new ValueCallback<Boolean>() {
@@ -48,6 +46,5 @@ public class WebActivity extends BaseWebActivity {
         }catch (Exception e){
             e.printStackTrace();
         }*/
-
     }
 }

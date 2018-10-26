@@ -1,5 +1,6 @@
 package com.newsjd.view.webview;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.webkit.WebView;
 
 import com.just.agentweb.IWebLayout;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+
 import pub.cpp.news.R;
 
 /**
@@ -18,15 +20,14 @@ import pub.cpp.news.R;
 
 public class WebLayout implements IWebLayout {
 
-    private Activity mActivity;
     private final TwinklingRefreshLayout mTwinklingRefreshLayout;
-    private WebView mWebView = null;
+    private WebView mWebView;
 
-    public WebLayout(Activity activity) {
-        this.mActivity = activity;
+    @SuppressLint("InflateParams")
+    WebLayout(Activity activity) {
         mTwinklingRefreshLayout = (TwinklingRefreshLayout) LayoutInflater.from(activity).inflate(R.layout.fragment_twk_web, null);
         mTwinklingRefreshLayout.setPureScrollModeOn();
-        mWebView = (WebView) mTwinklingRefreshLayout.findViewById(R.id.webView);
+        mWebView = mTwinklingRefreshLayout.findViewById(R.id.webView);
     }
 
     @NonNull
@@ -40,7 +41,6 @@ public class WebLayout implements IWebLayout {
     public WebView getWebView() {
         return mWebView;
     }
-
 
 
 }

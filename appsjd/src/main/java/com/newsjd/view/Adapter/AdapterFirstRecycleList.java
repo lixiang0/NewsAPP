@@ -42,8 +42,9 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
         mDatas = datas;
     }
 
+    @NonNull
     @Override //创建
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         LayoutInflater mInflater = LayoutInflater.from(mContext);
         if (viewType == 1) {
@@ -134,7 +135,7 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
         public TextView tv_description;
         public ImageView tv_img;
 
-        public NormalHolder(View v) {
+        NormalHolder(View v) {
             super(v);
             tv_time = v.findViewById(R.id.tv_time);
             tv_title = v.findViewById(R.id.tv_title);
@@ -150,8 +151,7 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
         View mNetworkErrorViewstub;
         View mOnClickContinueErrorViewstub;
 
-
-        public FooterHolder(View itemView) {
+        FooterHolder(View itemView) {
             super(itemView);
             mLoadingViewstubstub = itemView.findViewById(R.id.loading_viewstub);
             mEndViewstub = itemView.findViewById(R.id.end_viewstub);
@@ -204,10 +204,7 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
 
     }
 
-    private static final String TAG = "AdapterFirstRecycleList";
-
-
-    protected void setUpItemEvent(final NormalHolder holder) {
+    private void setUpItemEvent(final NormalHolder holder) {
         if (mOnItemClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

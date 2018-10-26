@@ -1,5 +1,6 @@
 package com.newsjd.view.Adapter;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
 /**
@@ -7,12 +8,12 @@ import android.support.v7.widget.RecyclerView;
  */
 public class UILPauseOnScrollListener extends RecyclerView.OnScrollListener {
     @Override
-    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
         super.onScrollStateChanged(recyclerView, newState);
     }
 
     @Override
-    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
     }
 }

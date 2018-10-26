@@ -1,5 +1,8 @@
 package com.utils;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+
 import com.network.bean.NewsBean;
 
 import java.text.ParseException;
@@ -9,24 +12,25 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class Utils {
+import pub.cpp.news.R;
 
+public class Utils {
     public static String dateFormat(String dateString) {
         SimpleDateFormat inputFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss 'GMT'", Locale.ENGLISH);
         inputFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 
-        SimpleDateFormat outputFormat = new SimpleDateFormat("MM月dd日HH时mm分");
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat outputFormat = new SimpleDateFormat("MM-dd_HH:mm");
         Date date1 = null;
         try {
             date1 = inputFormat.parse(dateString);
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return outputFormat.format(date1);
     }
 
-    //此方法仅用于参考，直接调用 无法起到替换数据的效果，必须实际执行
+    /*//此方法仅用于参考，直接调用 无法起到替换数据的效果，必须实际执行
     public static void replace(List<NewsBean> oldData, List<NewsBean> newsData) {
         if (newsData == null) {
             oldData.clear();
@@ -45,5 +49,5 @@ public class Utils {
                 }
             }
         }
-    }
+    }*/
 }

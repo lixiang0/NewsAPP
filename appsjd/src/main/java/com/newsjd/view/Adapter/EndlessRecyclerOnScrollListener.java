@@ -1,5 +1,6 @@
 package com.newsjd.view.Adapter;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,12 +10,12 @@ import android.view.View;
 /**
  * 继承自RecyclerView.OnScrollListener，一：可以监听到是否滑动到页面最低部。二：滑动时停止加载图片
  */
-public class EndlessRecyclerOnScrollListener extends UILPauseOnScrollListener {
+public abstract class EndlessRecyclerOnScrollListener extends UILPauseOnScrollListener {
 
     /**
      * 当前RecyclerView类型
      */
-    protected LayoutManagerType layoutManagerType;
+    private LayoutManagerType layoutManagerType;
 
     /**
      * 最后一个的位置
@@ -26,13 +27,8 @@ public class EndlessRecyclerOnScrollListener extends UILPauseOnScrollListener {
      */
     private int lastVisibleItemPosition;
 
-    /**
-     * 当前滑动的状态
-     */
-    private int currentScrollState = 0;
-
     @Override
-    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
 
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
@@ -40,8 +36,6 @@ public class EndlessRecyclerOnScrollListener extends UILPauseOnScrollListener {
         if (layoutManagerType == null) {
             if (layoutManager instanceof LinearLayoutManager) {
                 layoutManagerType = LayoutManagerType.LinearLayout;
-            } else if (layoutManager instanceof GridLayoutManager) {
-                layoutManagerType = LayoutManagerType.GridLayout;
             } else if (layoutManager instanceof StaggeredGridLayoutManager) {
                 layoutManagerType = LayoutManagerType.StaggeredGridLayout;
             } else {
@@ -52,16 +46,20 @@ public class EndlessRecyclerOnScrollListener extends UILPauseOnScrollListener {
 
         switch (layoutManagerType) {
             case LinearLayout:
+                assert layoutManager != null;
                 lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
                 break;
             case GridLayout:
+                assert layoutManager != null;
                 lastVisibleItemPosition = ((GridLayoutManager) layoutManager).findLastVisibleItemPosition();
                 break;
             case StaggeredGridLayout:
                 StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
                 if (lastPositions == null) {
+                    assert staggeredGridLayoutManager != null;
                     lastPositions = new int[staggeredGridLayoutManager.getSpanCount()];
                 }
+                assert staggeredGridLayoutManager != null;
                 staggeredGridLayoutManager.findLastVisibleItemPositions(lastPositions);
                 lastVisibleItemPosition = findMax(lastPositions);
                 break;
@@ -69,22 +67,20 @@ public class EndlessRecyclerOnScrollListener extends UILPauseOnScrollListener {
     }
 
     @Override
-    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
         super.onScrollStateChanged(recyclerView, newState);
-        currentScrollState = newState;
+        //当前滑动的状态
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+        assert layoutManager != null;
         int visibleItemCount = layoutManager.getChildCount();
         int totalItemCount = layoutManager.getItemCount();
-        if ((visibleItemCount > 0 && currentScrollState == RecyclerView.SCROLL_STATE_IDLE && (lastVisibleItemPosition) >= totalItemCount - 1)) {
+        if ((visibleItemCount > 0 && newState == RecyclerView.SCROLL_STATE_IDLE && (lastVisibleItemPosition) >= totalItemCount - 1)) {
             onLoadNextPage(recyclerView);
         }
     }
 
     /**
      * 取数组中最大值
-     *
-     * @param lastPositions
-     * @return
      */
     private int findMax(int[] lastPositions) {
         int max = lastPositions[0];
@@ -93,14 +89,12 @@ public class EndlessRecyclerOnScrollListener extends UILPauseOnScrollListener {
                 max = value;
             }
         }
-
         return max;
     }
 
-    public void onLoadNextPage(final View view) {
-    }
+    public abstract void onLoadNextPage(final View view) ;
 
-    public static enum LayoutManagerType {
+    public enum LayoutManagerType {
         LinearLayout,
         StaggeredGridLayout,
         GridLayout

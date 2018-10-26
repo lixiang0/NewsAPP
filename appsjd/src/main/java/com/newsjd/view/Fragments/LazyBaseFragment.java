@@ -1,7 +1,6 @@
 package com.newsjd.view.Fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 public abstract class LazyBaseFragment extends Fragment {
@@ -11,7 +10,7 @@ public abstract class LazyBaseFragment extends Fragment {
 
     //懒加载
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated( Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (canExcute) {//页面第一次加载时执行，以后不在执行
             canExcute = false;

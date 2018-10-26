@@ -17,21 +17,17 @@ import rx.functions.Func1;
 
 public class ThirdFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "sjd secfrag";
-    View mView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        mView = inflater.inflate(R.layout.activity_second, container, false);
-        return mView;
+        return inflater.inflate(R.layout.activity_second, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button button = mView.findViewById(R.id.button2);
-
+        Button button = view.findViewById(R.id.button2);
         button.setOnClickListener(this);
     }
 
@@ -43,7 +39,7 @@ public class ThirdFragment extends Fragment implements View.OnClickListener {
                 HttpUtils.login("tes", "test").filter(new Func1<String, Boolean>() {
                     @Override
                     public Boolean call(String s) {
-                        Log.e(TAG, "call: " + s );
+                        Log.e(TAG, "call: " + s);
                         return null;
                     }
                 });

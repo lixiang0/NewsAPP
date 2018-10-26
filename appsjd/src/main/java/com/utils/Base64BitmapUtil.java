@@ -12,8 +12,8 @@ public class Base64BitmapUtil {
     /**
      * bitmap转为base64
      *
-     * @param bitmap
-     * @return
+     * @param bitmap bitmap图片数据
+     * @return 64编码字符串
      */
     public static String bitmapToBase64(Bitmap bitmap) {
 
@@ -48,8 +48,8 @@ public class Base64BitmapUtil {
     /**
      * base64转为bitmap
      *
-     * @param base64Data
-     * @return
+     * @param base64Data 字符串
+     * @return bitmap图片
      */
     public static Bitmap base64ToBitmap(String base64Data) {
         byte[] bytes = Base64.decode(base64Data, Base64.DEFAULT);

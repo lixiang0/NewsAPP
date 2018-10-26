@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private static final String TAG = "MainActivity";
 
     private ViewPager mViewPager;
-    private AdapterMainVP mAdapterMainVP;
     private BottomNavigationView bottomNavigationView;
     private MenuItem menuItem;
 
@@ -27,8 +26,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mViewPager = findViewById(R.id.main_view_pager);
-
-        mAdapterMainVP = new AdapterMainVP(getSupportFragmentManager(), Contants.FourPart, Contants.FourPart_Name);
+        AdapterMainVP mAdapterMainVP = new AdapterMainVP(getSupportFragmentManager(), Contants.FourPart, Contants.FourPart_Name);
         mViewPager.setAdapter(mAdapterMainVP);
         bottomNavigationView = findViewById(R.id.main_bottom_navigation_view);
         initView();
@@ -48,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
             @Override
             public void onPageSelected(int position) {
-//                bottomNavigationView.setSelectedIndex(position);
                 bottomNavigationView.setSelectedItemId(position);
                 if (menuItem != null) {
                     menuItem.setChecked(false);
@@ -85,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 break;
             default:
         }
-//        mViewPager.setCurrentItem();
         return false;
     }
 
@@ -93,14 +89,4 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
-
-   /* public static final String CURRENT_FRAGMENT = "current_fragment";
-
-    private void showFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_bottom, R.anim.fade_out)
-                .replace(R.id.container, fragment, CURRENT_FRAGMENT)
-                .commit();
-    }
-    */
 }
