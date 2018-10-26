@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F0F0"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <FrameLayout
+        android:id="@+id/regist_layout"
+        android:background="#ffffff"
+        android:elevation="3dip"
+        android:layout_width="335dp"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/inputlayout"
+        android:background="#ffffff"
+        android:elevation="3dip"
+        android:layout_width="335dp"
+        android:layout_height="230dp"
+        android:gravity="center"
+        android:layout_marginTop="35dp"
+        android:layout_alignLeft="@+id/regist_layout"
+        android:layout_alignStart="@+id/regist_layout">
+
+        <EditText
+            android:id="@+id/M_username"
+            android:hint="输入账号"
+            android:text=""
+            android:layout_width="310dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="-60dp"
+            android:inputType="number"
+            android:textColor="#878787"
+            android:maxLength="20"
+            android:paddingLeft="20dp" >
+        </EditText>
+
+        <EditText
+            android:id="@+id/M_password"
+            android:hint="输入密码"
+            android:layout_width="310dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:inputType="textPassword"
+            android:textColor="#000000"
+            android:maxLength="20"
+            android:paddingLeft="20dp" >
+        </EditText>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:textColor="#6E8B3D"
+            android:text="忘记密码"
+            android:textSize="20dp"
+            android:layout_marginLeft="140dp"
+            android:layout_marginTop="170dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:id="@+id/M_forget" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:textColor="#6E8B3D"
+            android:text="登录"
+            android:textSize="20dp"
+            android:layout_marginLeft="260dp"
+            android:layout_marginTop="170dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:id="@+id/M_login" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/M_regist"
+        android:layout_width="335dp"
+        android:layout_height="60dp"
+        android:text="立即使用手机号注册账号"
+        android:textSize="20dp"
+        android:elevation="3dip"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:textColor="#6E8B3D"
+        android:foreground="?attr/selectableItemBackground"
+        android:layout_marginTop="-55dp"
+        android:layout_below="@+id/regist_layout"
+        android:layout_alignLeft="@+id/regist_layout"
+        android:layout_alignStart="@+id/regist_layout" />
+
+
+</RelativeLayout>

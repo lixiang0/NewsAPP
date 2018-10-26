@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private void initView() {
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+        //去掉默认模式，但是在某些设备上 反射失败找不到该方法
+//        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         //设置左右单侧保存的 item数量
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

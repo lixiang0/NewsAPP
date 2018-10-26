@@ -6,9 +6,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
-import com.maxi.chatdemo.ui.RecyclerViewChatFragment;
 import com.newsjd.view.Fragments.FirstFragment;
+import com.newsjd.view.Fragments.FourFragment;
 import com.newsjd.view.Fragments.SecondFragment;
+import com.newsjd.view.Fragments.ThirdFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,10 +31,9 @@ public class AdapterMainVP extends FragmentStatePagerAdapter {
             length = data.length;
             mItems.addAll(Arrays.asList(data_Name).subList(0, length));
             pageFragmentSArrayList.add(new FirstFragment());
-            pageFragmentSArrayList.add(new RecyclerViewChatFragment());
-//            pageFragmentSArrayList.add(new SecondFragment());
             pageFragmentSArrayList.add(new SecondFragment());
-            pageFragmentSArrayList.add(new SecondFragment());
+            pageFragmentSArrayList.add(new ThirdFragment());
+            pageFragmentSArrayList.add(new FourFragment());
         }
     }
 

@@ -18,7 +18,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.network.bean.NewsBean;
+
 import pub.cpp.news.R;
+
 import com.newsjd.config.LoadingFooter;
 import com.utils.Base64BitmapUtil;
 import com.utils.Utils;

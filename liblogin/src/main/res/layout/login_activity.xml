@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/login_activity"
+    android:background="@mipmap/regist1"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="不想注册？点此游客登录"
+        android:textSize="15dp"
+        android:textColor="#ff9900"
+        android:layout_marginTop="83dp"
+        android:id="@+id/Regist_visitor"
+        android:layout_below="@+id/regist_layout"
+        android:layout_alignRight="@+id/regist_layout"
+        android:layout_alignEnd="@+id/regist_layout" />
+
+    <FrameLayout
+        android:id="@+id/regist_layout"
+        android:background="#F0F0F0"
+        android:elevation="3dip"
+        android:layout_width="335dp"
+        android:layout_height="180dp"
+        android:gravity="center"
+        android:layout_marginTop="98dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <EditText
+            android:id="@+id/Regist_username"
+            android:hint="账号"
+            android:layout_width="310dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="-40dp"
+            android:inputType="number"
+            android:textColor="#000000"
+            android:maxLength="20"
+            android:paddingLeft="20dp" >
+        </EditText>
+
+        <EditText
+            android:id="@+id/Regist_password"
+            android:hint="密码"
+            android:layout_width="310dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:inputType="textPassword"
+            android:textColor="#000000"
+            android:maxLength="20"
+            android:paddingLeft="20dp" >
+        </EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textColor="#6E8B3D"
+            android:text="注册"
+            android:textSize="20dp"
+            android:layout_marginLeft="145dp"
+            android:layout_marginTop="140dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:id="@+id/Regist_regist" />
+
+    </FrameLayout>
+
+</RelativeLayout>

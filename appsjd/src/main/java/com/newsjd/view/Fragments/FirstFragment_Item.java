@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -43,11 +44,16 @@ public class FirstFragment_Item extends LazyBaseFragment {
     private List<NewsBean> mDatas = new ArrayList<>();
     private AdapterFirstRecycleList mAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
-
+    //新闻分类
     private int position = -1;
 
     public FirstFragment_Item() {
-//        Log.e(TAG, "FirstFragment_Item: ");
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ;
     }
 
     @Override
@@ -60,21 +66,28 @@ public class FirstFragment_Item extends LazyBaseFragment {
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
-        Log.e(TAG, "onResume: " + position);
     }
 
 
     @Override
     protected void initOnceData() {
-//        initViews(view);
-        //initData();
+        loadInitData();
     }
 
     @Override
     protected void initEveryTimeVisiable() {
-//        initViews(view);
     }
 
     @Override
@@ -85,10 +98,9 @@ public class FirstFragment_Item extends LazyBaseFragment {
     private void initViews(View view) {
         Log.e(TAG, "initViews: ");
         Context context = view.getContext();
+        mAdapter = new AdapterFirstRecycleList(getContext(), mDatas);
         mRecyclerView = view.findViewById(R.id.recyclerView);
         swipeRefreshLayout = view.findViewById(R.id.fragment_first_srl);
-
-        mAdapter = new AdapterFirstRecycleList(context, mDatas);
 
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
@@ -99,6 +111,7 @@ public class FirstFragment_Item extends LazyBaseFragment {
         //设置RecyclerView的布局管理
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        //此处是为瀑布流准备
 //        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
 //            @Override
 //            public int getSpanSize(int position) {
@@ -112,17 +125,17 @@ public class FirstFragment_Item extends LazyBaseFragment {
         //设置RecyclerView的Item之间分割线
         RecyclerView.ItemDecoration itemDecor = new RecyclerView.ItemDecoration() {
             @Override
-            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+            public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 super.onDraw(c, parent, state);
             }
 
             @Override
-            public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+            public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 super.onDrawOver(c, parent, state);
             }
 
             @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 super.getItemOffsets(outRect, view, parent, state);
             }
         };
@@ -162,6 +175,7 @@ public class FirstFragment_Item extends LazyBaseFragment {
 
     public void loadInitData() {
         if (mDatas.size() == 0) {
+            Log.e(TAG, "loadInitData: ");
             initData();
         }
     }
@@ -213,7 +227,6 @@ public class FirstFragment_Item extends LazyBaseFragment {
                             mDatas.clear();
                         }
                         for (NewsBean bean : newsData) {
-                            Log.e(TAG, "onNext: " + bean.toString());
 //                            Log.e(TAG, "onNext:  NewsBean 是否存在：" + mDatas.contains(bean));
                             if (!mDatas.contains(bean)) {
                                 mDatas.add(bean);
@@ -258,6 +271,7 @@ public class FirstFragment_Item extends LazyBaseFragment {
      */
     private void requestData() {
         setState(LoadingFooter.FooterState.Loading);
+        Log.e(TAG, "requestData: ");
         initData();
     }
 

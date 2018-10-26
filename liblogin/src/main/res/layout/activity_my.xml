@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@mipmap/regist2"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="好累呀，终于完成了\n  代码送上"
+        android:textSize="20dp"
+        android:textColor="#ff9900"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        />
+    <TextView
+        android:id="@+id/go_web"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="传送门\n  简书"
+        android:textSize="35dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="#6E8B3D"
+        android:background="@mipmap/ic_launcher"
+        android:elevation="3dip"
+        android:foreground="?attr/selectableItemBackground"
+        />
+    <TextView
+        android:id="@+id/player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="播放音乐\n多田葵 - Brave Song\n点我停止播放"
+        android:layout_marginTop="350dp"
+        android:layout_marginLeft="5dp"
+        android:textSize="25dp" />
+</RelativeLayout>
