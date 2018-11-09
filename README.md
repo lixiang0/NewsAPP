@@ -3,7 +3,7 @@
 - 1.自动更新抓取谷歌新闻
 - 2.新闻内容为JSON格式,参考[链接](http://121.42.138.77:8081/query?type=1)
 - 3.添加了用户系统：包括用户注册、登陆、收藏、顶新闻、踩新闻的功能[正在添加]
-- 4.apk下载链接：[apk链接](https://github.com/lixiang0/NewsAPP/blob/master/app-debug.apk)
+- 4.apk下载链接：[apk链接](http://121.42.138.77:8890/download)
 - 5.登录则可以添加新闻;未登录则显示新闻信息。[链接](http://news.rubenxiao.com/)
 - 6.获取新闻接口：[示例：获取国际新闻第一页](http://121.42.138.77:8081/query?type=1&page=1)
 
