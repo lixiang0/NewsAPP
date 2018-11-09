@@ -30,7 +30,7 @@
         android:layout_alignStart="@+id/regist_layout">
 
         <EditText
-            android:id="@+id/M_username"
+            android:id="@+id/username"
             android:hint="输入账号"
             android:text=""
             android:layout_width="310dp"
@@ -44,7 +44,7 @@
         </EditText>
 
         <EditText
-            android:id="@+id/M_password"
+            android:id="@+id/password"
             android:hint="输入密码"
             android:layout_width="310dp"
             android:layout_height="40dp"
@@ -64,7 +64,7 @@
             android:layout_marginLeft="140dp"
             android:layout_marginTop="170dp"
             android:foreground="?attr/selectableItemBackground"
-            android:id="@+id/M_forget" />
+            android:id="@+id/forget" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,12 +75,12 @@
             android:layout_marginLeft="260dp"
             android:layout_marginTop="170dp"
             android:foreground="?attr/selectableItemBackground"
-            android:id="@+id/M_login" />
+            android:id="@+id/login" />
 
     </FrameLayout>
 
     <TextView
-        android:id="@+id/M_regist"
+        android:id="@+id/regist"
         android:layout_width="335dp"
         android:layout_height="60dp"
         android:text="立即使用手机号注册账号"

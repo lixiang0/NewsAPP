@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity_login extends AppCompatActivity {
     String registfile = "registfile.txt";
     String pswfile = "pswfile.txt";
     EditText Euesrname;
@@ -29,14 +29,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_login);
 
         //匹配id
-        Euesrname = (EditText)findViewById(R.id.M_username);
-        Epassword = (EditText)findViewById(R.id.M_password);
-        forget = (TextView)findViewById(R.id.M_forget);
-        login = (TextView)findViewById(R.id.M_login);
-        regist = (TextView)findViewById(R.id.M_regist);
+        Euesrname = findViewById(R.id.username);
+        Epassword = findViewById(R.id.password);
+        forget = findViewById(R.id.forget);
+        login = findViewById(R.id.login);
+        regist = findViewById(R.id.regist);
 
         //设置自带toolbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -88,15 +88,15 @@ public class MainActivity extends AppCompatActivity {
                         if(ListUser.get(i).equals(username1)){
                             //匹配密码
                             if(ListPassword.get(i).equals(password1)){
-                                Toast.makeText(MainActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
-                                MainActivity.this.finish();
+                                Toast.makeText(MainActivity_login.this, "登录成功！", Toast.LENGTH_SHORT).show();
+                                MainActivity_login.this.finish();
                             }
                             else
-                                Toast.makeText(MainActivity.this, "请检查密码是否正确", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity_login.this, "请检查密码是否正确", Toast.LENGTH_SHORT).show();
                         }
                     }
                     if(i==ListUser.size()-1){
-                        Toast.makeText(MainActivity.this, "账号不存在", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity_login.this, "账号不存在", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (IOException e) {
@@ -111,8 +111,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this,LoginActivity.class);
-                MainActivity.this.startActivityForResult(intent,1);
+                intent.setClass(MainActivity_login.this,LoginActivity.class);
+                MainActivity_login.this.startActivityForResult(intent,1);
             }
         });
 
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         forget.setOnClickListener(new TextView.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "该功能暂未开放", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity_login.this, "该功能暂未开放", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -2,19 +2,12 @@ package com.network;
 
 import com.network.config.Api;
 import com.network.config.ApiChat;
+import com.network.config.ApiCheck;
 import com.network.config.Constants;
 
-import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Cookie;
-import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.CallAdapter;
 import retrofit2.Converter;
@@ -35,6 +28,7 @@ public class RetrofitClient {
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
     private static ApiChat apiChat;
+    private static ApiCheck apiCheck;
 
     public static Api getApi() {
         if (null == okHttpClient) {
@@ -68,6 +62,21 @@ public class RetrofitClient {
         return apiChat;
     }
 
+    public static ApiCheck getApiCheck() {
+        if (null == okHttpClient) {
+            initOkhttpClient();
+        }
+        if (apiCheck == null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(okHttpClient)
+                    .baseUrl(Constants.getCheckHost())
+                    .addConverterFactory(gsonConverterFactory)
+                    .addCallAdapterFactory(rxJavaCallAdapterFactory)
+                    .build();
+            apiCheck = retrofit.create(ApiCheck.class);
+        }
+        return apiCheck;
+    }
 
     private static void initOkhttpClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();

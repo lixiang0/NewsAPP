@@ -9,6 +9,18 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 //        flavorDimensions "versionCode"
+        buildConfigField("String", "check_url", rootProject.ext.update["url"])
+        buildConfigField("String", "check_update", rootProject.ext.update["update"])
+        buildConfigField("String", "check_version", rootProject.ext.update["version"])
+        buildConfigField("String", "check_download", rootProject.ext.update["download"])
+
+        buildConfigField("String", "login", rootProject.ext.update["login"])
+
+        buildConfigField("String", "chatbot_url", rootProject.ext.chatbot["url"])
+        buildConfigField("String", "chatbot_chat", rootProject.ext.chatbot["chat"])
+
+        buildConfigField("String", "news_url", rootProject.ext.news["url"])
+        buildConfigField("String", "news_quary", rootProject.ext.news["quary"])
     }
 
     buildTypes {
@@ -31,7 +43,7 @@ android {
 //            jniLibs.srcDirs = ['libs']
 //        }
 //    }
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
 }
 
 dependencies {

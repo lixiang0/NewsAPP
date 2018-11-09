@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                     //若不为空，保存信息，传递信息，跳转页面
                     save();
                     Intent intent = new Intent();
-                    intent.setClass(LoginActivity.this,MainActivity.class);
+                    intent.setClass(LoginActivity.this,MainActivity_login.class);
                     //将输入传递给主界面
                     intent.putExtra("username",username);
                     intent.putExtra("password",password);
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent = new Intent();
-        intent.setClass(LoginActivity.this,MainActivity.class);
+        intent.setClass(LoginActivity.this,MainActivity_login.class);
         startActivity(intent);
         LoginActivity.this.finish();
         System.out.println("按下了back键   onBackPressed()");

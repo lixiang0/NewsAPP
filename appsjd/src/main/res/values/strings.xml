@@ -13,11 +13,12 @@
     <string name="title_activity_web">Original website</string>
 
     <string name="news">News</string>
-    <string name="video">Video</string>
-    <string name="Contacts">Contacts</string>
-    <string name="setting">Setting</string>
+    <string name="video">ChatBot</string>
+    <string name="Contacts">AD</string>
+    <string name="setting">Mini</string>
 
     <string name="update_time">update time</string>
+    <string name="error_nonetwork">Network Error</string>
     <string name="loaded">loaded</string>
     <string name="latestdata">It\'s the latest data</string>
 </resources>

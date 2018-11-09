@@ -40,7 +40,7 @@ android {
 //            signingConfig signingConfigs.main
         }
     }
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
 }
 
 static def releaseTime() {

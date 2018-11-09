@@ -16,7 +16,7 @@ import pub.cpp.news.R;
 import rx.functions.Func1;
 
 public class ThirdFragment extends Fragment implements View.OnClickListener {
-    private static final String TAG = "sjd secfrag";
+    private static final String TAG = "sjd thirdfrag";
 
     @Nullable
     @Override

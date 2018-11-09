@@ -47,8 +47,7 @@ public class FirstFragment_Item extends LazyBaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.e(TAG, "onCreateView: ");
-        View view;
-        view = inflater.inflate(R.layout.fragment_first, container, false);
+        View view = inflater.inflate(R.layout.fragment_first, container, false);
         initViews(view);
         return view;
     }
@@ -171,19 +170,27 @@ public class FirstFragment_Item extends LazyBaseFragment {
                 .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
                 .subscribe(new Subscriber<List<NewsBean>>() {
                     // 添加数据
-                    boolean hasNewData = false;
+                    int dataState = 0;
 
                     @Override
                     public void onCompleted() {
                         if (initDataCallBack != null) {
                             initDataCallBack.onCallBack();
                         } else {
-                            if (hasNewData) {
-                                Toast.makeText(getContext(), R.string.loaded, Toast.LENGTH_SHORT).show();
-                                setState(LoadingFooter.FooterState.Normal);
-                            } else {
-                                Toast.makeText(getContext(), R.string.latestdata, Toast.LENGTH_SHORT).show();
-                                setState(LoadingFooter.FooterState.TheEnd);
+                            switch (dataState) {
+                                case 0:
+                                    Toast.makeText(getContext(), R.string.latestdata, Toast.LENGTH_SHORT).show();
+                                    setState(LoadingFooter.FooterState.TheEnd);
+                                    break;
+                                case 1:
+                                    Toast.makeText(getContext(), R.string.loaded, Toast.LENGTH_SHORT).show();
+                                    setState(LoadingFooter.FooterState.Normal);
+                                    break;
+                                case 2:
+                                    Toast.makeText(getContext(), R.string.error_nonetwork, Toast.LENGTH_SHORT).show();
+                                    setState(LoadingFooter.FooterState.NetWorkError);
+                                    break;
+                                default:
                             }
                         }
                     }
@@ -191,6 +198,7 @@ public class FirstFragment_Item extends LazyBaseFragment {
                     @Override
                     public void onError(Throwable e) {
                         Log.e(TAG, "onError: ", e);
+                        dataState = 2;
                     }
 
                     @Override
@@ -202,7 +210,7 @@ public class FirstFragment_Item extends LazyBaseFragment {
 //                            Log.e(TAG, "onNext:  NewsBean 是否存在：" + mDatas.contains(bean));
                             if (!mDatas.contains(bean)) {
                                 mDatas.add(bean);
-                                hasNewData = true;
+                                dataState = 1;
                             }
                         }
                         mAdapter.notifyDataSetChanged();

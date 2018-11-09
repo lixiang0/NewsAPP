@@ -9,24 +9,33 @@ public class Constants {
 
 
     //======================== 按类型获取新闻数据  =================//
-    public static final String getNewsByType = "/query";//?type=1&page=1
+    public static final String getNewsByType = BuildConfig.news_quary;//?type=1&page=1
 
-    //======================== 按类型获取新闻数据  =================//
-    public static final String login = "/login";
+    //======================== 用户登陆接口  =================//
+    public static final String login = BuildConfig.login;
     public static final String Login_username = "username";
     public static final String Login_password = "password";
 
     //========================   向机器人发送聊天消息  =================//
-    public static final String chatRobot = "/chat/me";
+    public static final String chatRobot = BuildConfig.chatbot_chat;
     public static final String chatContants = "msg";
+
+    //============================ 检查更新接口 ================================//
+    public static final String check_download = BuildConfig.check_download;
+    public static final String check_update = BuildConfig.check_update;
+    public static final String check_version = BuildConfig.check_version;
 
     //============================ 后台地址 ================================//
     // Get url.
     public static String getHost() {
-        return "http://121.42.138.77:8081/";
-    }
-    public static String getChatHost() {
-        return "http://121.42.138.77:8889/";
+        return BuildConfig.news_url;
     }
 
+    public static String getChatHost() {
+        return BuildConfig.chatbot_url;
+    }
+
+    public static String getCheckHost() {
+        return BuildConfig.check_url;
+    }
 }
