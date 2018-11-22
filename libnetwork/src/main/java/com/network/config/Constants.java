@@ -22,7 +22,6 @@ public class Constants {
 
     //============================ 检查更新接口 ================================//
     public static final String check_download = BuildConfig.check_download;
-    public static final String check_update = BuildConfig.check_update;
     public static final String check_version = BuildConfig.check_version;
 
     //============================ 后台地址 ================================//

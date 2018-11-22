@@ -12,6 +12,7 @@
         android:title="@string/video" />
 
     <item
+        android:visible="false"
         android:id="@+id/bottom_series_list"
         android:icon="@drawable/menu_3"
         android:title="@string/Contacts" />

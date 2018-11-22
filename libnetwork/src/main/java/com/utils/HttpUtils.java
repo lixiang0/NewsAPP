@@ -36,16 +36,15 @@ public class HttpUtils {
         return RetrofitClient.getApiChat().chatRobot(hashMap);
     }
 
-    public static Observable<String> checkUpdate(Map<String, String> map) {
-        return RetrofitClient.getApiCheck().check_update(map);
+    public static String getDownloadUri() {
+        return Constants.getCheckHost() + Constants.check_download;
     }
+//    public static Observable<String> checkDownload(Map<String, String> map) {
+//        return RetrofitClient.getApiCheck().check_download(map);
+//    }
 
-    public static Observable<String> checkDownload(Map<String, String> map) {
-        return RetrofitClient.getApiCheck().check_download(map);
-    }
-
-    public static Observable<String> checkVersion(Map<String, String> map) {
-        return RetrofitClient.getApiCheck().check_version(map);
+    public static Observable<String> checkVersion() {
+        return RetrofitClient.getApiCheck().check_version();
     }
 }
 

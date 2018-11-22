@@ -179,15 +179,15 @@ public class FirstFragment_Item extends LazyBaseFragment {
                         } else {
                             switch (dataState) {
                                 case 0:
-                                    Toast.makeText(getContext(), R.string.latestdata, Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(getContext(), R.string.latestdata, Toast.LENGTH_SHORT).show();
                                     setState(LoadingFooter.FooterState.TheEnd);
                                     break;
                                 case 1:
-                                    Toast.makeText(getContext(), R.string.loaded, Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(getContext(), R.string.loaded, Toast.LENGTH_SHORT).show();
                                     setState(LoadingFooter.FooterState.Normal);
                                     break;
                                 case 2:
-                                    Toast.makeText(getContext(), R.string.error_nonetwork, Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(getContext(), R.string.error_nonetwork, Toast.LENGTH_SHORT).show();
                                     setState(LoadingFooter.FooterState.NetWorkError);
                                     break;
                                 default:

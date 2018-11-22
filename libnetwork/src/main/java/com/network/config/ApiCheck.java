@@ -6,6 +6,7 @@ import java.util.Map;
 
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import rx.Observable;
 
@@ -17,16 +18,10 @@ import rx.Observable;
  */
 public interface ApiCheck {
 
-    @FormUrlEncoded
-    @POST(Constants.check_download)
-    Observable<String> check_download(@FieldMap Map<String, String> map);
+//    @FormUrlEncoded
+//    @POST(Constants.check_download)
+//    Observable<String> check_download(@FieldMap Map<String, String> map);
 
-    @FormUrlEncoded
-    @POST(Constants.check_update)
-    Observable<String> check_update(@FieldMap Map<String, String> map);
-
-
-    @FormUrlEncoded
-    @POST(Constants.check_version)
-    Observable<String> check_version(@FieldMap Map<String, String> map);
+    @GET(Constants.check_version)
+    Observable<String> check_version();
 }

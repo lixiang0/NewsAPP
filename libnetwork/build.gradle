@@ -10,7 +10,6 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 //        flavorDimensions "versionCode"
         buildConfigField("String", "check_url", rootProject.ext.update["url"])
-        buildConfigField("String", "check_update", rootProject.ext.update["update"])
         buildConfigField("String", "check_version", rootProject.ext.update["version"])
         buildConfigField("String", "check_download", rootProject.ext.update["download"])
 
