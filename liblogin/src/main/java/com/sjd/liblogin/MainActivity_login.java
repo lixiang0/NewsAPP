@@ -1,7 +1,6 @@
 package com.sjd.liblogin;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -15,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class MainActivity_login extends AppCompatActivity {
+public class MainActivity_login extends BaseActivity {
     String registfile = "registfile.txt";
     String pswfile = "pswfile.txt";
     EditText Euesrname;

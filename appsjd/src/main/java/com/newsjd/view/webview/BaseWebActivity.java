@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.DefaultWebClient;
+import com.umeng.analytics.MobclickAgent;
 
 import pub.cpp.news.R;
 
@@ -135,7 +136,7 @@ public class BaseWebActivity extends AppCompatActivity {
             mAgentWeb.getWebLifeCycle().onPause();
         }
         super.onPause();
-
+        MobclickAgent.onPause(this);
     }
 
     @Override
@@ -147,6 +148,7 @@ public class BaseWebActivity extends AppCompatActivity {
         mAgentWeb.getWebLifeCycle().onResume();
         super.onResume();
         //mAgentWeb.getUrlLoader().loadUrl(getUrl());
+        MobclickAgent.onResume(this);
     }
 
     @Override

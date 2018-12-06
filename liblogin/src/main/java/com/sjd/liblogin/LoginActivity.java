@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,7 +16,7 @@ import java.io.IOException;
  * Created by jzl on 2016/11/21.
  */
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
     String username,password;
     String registfile = "registfile.txt";
     String pswfile = "pswfile.txt";

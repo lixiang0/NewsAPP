@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="pub.cpp.news">
 
     <!--<uses-permission android:name="android.permission.GET_ACCOUNTS" />-->
@@ -10,12 +11,12 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
 
     <application
@@ -24,7 +25,8 @@
         android:icon="@mipmap/bored"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/bored"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name="com.newsjd.view.Activity.MainActivity"
             android:label="@string/app_name"
@@ -41,6 +43,25 @@
             android:label="@string/title_activity_web"
             android:launchMode="singleTop"
             android:theme="@style/BaseAppTheme" />
+
+        <!--其他的配置项-->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="pub.cpp.news.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+        <!--其他的配置项-->
     </application>
 
+    <!-- <meta-data
+         android:name="UMENG_APPKEY"
+         android:value="5c093b6af1f55620c60003a5" />&lt;!&ndash;友盟 Appkey 自己应用注册申请来的&ndash;&gt;
+     <meta-data
+         android:name="UMENG_CHANNEL"
+         android:value="${UMENG_CHANNEL_VALUE}" /> &lt;!&ndash;渠道号，多渠道这里使用了占位符$&ndash;&gt;
+         -->
 </manifest>

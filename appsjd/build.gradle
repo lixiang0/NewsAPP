@@ -21,6 +21,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        flavorDimensions "platform"
 //        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -41,6 +42,16 @@ android {
         }
     }
     buildToolsVersion '28.0.3'
+
+    productFlavors {
+        xiaomi {
+            dimension "platform"
+        }
+        productFlavors.all { flavor ->
+//            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+            flavor.buildConfigField("String", "UMENG_CHANNEL_VALUE", "\"" + name + "\"")
+        }
+    }
 }
 
 static def releaseTime() {
@@ -78,4 +89,8 @@ dependencies {
     implementation project(':libshare')
     //检测更新
 //    implementation 'com.allenliu.versionchecklib:library:2.0.0'
+
+    //友盟统计
+    implementation 'com.umeng.umsdk:analytics:7.5.4'
+    implementation 'com.umeng.umsdk:common:1.5.4'
 }
