@@ -14,6 +14,8 @@ import pub.cpp.news.R;
 import com.newsjd.config.Contants;
 import com.newsjd.view.Adapter.AdapterMainVP;
 import com.umeng.analytics.MobclickAgent;
+import com.utils.CheckUpdate;
+import com.utils.SharedPrefUtils;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
@@ -31,6 +33,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mViewPager.setAdapter(mAdapterMainVP);
         bottomNavigationView = findViewById(R.id.main_bottom_navigation_view);
         initView();
+        //检查更新
+        int time = SharedPrefUtils.getUpdateTime();
+        if (time > 0) {
+            SharedPrefUtils.setUpdateTime(time - 1);
+        } else {
+            CheckUpdate.checkVersion(this);
+        }
     }
 
     private void initView() {

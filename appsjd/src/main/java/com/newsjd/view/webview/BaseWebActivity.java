@@ -167,31 +167,4 @@ public class BaseWebActivity extends AppCompatActivity {
             mAgentWeb.getWebLifeCycle().onDestroy();
         }
     }
-
-//    private AlertDialog mAlertDialog;
-//    private void showDialog() {
-//        if (mAlertDialog == null) {
-//            mAlertDialog = new AlertDialog.Builder(this)
-//                    .setMessage("您确定要关闭该页面吗?")
-//                    .setNegativeButton("再逛逛", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            if (mAlertDialog != null) {
-//                                mAlertDialog.dismiss();
-//                            }
-//                        }
-//                    })//
-//                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//
-//                            if (mAlertDialog != null) {
-//                                mAlertDialog.dismiss();
-//                            }
-//                            BaseWebActivity.this.finish();
-//                        }
-//                    }).create();
-//        }
-//        mAlertDialog.show();
-//    }
 }
