@@ -2,15 +2,15 @@ apply plugin: 'com.android.application'
 
 android {
     //签名
-//    signingConfigs {
-//        main {
-//            File key = new File(rootProject.ext.signingConfigs["filePath"])
-//            keyAlias rootProject.ext.signingConfigs["keyAlias"]
-//            keyPassword rootProject.ext.signingConfigs["keyPassword"]
-//            storeFile file(key)
-//            storePassword rootProject.ext.signingConfigs["storePassword"]
-//        }
-//    }
+    signingConfigs {
+        main {
+            File key = new File(rootProject.ext.signingConfigs["keyStorePath"])
+            keyAlias rootProject.ext.signingConfigs["keyAlias"]
+            keyPassword rootProject.ext.signingConfigs["keyPassword"]
+            storeFile file(key)
+            storePassword rootProject.ext.signingConfigs["keyStorePassword"]
+        }
+    }
     aaptOptions.cruncherEnabled = false
     aaptOptions.useNewCruncher = false
 
@@ -28,28 +28,90 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            android.applicationVariants.all { variant ->
-                variant.outputs.all {
-                    def fileName = "news_v${defaultConfig.versionName}_${releaseTime()}_${variant.flavorName}_${variant.buildType.name}.apk"
-                    outputFileName = fileName
-                }
-            }
-//            signingConfig signingConfigs.main
+            signingConfig signingConfigs.main
         }
         debug {
             versionNameSuffix "-debug"
-//            signingConfig signingConfigs.main
+            signingConfig signingConfigs.main
         }
     }
     buildToolsVersion '28.0.3'
 
     productFlavors {
+        baidu {
+            dimension "platform"
+        }
+        ali {
+            dimension "platform"
+        }
+        tencent {
+            dimension "platform"
+        }
         xiaomi {
+            dimension "platform"
+        }
+        huawei {
+            dimension "platform"
+        }
+        sansung {
+            dimension "platform"
+        }
+        vivo {
+            dimension "platform"
+        }
+        oppo {
+            dimension "platform"
+        }
+        meizu {
+            dimension "platform"
+        }
+        lenovo {
+            dimension "platform"
+        }
+        q360 {
+            dimension "platform"
+        }
+        sogou {
+            dimension "platform"
+        }
+        appchina {
+            dimension "platform"
+        }
+        chrome {
             dimension "platform"
         }
         productFlavors.all { flavor ->
 //            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
             flavor.buildConfigField("String", "UMENG_CHANNEL_VALUE", "\"" + name + "\"")
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def fileName = "news_v${defaultConfig.versionName}_${releaseTime()}_${variant.flavorName}_${variant.buildType.name}.apk"
+            outputFileName = fileName
+            //修改apk 生成路劲      
+//            if (outputFileName != null && outputFileName.endsWith('.apk')) {
+//                if (!outputFile.name.contains("debug")) {
+//                    variant.getPackageApplication().outputDirectory = new File("E:\\APK-Release")
+//                    variant.getPackageApplication().outputScope.apkDatas.forEach {
+//                        apkData -> apkData.outputFileName = outputFileName
+//                    }
+//                }
+//            }
+        }
+    }
+    //执行assemble时 过滤不必要的版本
+    android.variantFilter { variant ->
+        if ('debug'.equals(variant.buildType.name)) {
+            variant.setIgnore(true)
+            /*
+            variant.getFlavors().each() { flavor ->
+//           // 这里需要注意下 ， 多维度 和此处不一样
+                if ('Num1'.equals(flavor.name)) {
+                    variant.setIgnore(true)
+                }
+            }*/
         }
     }
 }

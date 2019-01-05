@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">严肃消息</string>
+    <string name="app_name">今日消息</string>
 
     <string name="focus">焦点</string>
     <string name="international">国际</string>
@@ -22,4 +22,10 @@
     <string name="error_nonetwork">没有网络</string>
     <string name="loaded">已加载</string>
     <string name="latestdata">已经是最新数据</string>
+    <string name="new_function">新功能</string>
+    <string name="unlogin">未登录</string>
+    <string name="save">收藏</string>
+    <string name="reward">打赏团队</string>
+    <string name="checkversion">检查版本</string>
+    <string name="aboutapp">关于应用</string>
 </resources>

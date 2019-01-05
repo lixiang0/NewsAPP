@@ -31,7 +31,7 @@ import rx.schedulers.Schedulers;
 public class CheckUpdate {
     private static final String TAG = "sjd CheckUpdate";
 
-    public static void checkVersion(final Context context) {
+    public static void checkVersion(final Context context, final boolean isShowToast) {
         HttpUtils.checkVersion()
                 .subscribeOn(Schedulers.io())
                 .flatMap(new Func1<String, Observable<Float>>() {
@@ -57,11 +57,14 @@ public class CheckUpdate {
                         });
                     }
                 })
+                .observeOn(AndroidSchedulers.mainThread()) // 指定 doOnSubscribe 在主线程
                 .subscribe(new Observer<Float>() {
                     @Override
                     public void onCompleted() {
                         Log.e(TAG, "onCompleted: ");
-                        Toast.makeText(context, "已是最新版本", Toast.LENGTH_LONG).show();
+                        if (isShowToast) {
+                            Toast.makeText(context, "已是最新版本", Toast.LENGTH_LONG).show();
+                        }
                     }
 
                     @Override
@@ -72,14 +75,7 @@ public class CheckUpdate {
                     @Override
                     public void onNext(Float f) {
                         Log.e(TAG, "onNext: " + f);
-                        Observable.just(f)
-                                .observeOn(AndroidSchedulers.mainThread()) // 指定 doOnSubscribe 在主线程
-                                .subscribe(new Action1<Float>() {
-                                    @Override
-                                    public void call(Float aFloat) {
-                                        initDialog(context, aFloat);
-                                    }
-                                });
+                        initDialog(context, f);
                     }
                 });
 
@@ -101,7 +97,7 @@ public class CheckUpdate {
         //设置构造器标题
         builder.setTitle("有新版本(" + aFloat + ")可以更新");
         //构造器对应的图标
-        builder.setIcon(R.mipmap.ic_launcher);
+//        builder.setIcon(R.mipmap.ic_launcher);
         //构造器内容,为对话框设置文本项(之后还有列表项的例子)
         builder.setMessage("需要体验新版本吗？");
         //为构造器设置确定按钮,第一个参数为按钮显示的文本信息，第二个参数为点击后的监听事件，用匿名内部类实现

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (time > 0) {
             SharedPrefUtils.setUpdateTime(time - 1);
         } else {
-            CheckUpdate.checkVersion(this);
+            CheckUpdate.checkVersion(this, false);
         }
     }
 

@@ -82,9 +82,7 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
             }
 
 
-            if (bitmapBytes == null) {
-                normalHolder.tv_img.setVisibility(View.GONE);
-            } else {
+            if (bitmapBytes != null) {
                 RequestOptions requestOptions = new RequestOptions()
                         .placeholder(R.mipmap.null_pic)
                         .error(R.mipmap.null_pic);
@@ -94,6 +92,9 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
                         .apply(requestOptions)
                         .into(normalHolder.tv_img);
             }
+//            else {
+//                normalHolder.tv_img.setVisibility(View.GONE);
+//            }
         }
     }
 
