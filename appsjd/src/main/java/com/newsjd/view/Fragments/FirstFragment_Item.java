@@ -23,6 +23,8 @@ import pub.cpp.news.R;
 
 import com.newsjd.config.Contants;
 import com.newsjd.config.LoadingFooter;
+import com.newsjd.database.Data;
+import com.newsjd.database.DataUtils;
 import com.newsjd.view.Adapter.AdapterFirstRecycleList;
 import com.newsjd.view.Adapter.EndlessRecyclerOnScrollListener;
 import com.newsjd.view.webview.WebActivity;
@@ -122,8 +124,10 @@ public class FirstFragment_Item extends LazyBaseFragment {
             }
 
             @Override
-            public void onItemLongClick(View view, int position) {
-//                Toast.makeText(context, position + " longclick", Toast.LENGTH_SHORT).show();
+            public void onItemLongClick(View view, int position, NewsBean newsBean) {
+                //TODO 收藏
+//                DataUtils.
+//                Toast.makeText(view.getContext(), position + " longclick", Toast.LENGTH_SHORT).show();
             }
         });
 

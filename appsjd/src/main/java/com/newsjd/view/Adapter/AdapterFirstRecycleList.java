@@ -11,8 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
@@ -22,6 +25,7 @@ import com.network.bean.NewsBean;
 import pub.cpp.news.R;
 
 import com.newsjd.config.LoadingFooter;
+import com.newsjd.database.DataUtils;
 import com.utils.Base64BitmapUtil;
 import com.utils.Utils;
 
@@ -65,9 +69,9 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
             NormalHolder normalHolder = (NormalHolder) holder;
             normalHolder.tv_time.setText(mContext.getString(R.string.update_time) + Utils.dateFormat(mDatas.get(position).getTime()));
             normalHolder.tv_title.setText(mDatas.get(position).getTitle());
-
 //        holder.tv_link.setMovementMethod(LinkMovementMethod.getInstance());
             normalHolder.tv_description.setText(mDatas.get(position).getText());
+
             setUpItemEvent(normalHolder);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -119,7 +123,7 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
 
-        void onItemLongClick(View view, int position);
+        void onItemLongClick(View view, int position, NewsBean newsBean);
     }
 
     private OnItemClickListener mOnItemClickListener;
@@ -130,11 +134,12 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
 
 
     public class NormalHolder extends RecyclerView.ViewHolder {
-        public TextView tv_time;
-        public TextView tv_title;
-        public Button tv_link;
-        public TextView tv_description;
-        public ImageView tv_img;
+        TextView tv_time;
+        TextView tv_title;
+        Button tv_link;
+        TextView tv_description;
+        ImageView tv_img;
+        CheckBox favoritesBtn;
 
         NormalHolder(View v) {
             super(v);
@@ -143,6 +148,19 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
             tv_link = v.findViewById(R.id.tv_link);
             tv_description = v.findViewById(R.id.tv_description);
             tv_img = v.findViewById(R.id.tv_img);
+            favoritesBtn = v.findViewById(R.id.favoritesBtn);
+            favoritesBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CheckBox checkBox = (CheckBox) v;
+                    if (checkBox.isChecked()) {
+                        Toast.makeText(v.getContext(), "收藏", Toast.LENGTH_SHORT).show();
+//                        DataUtils.add()
+                    } else {
+                        Toast.makeText(v.getContext(), "取消收藏", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
     }
 
@@ -218,8 +236,8 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    int layoutPosition = holder.getLayoutPosition();
-                    mOnItemClickListener.onItemLongClick(view, layoutPosition);
+                    int layoutPosition = holder.getLayoutPosition();//这里要注意 ， item 根据holder来获取，不是通过传输的数据
+                    mOnItemClickListener.onItemLongClick(view, layoutPosition, mDatas.get(layoutPosition));
                     return true;
                 }
             });

@@ -4,16 +4,20 @@ apply from: "config.gradle"
 buildscript {
     repositories {
         jcenter()
+        google()
+        mavenCentral()
         maven {
             url 'http://maven.aliyun.com/nexus/content/groups/public/'
         }
         maven { url 'https://dl.bintray.com/umsdk/release' }
-        mavenCentral()
-        google()
     }
+    
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:3.3.0'
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
+
+        //美团 瓦利打包
+        classpath 'com.meituan.android.walle:plugin:1.1.6'
 
 //上传多模块到bintray jcenter
 //        classpath 'com.novoda:bintray-release:0.3.4'
@@ -25,12 +29,12 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        google()
+        mavenCentral()
         maven {
             url 'http://maven.aliyun.com/nexus/content/groups/public/'
         }
         maven { url 'https://dl.bintray.com/umsdk/release' }
-        mavenCentral()
-        google()
     }
 }
 

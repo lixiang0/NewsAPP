@@ -1,0 +1,24 @@
+//美团瓦利打包
+apply plugin: 'walle'
+
+walle {
+    /*//可用的变量
+    projectName - 项目名字
+    appName - App模块名字
+    packageName - applicationId (App包名packageName)
+    buildType - buildType (release/debug等)
+    channel - channel名称 (对应渠道打包中的渠道名字)
+    versionName - versionName (显示用的版本号)
+    versionCode - versionCode (内部版本号)
+    buildTime - buildTime (编译构建日期时间)
+    fileSHA1 - fileSHA1 (最终APK文件的SHA1哈希值)
+    flavorName - 编译构建 productFlavors 名
+    */
+
+    // 指定渠道包的输出路径
+    apkOutputFolder = new File("${project.buildDir}/outputs/channels");
+    // 定制渠道包的APK的文件名称
+    apkFileNameFormat = '${appName}-${packageName}-${channel}-${buildType}-v${versionName}-${versionCode}-${buildTime}.apk';
+    // 渠道配置文件
+    channelFile = new File("${project.getProjectDir()}/channel")
+}
