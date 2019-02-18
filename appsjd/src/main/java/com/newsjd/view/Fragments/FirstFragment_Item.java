@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 
 import com.network.bean.NewsBean;
 
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -123,9 +122,8 @@ public class FirstFragment_Item extends LazyBaseFragment {
 
             @Override
             public void onItemLongClick(View view, int position, NewsBean newsBean) {
-                //TODO 收藏
-//                DataUtils.
-//                Toast.makeText(view.getContext(), position + " longclick", Toast.LENGTH_SHORT).show();
+                //TODO 长按分享
+
             }
         });
 

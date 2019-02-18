@@ -31,7 +31,7 @@ public class AdapterMainVP extends FragmentStatePagerAdapter {
             mItems.addAll(Arrays.asList(data_Name).subList(0, length));
             pageFragmentSArrayList.add(new FirstFragment());
             pageFragmentSArrayList.add(new SecondFragment());
-            pageFragmentSArrayList.add(new ThirdFragment());
+//            pageFragmentSArrayList.add(new ThirdFragment());
             pageFragmentSArrayList.add(new FourFragment());
         }
     }

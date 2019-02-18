@@ -53,18 +53,6 @@ public class AdapterFirstVP extends FragmentStatePagerAdapter {
 
 
     public void loadInitData(int position) {
-        int i = -1;
-        for (int j = 0; j < Contants.AllItem_Name.length; j++) {
-            if (context.getString(R.string.local).equals(Contants.AllItem_Name[j])) {
-                i = j;
-                break;
-            }
-        }
-        if (position == i) {
-            //TODO 加载本地数据
-
-        } else {
-            firstFragmentItemArrayList.get(position).loadInitData();
-        }
+        firstFragmentItemArrayList.get(position).loadInitData();
     }
 }

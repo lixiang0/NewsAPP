@@ -1,14 +1,12 @@
 package com.newsjd.view.Adapter;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.network.bean.NewsBean;
 import com.newsjd.config.Contants;
 import com.newsjd.database.DataBean;
 import com.newsjd.database.DataUtils;
-import com.newsjd.view.Fragments.FirstFragment_Item;
 import com.utils.HttpUtils;
 
 import java.util.ArrayList;
