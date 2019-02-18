@@ -20,11 +20,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
 import com.network.bean.NewsBean;
 
 import pub.cpp.news.R;
 
 import com.newsjd.config.LoadingFooter;
+import com.newsjd.database.DataBean;
 import com.newsjd.database.DataUtils;
 import com.utils.Base64BitmapUtil;
 import com.utils.Utils;
@@ -67,11 +69,7 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof NormalHolder) {
             NormalHolder normalHolder = (NormalHolder) holder;
-            normalHolder.tv_time.setText(mContext.getString(R.string.update_time) + Utils.dateFormat(mDatas.get(position).getTime()));
-            normalHolder.tv_title.setText(mDatas.get(position).getTitle());
-//        holder.tv_link.setMovementMethod(LinkMovementMethod.getInstance());
-            normalHolder.tv_description.setText(mDatas.get(position).getText());
-
+            normalHolder.setNewsBean(mDatas.get(position));
             setUpItemEvent(normalHolder);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -134,12 +132,16 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
 
 
     public class NormalHolder extends RecyclerView.ViewHolder {
+        //子View
         TextView tv_time;
         TextView tv_title;
         Button tv_link;
         TextView tv_description;
         ImageView tv_img;
         CheckBox favoritesBtn;
+
+        //数据
+        NewsBean newsBean;
 
         NormalHolder(View v) {
             super(v);
@@ -154,13 +156,37 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
                 public void onClick(View v) {
                     CheckBox checkBox = (CheckBox) v;
                     if (checkBox.isChecked()) {
-                        Toast.makeText(v.getContext(), "收藏", Toast.LENGTH_SHORT).show();
-//                        DataUtils.add()
+                        Toast.makeText(v.getContext(), v.getContext().getString(R.string.Save_local), Toast.LENGTH_SHORT).show();
+                        DataUtils.addAsyn(new Gson().toJson(newsBean));
                     } else {
-                        Toast.makeText(v.getContext(), "取消收藏", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(v.getContext(), v.getContext().getString(R.string.local_not_saved), Toast.LENGTH_SHORT).show();
+                        DataUtils.delAsyn(new Gson().toJson(newsBean));
                     }
                 }
             });
+        }
+
+        public void setNewsBean(NewsBean newsBean) {
+            this.newsBean = newsBean;
+            updateData();
+        }
+
+        public void updateData() {
+            if (newsBean == null) {
+                return;
+            }
+            tv_time.setText(mContext.getString(R.string.update_time) + Utils.dateFormat(newsBean.getTime()));
+            tv_title.setText(newsBean.getTitle());
+//        holder.tv_link.setMovementMethod(LinkMovementMethod.getInstance());
+            tv_description.setText(newsBean.getText());
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    DataBean result = DataUtils.queryItemData(new Gson().toJson(newsBean));
+                    favoritesBtn.setChecked(result != null);
+                }
+            }).run();
         }
     }
 
@@ -169,6 +195,7 @@ public class AdapterFirstRecycleList extends RecyclerView.Adapter {
         View mEndViewstub;
         View mNetworkErrorViewstub;
         View mOnClickContinueErrorViewstub;
+
 
         FooterHolder(View itemView) {
             super(itemView);

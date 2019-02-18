@@ -21,10 +21,12 @@
     <string name="error_nonetwork">Network Error</string>
     <string name="loaded">loaded</string>
     <string name="latestdata">It\'s the latest data</string>
-    <string name="new_function">新功能</string>
-    <string name="unlogin">未登录</string>
-    <string name="save">收藏</string>
-    <string name="reward">打赏团队</string>
-    <string name="checkversion">检查版本</string>
-    <string name="aboutapp">关于应用</string>
+    <string name="new_function">New Function</string>
+    <string name="unlogin">unlogin</string>
+    <string name="save">Favorites</string>
+    <string name="reward">Reward team</string>
+    <string name="checkversion">Check Version</string>
+    <string name="aboutapp">Aout App</string>
+    <string name="Save_local">Save Local</string>
+    <string name="local_not_saved">Local Not Saved</string>
 </resources>

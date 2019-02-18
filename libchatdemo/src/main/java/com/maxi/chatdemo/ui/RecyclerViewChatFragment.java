@@ -1,6 +1,5 @@
 package com.maxi.chatdemo.ui;
 
-import android.app.Fragment;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
-import com.google.gson.Gson;
 import com.maxi.chatdemo.adapter.ChatListViewAdapter;
 import com.maxi.chatdemo.adapter.ChatRecyclerAdapter;
 import com.maxi.chatdemo.animator.SlideInOutBottomItemAnimator;
@@ -27,12 +25,17 @@ import com.maxi.chatdemo.widget.pulltorefresh.base.PullToRefreshView;
 import com.network.bean.ChatMsgBean;
 import com.utils.HttpUtils;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.lang.ref.WeakReference;
 
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.Subject;
+
 
 public class RecyclerViewChatFragment extends BaseFragment {
     private static final String TAG = "RecViewChatFragment";
@@ -184,7 +187,7 @@ public class RecyclerViewChatFragment extends BaseFragment {
                 if (heightDifference == 0 || heightDifference == bottomStatusHeight) {
                     needToScrollView.scrollTo(0, 0);
                 } else {
-                    Log.e(TAG, "onGlobalLayout: "+ "heightDifference = "+heightDifference +" | recyclerHeight = "+recyclerHeight );
+                    Log.e(TAG, "onGlobalLayout: " + "heightDifference = " + heightDifference + " | recyclerHeight = " + recyclerHeight);
                     if (heightDifference < recyclerHeight) {
                         int contentHeight = wcLinearLayoutManger == null ? 0 : wcLinearLayoutManger.getHeight();
                         if (recyclerHeight < contentHeight) {
@@ -194,7 +197,7 @@ public class RecyclerViewChatFragment extends BaseFragment {
                             listSlideHeight = heightDifference;
                             needToScrollView.scrollTo(0, listSlideHeight);
                         }
-                        Log.e(TAG, "onGlobalLayout: listSlideHeight ="+ listSlideHeight );
+                        Log.e(TAG, "onGlobalLayout: listSlideHeight =" + listSlideHeight);
                     } else {
                         listSlideHeight = 0;
                     }
@@ -308,10 +311,20 @@ public class RecyclerViewChatFragment extends BaseFragment {
                 HttpUtils.chatRobot(content)
                         .subscribeOn(Schedulers.computation()) // 指定 subscribe() 发生在 运算 线程
                         .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
-                        .subscribe(new Subscriber<ChatMsgBean>() {
+                        .subscribe(new Observer<ChatMsgBean>() {
                             @Override
-                            public void onCompleted() {
+                            public void onSubscribe(Disposable d) {
 
+                            }
+
+                            @Override
+                            public void onNext(ChatMsgBean chatMsgBean) {
+
+                                Log.e(TAG, "onNext: " + chatMsgBean.getMsg());
+                                Message message = new Message();
+                                message.what = 0;
+                                message.obj = chatMsgBean.getMsg();
+                                receriveHandler.sendMessage(message);
                             }
 
                             @Override
@@ -321,12 +334,8 @@ public class RecyclerViewChatFragment extends BaseFragment {
                             }
 
                             @Override
-                            public void onNext(ChatMsgBean s) {
-                                Log.e(TAG, "onNext: " + s.getMsg());
-                                Message message = new Message();
-                                message.what = 0;
-                                message.obj = s.getMsg();
-                                receriveHandler.sendMessage(message);
+                            public void onComplete() {
+
                             }
                         });
             }

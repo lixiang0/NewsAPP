@@ -3,9 +3,11 @@ package com.network.config;
 import com.network.bean.BaseResponse;
 import com.network.bean.NewsBean;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -16,7 +18,6 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import rx.Observable;
 
 /**
  * Created by Lulei on 2017/1/3.
@@ -27,8 +28,8 @@ import rx.Observable;
 public interface Api {
     //============= API =================//
     @GET(Constants.getNewsByType)
-    Observable<List<NewsBean>> getNewsByType(@Query("type") int type,
-                                             @Query("page") int page);
+    Observable<ArrayList<NewsBean>> getNewsByType(@Query("type") int type,
+                                                  @Query("page") int page);
 
     @FormUrlEncoded
     @POST(Constants.login)

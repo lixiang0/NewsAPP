@@ -15,27 +15,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.network.bean.NewsBean;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import pub.cpp.news.R;
 
 import com.newsjd.config.Contants;
 import com.newsjd.config.LoadingFooter;
-import com.newsjd.database.Data;
-import com.newsjd.database.DataUtils;
 import com.newsjd.view.Adapter.AdapterFirstRecycleList;
 import com.newsjd.view.Adapter.EndlessRecyclerOnScrollListener;
+import com.newsjd.view.Adapter.FirstItemUtils;
 import com.newsjd.view.webview.WebActivity;
-import com.utils.HttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class FirstFragment_Item extends LazyBaseFragment {
     private static final String TAG = "NEWS FirstFragment_Item";
@@ -169,15 +167,44 @@ public class FirstFragment_Item extends LazyBaseFragment {
             pageNum++;
         }
         Log.e(TAG, "initData:  pageNum = " + pageNum);
-        HttpUtils.getNewsByType(Contants.AllItem[position], pageNum)
+
+        FirstItemUtils.getData(Contants.AllItem[position], pageNum)
                 .subscribeOn(Schedulers.computation()) // 指定 subscribe() 发生在 运算 线程
                 .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
-                .subscribe(new Subscriber<List<NewsBean>>() {
+                .subscribe(new Observer<List<NewsBean>>() {
                     // 添加数据
                     int dataState = 0;
 
                     @Override
-                    public void onCompleted() {
+                    public void onSubscribe(Disposable d) {
+                        Log.e(TAG, "onSubscribe: initData");
+
+                    }
+
+                    @Override
+                    public void onNext(List<NewsBean> newsBeans) {
+                        Log.e(TAG, "onNext: initData");
+                        dataState = updateData(clean, newsBeans);
+                        if (clean) {
+                            pageNum = 0;
+                        }
+                        if (dataState != 1) {
+                            pageNum--;
+                        }
+                        //延续rxjava1的流程， rxjava2的流程不一样
+                        onComplete();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError: ", e);
+                        dataState = 2;
+                        pageNum--;
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "onComplete: initData");
                         if (initDataCallBack != null) {
                             initDataCallBack.onCallBack();
                         } else {
@@ -198,29 +225,9 @@ public class FirstFragment_Item extends LazyBaseFragment {
                             }
                         }
                     }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, "onError: ", e);
-                        dataState = 2;
-                    }
-
-                    @Override
-                    public void onNext(List<NewsBean> newsData) {
-                        if (clean) {
-                            mDatas.clear();
-                        }
-                        for (NewsBean bean : newsData) {
-//                            Log.e(TAG, "onNext:  NewsBean 是否存在：" + mDatas.contains(bean));
-                            if (!mDatas.contains(bean)) {
-                                mDatas.add(bean);
-                                dataState = 1;
-                            }
-                        }
-                        mAdapter.notifyDataSetChanged();
-                    }
                 });
     }
+
 
     public FirstFragment_Item setPosition(int position) {
         this.position = position;
@@ -274,5 +281,20 @@ public class FirstFragment_Item extends LazyBaseFragment {
 
     private interface InitDataCallBack {
         void onCallBack();
+    }
+
+    public int updateData(boolean clean, List<NewsBean> newsData) {
+        int dataState = 0;
+        if (clean) {
+            mDatas.clear();
+        }
+        for (NewsBean bean : newsData) {
+            if (!mDatas.contains(bean)) {
+                mDatas.add(bean);
+                dataState = 1;
+            }
+        }
+        mAdapter.notifyDataSetChanged();
+        return dataState;
     }
 }

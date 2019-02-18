@@ -26,7 +26,7 @@ public class DataBeanDao extends AbstractDao<DataBean, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property New_item = new Property(1, String.class, "new_item", false, "NEW_ITEM");
-        public final static Property Add_time = new Property(2, String.class, "add_time", false, "ADD_TIME");
+        public final static Property Add_time = new Property(2, long.class, "add_time", false, "ADD_TIME");
     }
 
 
@@ -44,7 +44,7 @@ public class DataBeanDao extends AbstractDao<DataBean, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"DATA_BEAN\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"NEW_ITEM\" TEXT NOT NULL ," + // 1: new_item
-                "\"ADD_TIME\" TEXT NOT NULL );"); // 2: add_time
+                "\"ADD_TIME\" INTEGER NOT NULL );"); // 2: add_time
     }
 
     /** Drops the underlying database table. */
@@ -62,7 +62,7 @@ public class DataBeanDao extends AbstractDao<DataBean, Long> {
             stmt.bindLong(1, id);
         }
         stmt.bindString(2, entity.getNew_item());
-        stmt.bindString(3, entity.getAdd_time());
+        stmt.bindLong(3, entity.getAdd_time());
     }
 
     @Override
@@ -74,7 +74,7 @@ public class DataBeanDao extends AbstractDao<DataBean, Long> {
             stmt.bindLong(1, id);
         }
         stmt.bindString(2, entity.getNew_item());
-        stmt.bindString(3, entity.getAdd_time());
+        stmt.bindLong(3, entity.getAdd_time());
     }
 
     @Override
@@ -87,7 +87,7 @@ public class DataBeanDao extends AbstractDao<DataBean, Long> {
         DataBean entity = new DataBean( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // new_item
-            cursor.getString(offset + 2) // add_time
+            cursor.getLong(offset + 2) // add_time
         );
         return entity;
     }
@@ -96,7 +96,7 @@ public class DataBeanDao extends AbstractDao<DataBean, Long> {
     public void readEntity(Cursor cursor, DataBean entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setNew_item(cursor.getString(offset + 1));
-        entity.setAdd_time(cursor.getString(offset + 2));
+        entity.setAdd_time(cursor.getLong(offset + 2));
      }
     
     @Override

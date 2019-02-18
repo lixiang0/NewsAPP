@@ -3,30 +3,26 @@ package com.utils;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.maxi.chatdemo.utils.SharedPreferencesUtils;
 import com.network.DownloadUtil;
 import com.newsjd.base.MainApplication;
 
 import java.io.File;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import pub.cpp.news.BuildConfig;
-import pub.cpp.news.R;
-import rx.Observable;
-import rx.Observer;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 public class CheckUpdate {
     private static final String TAG = "sjd CheckUpdate";
@@ -34,24 +30,24 @@ public class CheckUpdate {
     public static void checkVersion(final Context context, final boolean isShowToast) {
         HttpUtils.checkVersion()
                 .subscribeOn(Schedulers.io())
-                .flatMap(new Func1<String, Observable<Float>>() {
+                .flatMap(new Function<String, ObservableSource<Float>>() {
                     @Override
-                    public Observable<Float> call(final String s) {
+                    public ObservableSource<Float> apply(final String s) throws Exception {
                         Log.d(TAG, "call: response = " + s);
-                        return Observable.unsafeCreate(new Observable.OnSubscribe<Float>() {
+                        return Observable.unsafeCreate(new ObservableSource<Float>() {
                             @Override
-                            public void call(Subscriber<? super Float> subscriber) {
+                            public void subscribe(Observer<? super Float> observer) {
                                 float f = 0;
                                 try {
                                     f = Float.valueOf(s);
                                 } catch (Exception e) {
                                     Log.e(TAG, "call: response is error");
-                                    subscriber.onError(e);
+                                    observer.onError(e);
                                 }
                                 if (BuildConfig.VERSION_CODE < f) {
-                                    subscriber.onNext(f);
+                                    observer.onNext(f);
                                 } else {
-                                    subscriber.onCompleted();
+                                    observer.onComplete();
                                 }
                             }
                         });
@@ -59,6 +55,28 @@ public class CheckUpdate {
                 })
                 .observeOn(AndroidSchedulers.mainThread()) // 指定 doOnSubscribe 在主线程
                 .subscribe(new Observer<Float>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Float aFloat) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+                        /*new Observer<Float>() {
                     @Override
                     public void onCompleted() {
                         Log.e(TAG, "onCompleted: ");
@@ -77,7 +95,7 @@ public class CheckUpdate {
                         Log.e(TAG, "onNext: " + f);
                         initDialog(context, f);
                     }
-                });
+                });*/
 
 //                .observeOn(AndroidSchedulers.mainThread()) // 指定 doOnSubscribe 在主线程，若没有 finallyDo 可不加，否则必须加上
 //                .doOnSubscribe(new Action0() {

@@ -12,8 +12,9 @@ import android.widget.Button;
 
 import com.utils.HttpUtils;
 
+import io.reactivex.SingleSource;
+import io.reactivex.functions.Function;
 import pub.cpp.news.R;
-import rx.functions.Func1;
 
 public class ThirdFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "sjd thirdfrag";
@@ -36,9 +37,9 @@ public class ThirdFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.button2:
                 Log.e(TAG, "onClick: button2");
-                HttpUtils.login("tes", "test").filter(new Func1<String, Boolean>() {
+                HttpUtils.login("tes", "test").flatMapSingle(new Function<String, SingleSource<?>>() {
                     @Override
-                    public Boolean call(String s) {
+                    public SingleSource<?> apply(String s) throws Exception {
                         Log.e(TAG, "call: " + s);
                         return null;
                     }

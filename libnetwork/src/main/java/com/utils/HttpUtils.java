@@ -5,11 +5,11 @@ import com.network.bean.ChatMsgBean;
 import com.network.bean.NewsBean;
 import com.network.config.Constants;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by SJD
@@ -19,7 +19,7 @@ import rx.Observable;
 public class HttpUtils {
     private static final String TAG = "NET HttpUtils";
 
-    public static Observable<List<NewsBean>> getNewsByType(int type, int page) {
+    public static Observable<ArrayList<NewsBean>> getNewsByType(int type, int page) {
         return RetrofitClient.getApi().getNewsByType(type, page);
     }
 

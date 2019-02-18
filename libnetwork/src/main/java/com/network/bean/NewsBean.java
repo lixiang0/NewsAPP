@@ -115,4 +115,6 @@ public class NewsBean {
                 ", link='" + link + '\'' +
                 '}';
     }
+
+
 }

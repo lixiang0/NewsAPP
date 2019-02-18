@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 
+import com.google.gson.Gson;
+import com.network.bean.NewsBean;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
@@ -33,9 +35,9 @@ public class DataBean {
     @NotNull
     private String new_item;
     @NotNull
-    private String add_time;
-    @Generated(hash = 1355880603)
-    public DataBean(Long id, @NotNull String new_item, @NotNull String add_time) {
+    private long add_time;
+    @Generated(hash = 51009051)
+    public DataBean(Long id, @NotNull String new_item, long add_time) {
         this.id = id;
         this.new_item = new_item;
         this.add_time = add_time;
@@ -55,10 +57,10 @@ public class DataBean {
     public void setNew_item(String new_item) {
         this.new_item = new_item;
     }
-    public String getAdd_time() {
+    public long getAdd_time() {
         return this.add_time;
     }
-    public void setAdd_time(String add_time) {
+    public void setAdd_time(long add_time) {
         this.add_time = add_time;
     }
 }

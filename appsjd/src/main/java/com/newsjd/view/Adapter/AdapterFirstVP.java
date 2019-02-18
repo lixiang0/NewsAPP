@@ -5,9 +5,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.newsjd.config.Contants;
 import com.newsjd.view.Fragments.FirstFragment_Item;
 
 import java.util.ArrayList;
+
+import pub.cpp.news.R;
+
+import static com.newsjd.base.MainApplication.context;
 
 public class AdapterFirstVP extends FragmentStatePagerAdapter {
     private int length = 0;
@@ -48,6 +53,18 @@ public class AdapterFirstVP extends FragmentStatePagerAdapter {
 
 
     public void loadInitData(int position) {
-        firstFragmentItemArrayList.get(position).loadInitData();
+        int i = -1;
+        for (int j = 0; j < Contants.AllItem_Name.length; j++) {
+            if (context.getString(R.string.local).equals(Contants.AllItem_Name[j])) {
+                i = j;
+                break;
+            }
+        }
+        if (position == i) {
+            //TODO 加载本地数据
+
+        } else {
+            firstFragmentItemArrayList.get(position).loadInitData();
+        }
     }
 }

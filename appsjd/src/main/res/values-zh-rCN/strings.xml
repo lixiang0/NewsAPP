@@ -28,4 +28,6 @@
     <string name="reward">打赏团队</string>
     <string name="checkversion">检查版本</string>
     <string name="aboutapp">关于应用</string>
+    <string name="Save_local">已收藏</string>
+    <string name="local_not_saved">取消收藏</string>
 </resources>

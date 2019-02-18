@@ -1,14 +1,7 @@
 package com.network.config;
 
-import com.network.bean.ChatMsgBean;
-
-import java.util.Map;
-
-import retrofit2.http.FieldMap;
-import retrofit2.http.FormUrlEncoded;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
-import rx.Observable;
 
 /**
  * Created by Lulei on 2017/1/3.
