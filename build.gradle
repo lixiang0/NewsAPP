@@ -19,6 +19,9 @@ buildscript {
         //美团 瓦利打包
         classpath 'com.meituan.android.walle:plugin:1.1.6'
 
+        //ShareSDK 分享
+//        classpath "com.mob.sdk:MobSDK:2018.0319.1724"
+
 //上传多模块到bintray jcenter
 //        classpath 'com.novoda:bintray-release:0.3.4'
         // NOTE: Do not place your application dependencies here; they belong

@@ -1,2 +1,2 @@
-include  ':appsjd', ':libViewDachshundtablayout', ':libnetwork', ':libshare', ':libagentweb-core', ':libagentweb-download', ':libagentweb-filechooser', ':libchatdemo', ':liblogin', ':libpay'
+include  ':appsjd', ':libViewDachshundtablayout', ':libnetwork', ':libagentweb-core', ':libagentweb-download', ':libagentweb-filechooser', ':libchatdemo', ':liblogin', ':libpay'
 

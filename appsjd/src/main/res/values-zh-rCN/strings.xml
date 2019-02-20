@@ -14,8 +14,8 @@
     <string name="title_activity_web">原文网址</string>
 
     <string name="news">新闻</string>
-    <string name="video">聊天</string>
-    <string name="Contacts">广告</string>
+    <string name="chat">聊天</string>
+    <string name="advance">广告</string>
     <string name="setting">我的</string>
 
     <string name="update_time">更新于</string>

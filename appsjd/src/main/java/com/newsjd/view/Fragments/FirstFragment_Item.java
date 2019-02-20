@@ -1,5 +1,6 @@
 package com.newsjd.view.Fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.network.bean.NewsBean;
 
@@ -30,6 +32,11 @@ import com.newsjd.view.Adapter.AdapterFirstRecycleList;
 import com.newsjd.view.Adapter.EndlessRecyclerOnScrollListener;
 import com.newsjd.view.Adapter.FirstItemUtils;
 import com.newsjd.view.webview.WebActivity;
+import com.newsjd.Share.umeng.ShareUtils;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,9 +128,35 @@ public class FirstFragment_Item extends LazyBaseFragment {
             }
 
             @Override
-            public void onItemLongClick(View view, int position, NewsBean newsBean) {
+            public void onItemLongClick(final View view, int position, NewsBean newsBean) {
                 //TODO 长按分享
+                ShareAction shareAction = ShareUtils.getShareAction((Activity) view.getContext());
+                shareAction = ShareUtils.setPlatform(shareAction);
+                UMImage umImage = ShareUtils.getUMImage((Activity) view.getContext(), newsBean.getImg());
+                shareAction = ShareUtils.setWeb(shareAction, ShareUtils.getUMWeb(newsBean.getLink(), newsBean.getTitle(), umImage, newsBean.getText()));
+                shareAction.setCallback(new UMShareListener() {
+                    @Override
+                    public void onStart(SHARE_MEDIA share_media) {
+                        Log.e(TAG, "onStart: share" + share_media.getName());
+                    }
 
+                    @Override
+                    public void onResult(SHARE_MEDIA share_media) {
+                        Log.e(TAG, "onResult: 已分享");
+                        Toast.makeText(view.getContext(), "已分享", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+                        Log.e(TAG, "onError: share", throwable);
+                    }
+
+                    @Override
+                    public void onCancel(SHARE_MEDIA share_media) {
+                        Log.e(TAG, "onCancel: share");
+                    }
+                });
+                shareAction.open();
             }
         });
 

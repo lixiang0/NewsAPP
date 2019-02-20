@@ -25,6 +25,7 @@ android {
         versionCode 1
         versionName "1.0"
         flavorDimensions "platform"
+//        multiDexEnabled true
 //        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -76,9 +77,9 @@ android {
         }
     }*/
     //执行assemble时 过滤不必要的版本
-    android.variantFilter { variant ->
-        if ('debug'.equals(variant.buildType.name)) {
-            variant.setIgnore(true)
+//    android.variantFilter { variant ->
+//        if ('debug'.equals(variant.buildType.name)) {
+//            variant.setIgnore(true)
             /*
             variant.getFlavors().each() { flavor ->
 //           // 这里需要注意下 ， 多维度 和此处不一样
@@ -86,8 +87,14 @@ android {
                     variant.setIgnore(true)
                 }
             }*/
-        }
-    }
+//        }
+//    }
+
+    //使用jdk1.8，需要添加不然报错
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
 }
 
 static def releaseTime() {
@@ -100,16 +107,22 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support:appcompat-v7:28.0.0'
     testImplementation 'junit:junit:4.12'
+
     //Android 官方的jar包
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.android.support:cardview-v7:28.0.0'
+
     // ViewModel和LiveData依赖
+
     //    implementation "android.arch.lifecycle:extensions:1.1.1"
+
     //    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+
     //
     implementation 'com.lcodecorex:tkrefreshlayout:1.0.7'
     implementation 'com.arialyy.aria:Aria:2.4.0'
+
     //网络请求框架
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
@@ -117,29 +130,56 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.1.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+
     //异步流程框架
     implementation 'io.reactivex.rxjava2:rxjava:2.2.6'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+
     //glide 图片加载
     implementation 'com.github.bumptech.glide:glide:4.8.0'
+
     //本地模块加载
     implementation project(':libViewDachshundtablayout')
     implementation project(':libnetwork')
-    implementation project(':libshare')
+
+    //    implementation project(':libshare') // 暂时不使用，引用第三方友盟的分享
+
     //本地他人模块
     implementation project(':libchatdemo')
     implementation project(':liblogin')
     implementation project(':libagentweb-core')
+
     //    implementation 'com.just.agentweb:agentweb:4.0.3' // (必选)
+
     //    implementation 'com.just.agentweb:download:4.0.2' // (可选)
+
     //    implementation 'com.just.agentweb:filechooser:4.0.2'// (可选)
+
     //检测更新
+
     //    implementation 'com.allenliu.versionchecklib:library:2.0.0'
-    //友盟统计
-    implementation 'com.umeng.umsdk:analytics:7.5.4'
-    implementation 'com.umeng.umsdk:common:1.5.4'
+
     //greendao 数据库框架
     implementation 'org.greenrobot:greendao:3.2.2'
+
     //美团 瓦利打包 读取依赖包
     implementation 'com.meituan.android.walle:library:1.1.6'
+
+    //友盟分享 和统计功能
+
+    //    implementation files('libs/Umeng/open_sdk_r6008_lite.jar')
+
+    //    implementation 'com.newsjd.Share.umeng.umsdk:analytics:7.5.4'  //网络模块
+
+    //    implementation 'com.newsjd.Share.umeng.umsdk:common:1.5.4'   //网络模块
+    implementation files('libs/Umeng/analytics/analytics_android_8.0.0/umeng-analytics-8.0.0.jar')
+    implementation files('libs/Umeng/common/common_android_2.0.1/normal/umeng-common-2.0.1.jar')
+    implementation files('libs/Umeng/share/share_android_6.9.4/main/libs/umeng-share-core-6.9.4.jar')
+    implementation files('libs/Umeng/share/share_android_6.9.4/main/libs/umeng-sharetool-6.9.4.jar')
+    implementation files('libs/Umeng/share/share_android_6.9.4/platforms/umeng-share-QQ-simplify-6.9.4.jar')
+    implementation files('libs/Umeng/share/share_android_6.9.4/platforms/umeng-share-sina-simplify-6.9.4.jar')
+    implementation files('libs/Umeng/share/share_android_6.9.4/platforms/umeng-share-wechat-simplify-6.9.4.jar')
+    implementation files('libs/Umeng/share/share_android_6.9.4/shareboard/libs/umeng-shareboard-widget-6.9.4.jar')
+    implementation files('libs/Umeng/thirdparties/thirdparties_android_1.0.7/SecurityEnvSDK/SecurityEnvSDK-release-1.1.0.jar')
+    implementation files('libs/Umeng/thirdparties/thirdparties_android_1.0.7/utdid4all-1.1.5.3_proguard.jar')
 }

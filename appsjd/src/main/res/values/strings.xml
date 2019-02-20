@@ -13,8 +13,8 @@
     <string name="title_activity_web">Original website</string>
 
     <string name="news">News</string>
-    <string name="video">ChatBot</string>
-    <string name="Contacts">AD</string>
+    <string name="chat">ChatBot</string>
+    <string name="advance">AD</string>
     <string name="setting">Mini</string>
 
     <string name="update_time">update time</string>
