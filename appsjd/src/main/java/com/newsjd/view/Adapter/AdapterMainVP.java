@@ -5,12 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.network.config.Constants;
 import com.newsjd.config.Contants;
-import com.newsjd.view.Fragments.FirstFragment;
-import com.newsjd.view.Fragments.FourFragment;
-import com.newsjd.view.Fragments.SecondFragment;
-import com.newsjd.view.Fragments.ThirdFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,10 +19,10 @@ public class AdapterMainVP extends FragmentStatePagerAdapter {
 
     public AdapterMainVP(FragmentManager fm, String[] data_Name) {
         super(fm);
-        addData(data_Name);
+        initFragment(data_Name);
     }
 
-    private void addData(String[] data_Name) {
+    private void initFragment(String[] data_Name) {
         if (data_Name != null) {
             length = data_Name.length;
             mItems.addAll(Arrays.asList(data_Name).subList(0, length));

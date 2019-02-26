@@ -64,7 +64,7 @@ public class ShareUtils {
         UMImage image = new UMImage(activity, file);//本地文件
         //用户设置的图片大小最好不要超过250k，缩略图不要超过18k，如果超过太多（最好不要分享1M以上的图片，压缩效率会很低），图片会被压缩。用户可以设置压缩的方式：
         image.compressStyle = UMImage.CompressStyle.SCALE;//大小压缩，默认为大小压缩，适合普通很大的图
-//        image.compressStyle = UMImage.CompressStyle.QUALITY;//质量压缩，适合长图的分享压缩格式设置
+        image.compressStyle = UMImage.CompressStyle.QUALITY;//质量压缩，适合长图的分享压缩格式设置
         image.compressFormat = Bitmap.CompressFormat.PNG;//用户分享透明背景的图片可以设置这种方式，但是qq好友，微信朋友圈，不支持透明背景图片，会变成黑色
         return image;
     }
@@ -130,7 +130,7 @@ public class ShareUtils {
      * 设置平台
      */
     public static ShareAction setPlatform(ShareAction shareAction) {
-        return shareAction.setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN);
+        return shareAction.setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE);
     }
 
     /**
@@ -146,7 +146,7 @@ public class ShareUtils {
     public static void shareWithUI(Activity activity, String text, UMShareListener umShareListener) {
         new ShareAction(activity)
                 .withText(text)
-                .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN)
+                .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
                 .setCallback(umShareListener).open();
     }
 

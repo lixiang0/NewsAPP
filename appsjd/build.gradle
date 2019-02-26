@@ -27,6 +27,13 @@ android {
         flavorDimensions "platform"
 //        multiDexEnabled true
 //        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+
+        buildConfigField("String", "wechat_appid", rootProject.ext.wechat["appid"])
+        buildConfigField("String", "wechat_appsecret", rootProject.ext.wechat["appsecret"])
+        buildConfigField("String", "umeng_appkey", rootProject.ext.umeng["appkey"])
+        buildConfigField("String", "qqzone_appid", rootProject.ext.qqzone["appid"])
+        buildConfigField("String", "qqzone_appsecret", rootProject.ext.qqzone["appsecret"])
     }
 
 

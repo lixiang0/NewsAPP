@@ -15,6 +15,13 @@
     <!--<uses-permission android:name="android.permission.CAMERA" />-->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
+    <!--友盟分享 权限添加-->
+    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
+    <!--<uses-permission android:name="android.permission.INTERNET" />-->
+    <!--如果需要使用QQ纯图分享或避免其它平台纯图分享的时候图片不被压缩，可以增加以下权限-->
+    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
+    <!--<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>-->
 
     <application
         android:name="com.newsjd.base.MainApplication"
@@ -52,11 +59,82 @@
                 android:resource="@xml/file_paths" />
         </provider>
         <!--其他的配置项-->
+
+        <!--新浪分享-->
+        <activity
+            android:name="com.umeng.socialize.media.WBShareCallBackActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+        <activity
+            android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
+        <activity
+            android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!--微信分享-->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+<!--
+
+        &lt;!&ndash;支付宝分享&ndash;&gt;
+        <activity
+            android:name=".apshare.ShareEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        &lt;!&ndash;钉钉分享&ndash;&gt;
+        <activity
+            android:name=".ddshare.DingCallBack"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+-->
+
+        <!--QQ分享 需要自己的Key-->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tencent101555166" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+
+        <!--分享编辑页(只有豆瓣，人人，腾讯微博，领英，twitter需要)-->
+        <activity
+            android:name="com.umeng.socialize.editorpage.ShareActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:excludeFromRecents="true"
+            />
     </application>
 
     <!-- <meta-data
          android:name="UMENG_APPKEY"
-         android:value="5c093b6af1f55620c60003a5" />&lt;!&ndash;友盟 Appkey 自己应用注册申请来的&ndash;&gt;
+         android:value="????" />&lt;!&ndash;友盟 Appkey 自己应用注册申请来的&ndash;&gt;
      <meta-data
          android:name="UMENG_CHANNEL"
          android:value="${UMENG_CHANNEL_VALUE}" /> &lt;!&ndash;渠道号，多渠道这里使用了占位符$&ndash;&gt;

@@ -11,11 +11,11 @@
         android:icon="@drawable/menu_2"
         android:title="@string/chat" />
 
-    <item
+   <!-- <item
         android:visible="false"
         android:id="@+id/bottom_series_list"
         android:icon="@drawable/menu_3"
-        android:title="@string/advance" />
+        android:title="@string/advance" />-->
 
     <item
         android:id="@+id/bottom_discover"

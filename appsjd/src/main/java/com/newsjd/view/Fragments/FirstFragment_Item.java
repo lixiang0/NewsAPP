@@ -37,6 +37,7 @@ import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
+import com.utils.Base64BitmapUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,7 +133,7 @@ public class FirstFragment_Item extends LazyBaseFragment {
                 //TODO 长按分享
                 ShareAction shareAction = ShareUtils.getShareAction((Activity) view.getContext());
                 shareAction = ShareUtils.setPlatform(shareAction);
-                UMImage umImage = ShareUtils.getUMImage((Activity) view.getContext(), newsBean.getImg());
+                UMImage umImage = ShareUtils.getUMImage((Activity) view.getContext(), Base64BitmapUtil.base64ToBitmap(newsBean.getImg()));
                 shareAction = ShareUtils.setWeb(shareAction, ShareUtils.getUMWeb(newsBean.getLink(), newsBean.getTitle(), umImage, newsBean.getText()));
                 shareAction.setCallback(new UMShareListener() {
                     @Override

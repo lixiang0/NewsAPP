@@ -53,11 +53,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                Log.e(TAG, "onPageScrolled: " + position + "|" + positionOffset + "|" + positionOffsetPixels);
             }
 
             @Override
             public void onPageSelected(int position) {
+                Log.e(TAG, "onPageSelected: " + position);
                 bottomNavigationView.setSelectedItemId(position);
                 if (menuItem != null) {
                     menuItem.setChecked(false);
@@ -70,11 +71,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                Log.e(TAG, "onPageScrollStateChanged: " + state);
             }
         });
     }
 
+    /**
+     * 底部导航栏 点击事件监听
+     *
+     * @param item 按键
+     * @return 消费点击事件
+     */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Log.e(TAG, "onMenuItemSelected: ");
@@ -86,11 +93,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.bottom_epg:
                 mViewPager.setCurrentItem(1);
                 break;
-            case R.id.bottom_series_list:
-                mViewPager.setCurrentItem(2);
-                break;
+//            case R.id.bottom_series_list:
+//                mViewPager.setCurrentItem(2);
+//                break;
             case R.id.bottom_discover:
-                mViewPager.setCurrentItem(3);
+                mViewPager.setCurrentItem(2);
                 break;
             default:
         }
