@@ -22,7 +22,9 @@ import com.utils.SharedPrefUtils;
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
 
-    private ViewPager mViewPager;
+    private MainViewPager mViewPager;
+    private AdapterMainVP mAdapterMainVP;
+
     private BottomNavigationView bottomNavigationView;
     private MenuItem menuItem;
 
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mViewPager = findViewById(R.id.main_view_pager);
-        AdapterMainVP mAdapterMainVP = new AdapterMainVP(getSupportFragmentManager(), Contants.FourPart_Name);
+        mAdapterMainVP = new AdapterMainVP(getSupportFragmentManager(), Contants.FourPart_Name);
         mViewPager.setAdapter(mAdapterMainVP);
         bottomNavigationView = findViewById(R.id.main_bottom_navigation_view);
         initView();
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (time > 0) {
             SharedPrefUtils.setUpdateTime(time - 1);
         } else {
-            CheckUpdate.checkVersion(this, false);
+            CheckUpdate.checkVersion(false);
         }
     }
 
@@ -126,5 +128,22 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onActivityResult(requestCode, resultCode, data);
         //QQ 和 新浪分享的回调， fragment的话 需要在所依赖的activity中设置
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+    public interface FragmentSkipInterface {
+        // ViewPager中子Fragment之间跳转的实现方法
+        void gotoFragment(MainViewPager viewPager,AdapterMainVP adapterMainVP);
+    }
+    private FragmentSkipInterface mFragmentSkipInterface;
+
+    public void setFragmentSkipInterface(FragmentSkipInterface fragmentSkipInterface) {
+        mFragmentSkipInterface = fragmentSkipInterface;
+    }
+
+    // Fragment跳转
+    public void skipToFragment(){
+        if(mFragmentSkipInterface != null){
+            mFragmentSkipInterface.gotoFragment(mViewPager,mAdapterMainVP);
+        }
     }
 }

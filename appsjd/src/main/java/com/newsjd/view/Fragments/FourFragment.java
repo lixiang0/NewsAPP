@@ -3,25 +3,34 @@ package com.newsjd.view.Fragments;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.newsjd.base.MainApplication;
+import com.newsjd.config.Contants;
+import com.newsjd.view.Activity.MainActivity;
+import com.newsjd.view.Activity.MainViewPager;
+import com.newsjd.view.Adapter.AdapterMainVP;
 import com.sjd.liblogin.MainActivity_login;
 import com.utils.CheckUpdate;
 
 
 import java.util.ArrayList;
 
+import pub.cpp.news.BuildConfig;
 import pub.cpp.news.R;
 
 public class FourFragment extends Fragment implements View.OnClickListener {
@@ -30,8 +39,7 @@ public class FourFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_four, container, false);
-        return view;
+        return inflater.inflate(R.layout.activity_four, container, false);
     }
 
     @Override
@@ -45,9 +53,10 @@ public class FourFragment extends Fragment implements View.OnClickListener {
         ArrayList<ButtonParams> arrayList = new ArrayList<>();
         arrayList.add(new ButtonParams(R.id.btName_1, R.string.unlogin, R.drawable.ic_person_outline_black_24dp));
         arrayList.add(new ButtonParams(R.id.btName_2, R.string.save, R.drawable.ic_save_black_24dp));
-        arrayList.add(new ButtonParams(R.id.btName_3, R.string.reward, R.drawable.ic_attach_money_black_24dp));
+//        arrayList.add(new ButtonParams(R.id.btName_3, R.string.reward, R.drawable.ic_attach_money_black_24dp));  //支付功能不对个人开放，暂时没接入
         arrayList.add(new ButtonParams(R.id.btName_4, R.string.checkversion, R.drawable.ic_vertical_align_bottom_black_24dp));
         arrayList.add(new ButtonParams(R.id.btName_5, R.string.aboutapp, R.drawable.ic_phone_android_black_24dp));
+
 
         for (int i = 0; i < arrayList.size(); i++) {
             ButtonParams buttonParams = arrayList.get(i);
@@ -70,13 +79,18 @@ public class FourFragment extends Fragment implements View.OnClickListener {
             // 将布局加入到当前布局中
             linearLayout.addView(itemView);
 
-            TextView textView = new TextView(view.getContext());
-            ViewGroup.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 8);
-            textView.setLayoutParams(layoutParams);
-
             //加入分割线
-            if (i != arrayList.size()) {
-                linearLayout.addView(textView);
+            if (i != arrayList.size() - 1) {
+                Log.e(TAG, "onViewCreated: add imageview");
+                //分割线
+                ImageView imageView = new ImageView(view.getContext());
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 20);
+                layoutParams.setMargins(4, 4, 4, 4);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    imageView.setImageResource(R.color.dark_gray_1);//view.getContext().getColor(
+                }
+                imageView.setLayoutParams(layoutParams);
+                linearLayout.addView(imageView);
             }
         }
     }
@@ -91,15 +105,16 @@ public class FourFragment extends Fragment implements View.OnClickListener {
                 startActivityForResult(intent, 101);
                 break;
             case R.id.btName_2:
+                jumpToLocalPri();
                 break;
             case R.id.btName_3:
                 Toast.makeText(v.getContext(), "正在开发，敬请期待", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btName_4:
-                CheckUpdate.checkVersion(this.getContext(), true);
+                CheckUpdate.checkVersion(true);
                 break;
             case R.id.btName_5:
-                Toast.makeText(v.getContext(), "正在开发，敬请期待", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), BuildConfig.VERSION_NAME + "(" + BuildConfig.VERSION_CODE + ")", Toast.LENGTH_LONG).show();
                 break;
             default:
                 Log.e(TAG, "onClick: " + v.getId());
@@ -129,4 +144,23 @@ public class FourFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    void jumpToLocalPri() {
+        toFragment(0);
+    }
+
+    /* 跳转到Fragment 与MAinActivity中的方法对接
+     * @param i
+     */
+    private void toFragment(final int i) {
+        final MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.setFragmentSkipInterface(new MainActivity.FragmentSkipInterface() {
+            @Override
+            public void gotoFragment(MainViewPager viewPager, AdapterMainVP adapterMainVP) {
+                viewPager.setCurrentItem(i);
+                FirstFragment firstFragment = (FirstFragment) adapterMainVP.getItem(0);
+                firstFragment.getViewPager().setCurrentItem(Contants.AllItem.length - 1);
+            }
+        });
+        mainActivity.skipToFragment();
+    }
 }

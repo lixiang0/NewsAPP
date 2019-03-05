@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="4dp">
 
     <Button
         android:id="@+id/view_four_item_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:background="@color/yellow"
+
+        android:background="@drawable/four_item_bg"
         android:gravity="left|center_vertical"
-        android:text="@string/new_function" />
+        android:text="@string/new_function"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>

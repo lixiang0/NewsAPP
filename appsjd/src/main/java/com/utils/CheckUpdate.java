@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.network.DownloadUtil;
 import com.newsjd.base.MainApplication;
@@ -27,7 +28,7 @@ import pub.cpp.news.BuildConfig;
 public class CheckUpdate {
     private static final String TAG = "sjd CheckUpdate";
 
-    public static void checkVersion(final Context context, final boolean isShowToast) {
+    public static void checkVersion(final boolean isShowToast) {
         HttpUtils.checkVersion()
                 .subscribeOn(Schedulers.io())
                 .flatMap(new Function<String, ObservableSource<Float>>() {
@@ -62,7 +63,7 @@ public class CheckUpdate {
 
                     @Override
                     public void onNext(Float aFloat) {
-
+                        initDialog(MainApplication.context, aFloat);
                     }
 
                     @Override
@@ -72,38 +73,11 @@ public class CheckUpdate {
 
                     @Override
                     public void onComplete() {
-
-                    }
-                });
-
-                        /*new Observer<Float>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.e(TAG, "onCompleted: ");
                         if (isShowToast) {
-                            Toast.makeText(context, "已是最新版本", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainApplication.context, "已是最新版本", Toast.LENGTH_LONG).show();
                         }
                     }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                    }
-
-                    @Override
-                    public void onNext(Float f) {
-                        Log.e(TAG, "onNext: " + f);
-                        initDialog(context, f);
-                    }
-                });*/
-
-//                .observeOn(AndroidSchedulers.mainThread()) // 指定 doOnSubscribe 在主线程，若没有 finallyDo 可不加，否则必须加上
-//                .doOnSubscribe(new Action0() {
-//                    @Override
-//                    public void call() {
-//
-//                    }
-//                })
+                });
     }
 
     /*

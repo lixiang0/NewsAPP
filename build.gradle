@@ -13,7 +13,7 @@ buildscript {
     }
     
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.1'
+        classpath 'com.android.tools.build:gradle:3.3.2'
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
 
         //美团 瓦利打包

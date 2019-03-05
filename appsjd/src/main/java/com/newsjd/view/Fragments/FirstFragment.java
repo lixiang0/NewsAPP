@@ -20,7 +20,11 @@ public class FirstFragment extends Fragment {
     private static final String TAG = "NEWS FirstAty";
 
     private AdapterFirstVP adapterFirstVP;
+    private ViewPager viewPager;
 
+    public ViewPager getViewPager() {
+        return viewPager;
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,7 +36,7 @@ public class FirstFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        ViewPager viewPager = view.findViewById(R.id.view_pager);
+        viewPager = view.findViewById(R.id.view_pager);
         adapterFirstVP = new AdapterFirstVP(getFragmentManager(), Contants.AllItem, Contants.AllItem_Name);
         viewPager.setAdapter(adapterFirstVP);
         DachshundTabLayout tabLayout = view.findViewById(R.id.tab_layout);

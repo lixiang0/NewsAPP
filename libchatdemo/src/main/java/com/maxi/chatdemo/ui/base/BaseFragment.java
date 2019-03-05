@@ -656,8 +656,7 @@ public abstract class BaseFragment extends Fragment {
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String filename = expressionAdapter.getItem(position);
                 try {
                     // 文字输入框可见时，才可输入表情
@@ -665,8 +664,7 @@ public abstract class BaseFragment extends Fragment {
                     if (filename != "delete_expression") { // 不是删除键，显示表情
                         // 这里用的反射，所以混淆的时候不要混淆SmileUtils这个类
                         @SuppressWarnings("rawtypes")
-                        Class clz = Class
-                                .forName("com.maxi.chatdemo.utils.SmileUtils");
+                        Class clz = Class.forName("com.maxi.chatdemo.utils.SmileUtils");
                         Field field = clz.getField(filename);
                         String oriContent = mEditTextContent.getText()
                                 .toString();
@@ -683,27 +681,19 @@ public abstract class BaseFragment extends Fragment {
                     } else { // 删除文字或者表情
                         if (!TextUtils.isEmpty(mEditTextContent.getText())) {
 
-                            int selectionStart = mEditTextContent
-                                    .getSelectionStart();// 获取光标的位置
+                            int selectionStart = mEditTextContent.getSelectionStart();// 获取光标的位置
                             if (selectionStart > 0) {
-                                String body = mEditTextContent.getText()
-                                        .toString();
-                                String tempStr = body.substring(0,
-                                        selectionStart);
+                                String body = mEditTextContent.getText().toString();
+                                String tempStr = body.substring(0, selectionStart);
                                 int i = tempStr.lastIndexOf("[");// 获取最后一个表情的位置
                                 if (i != -1) {
-                                    CharSequence cs = tempStr.substring(i,
-                                            selectionStart);
+                                    CharSequence cs = tempStr.substring(i, selectionStart);
                                     if (SmileUtils.containsKey(cs.toString()))
-                                        mEditTextContent.getEditableText()
-                                                .delete(i, selectionStart);
+                                        mEditTextContent.getEditableText().delete(i, selectionStart);
                                     else
-                                        mEditTextContent.getEditableText()
-                                                .delete(selectionStart - 1,
-                                                        selectionStart);
+                                        mEditTextContent.getEditableText().delete(selectionStart - 1, selectionStart);
                                 } else {
-                                    mEditTextContent.getEditableText().delete(
-                                            selectionStart - 1, selectionStart);
+                                    mEditTextContent.getEditableText().delete(selectionStart - 1, selectionStart);
                                 }
                             }
                         }
